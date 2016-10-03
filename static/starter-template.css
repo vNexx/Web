@@ -1,0 +1,55 @@
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+.nav > li > a {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+}
+.askme_question_block {
+	border-radius: 5px;
+	padding-top: 15px;
+	margin: 35px;
+	background-color: #ded
+}
+
+.user-data {
+	padding-left: 15px;
+	padding-bottom: 15px;
+	margin-left: 30px;
+}
+
+.askme_section-title{
+	margin: 30px;
+	margin-left: 40px;
+	margin-bottom: 20px;
+}
+.askme__right-block{
+    margin-top: 35px;
+   
+}
+.askme__right-block_popular-tags{
+	border-radius: 5px;
+	border: 3px;
+	border-color: #81f681;
+	background-color: #ded;
+	padding: 15px;
+	margin-right: 40px;
+	margin-bottom: 15px;
+
+}
+.askme__right-block_best-members{
+	border-radius: 5px;
+	border: 3px;
+	border-color: #81f681;
+	background-color: #ded;
+	padding: 15px;
+	margin-right: 40px;
+	margin-bottom: 15px;
+}
+
+body {
+	background-color: #eee;
+}
