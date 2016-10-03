@@ -23,8 +23,8 @@
 
 .askme_section-title{
 	margin: 30px;
-	margin-left: 40px;
 	margin-bottom: 20px;
+	text-align: center;
 }
 .askme__right-block{
     margin-top: 35px;
@@ -48,6 +48,17 @@
 	padding: 15px;
 	margin-right: 40px;
 	margin-bottom: 15px;
+}
+
+.askme__pagination{
+	margin-left: 100px;
+}
+
+.askme__footer{
+	margin-top: 30px;	
+	margin-bottom: 25px;
+	text-align: center;
+
 }
 
 body {
