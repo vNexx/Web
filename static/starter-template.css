@@ -2,11 +2,18 @@
   padding: 40px 15px;
   text-align: center;
 }
+.row{
+	margin-right: 0px;
+}
 
 .nav > li > a {
     position: relative;
     display: block;
     padding: 10px 15px;
+}
+
+ul.nav > li.active > a {
+	padding-bottom: 20px;
 }
 .askme_question_block {
 	border-radius: 5px;
@@ -15,7 +22,7 @@
 	background-color: #ded
 }
 
-.user-data {
+.askme__question-block_user-data {
 	padding-left: 15px;
 	padding-bottom: 15px;
 	margin-left: 30px;
