@@ -74,7 +74,7 @@ hr{
 }
 
 body {
-	background-color: #eee;
+	background-color: #9dd592;
 }
 
 .askme__question_answer-block{
@@ -94,4 +94,11 @@ body {
 
 .askme_ask-question-form{
 	margin-top: 15px;
+}
+
+.askme__login-form{
+	margin-bottom: 10px;
+}
+.askme__login-error{
+	color: red;
 }

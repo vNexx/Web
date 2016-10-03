@@ -64,18 +64,9 @@
 
 
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            <img src="../images/user_avatar.jpeg" width="30" class="img-circle" alt="avatar">
-            User <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu">
-            <li><a href="#">My questions</a></li>
-            <li><a href="#">My achievements</a></li>
-          </ul>
-        </li>
-        <li><a href="#">Settings</a></li>
-        <li><a href="#">Log Out</a></li>
+
+        <li><a href="#">Register</a></li>
+        <li><a href="#">Log in</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </nav>
@@ -84,6 +75,40 @@
 
   <div class="row">
     <div class="col-sm-7 col-sm-offset-1"> 
+
+      <div class="col-sm-10 col-sm-offset-2">
+        <h2>Log In</h2>
+      </div>
+
+      <div class = "col-sm-2 form-group">
+        <label for="usr">Username:</label>
+        <p></p>
+        <label for="pwd">Password:</label>
+      </div>  
+
+      
+      <div class = "col-sm-4 form-group">
+        <div class="askme__login-form">
+          <input type="text" class="form-control" placeholder="Enter Username" id="usr">
+        </div>
+        <input type="password" class="form-control" placeholder="Enter Password" id="pwd">
+      </div>   
+      
+      <div class="col-sm-10 col-sm-offset-2">
+        <button type="button" class="btn btn-success btn-md">Log in!</button>
+      </div>  
+
+
+      <div class="checkbox col-sm-10 col-sm-offset-2">
+        <label><input type="checkbox" value="">Remember me</label>
+      </div>    
+
+
+      <div class="col-sm-10 col-sm-offset-2">
+        <a href="#">Create a new account</a>
+      </div>  
+      <div class="askme__login-error"> Error! Wrong password</div> 
+
     </div>
 
     <div class="col-sm-3  col-sm-offset-1 askme__right-block"> <!--right block-->
