@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../images/icon.png">
+
+  <title>Ask Me</title>
+  <!-- Bootstrap core CSS -->
+  <link href="../static/bootstrap.min.css" rel="stylesheet">
+  <link href="../static/bootstrap.css" rel="stylesheet">
+  <link href="../static/bootstrap-responsive.css" rel="stylesheet">
+
+
+
+  <!-- Custom styles for this template -->
+  <link href="../static/starter-template.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <nav class="navbar navbar-inverse" role="navigation">    
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">
+        <img src="../images/logo.png" alt="Ask me. Logo." width="30">
+      </a>      
+    </div>
+
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Номе <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Popular </a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Topics <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Web </a></li>
+            <li><a href="#">C/C++ </a></li>
+            <li><a href="#">Python </a></li>
+            <li><a href="#">Other </a></li>
+          </ul>
+        </li>
+      </ul>
+
+
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Enter your question">
+        </div>
+        <button type="submit" class="btn btn-default">Ask!</button>
+      </form>
+
+
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <img src="../images/user_avatar.jpeg" width="30" class="img-circle" alt="avatar">
+            User <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#">My questions</a></li>
+            <li><a href="#">My achievements</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Settings</a></li>
+        <li><a href="#">Log Out</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </nav>
+
+
+
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-2">
+      <h2>New Question</h2>
+    </div>
+    <div class="col-sm-7 col-sm-offset-1 askme_ask-question-form"> <!-- ask question block-->
+      <div class = "col-sm-1">
+        <h4>Title:</h4>
+      </div>
+      <div class = "col-sm-11">
+        <div class="form-group">
+          <textarea class="form-control" rows="1"></textarea>
+        </div>
+      </div>
+
+      <div class = "col-sm-1">
+        <h4>Text:</h4>
+      </div>
+      <div class = "col-sm-11">
+        <div class="form-group">
+          <textarea class="form-control" rows="14"></textarea>
+        </div>
+      </div>
+
+      <div class = "col-sm-1">
+        <h4>Tags:</h4>
+      </div>
+      <div class = "col-sm-11">
+        <div class="form-group">
+          <textarea class="form-control" rows="1"></textarea>
+        </div>
+      </div>
+      <div class="col-sm-11  col-sm-offset-1">
+        <button type="button" class="btn btn-success">Ask!</button>
+      </div>
+      
+
+    </div> <!-- /ask question block-->
+
+
+    <div class="col-sm-3  col-sm-offset-1 askme__right-block"> <!--right block-->
+      <div class="askme__right-block_popular-tags">
+        <h3>Popular tags</h3>
+        <ul>
+          <li><a href="#">TechnoPark</a></li>
+          <li><a href="#">Perl</a></li>
+          <li><a href="#">Python</a></li>
+          <li><a href="#">C++</a></li>
+          <li><a href="#">C#</a></li>
+        </ul>
+      </div>
+
+      <div class="askme__right-block_best-members">
+        <h3>Best Members</h3>
+        <ul>
+          <li><a href="#">User1</a></li>
+          <li><a href="#">User2</a></li>
+          <li><a href="#">User3</a></li>
+          <li><a href="#">User4</a></li>
+        </ul>        
+      </div>
+    </div><!--/.right block-->
+  </div>
+
+
+  <div class="askme__footer">
+    <hr></hr>
+    <p>
+      Site was built in 2016 by Vladislav.
+      All rights reserved (c)      
+    </p>
+    
+  </div>
+</body>
+</html>
