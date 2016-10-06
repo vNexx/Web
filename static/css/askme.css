@@ -40,6 +40,18 @@ hr{
 	margin-bottom: 20px;
 	text-align: center;
 }
+
+.askme_section-title > span{
+	border-color: #111;
+	border-radius: 7px;
+	background-color: #444;
+}
+.askme_section-title > span.active{
+	border-color: #111;
+	border-radius: 7px;
+	background-color: #1a1a1a;
+}
+
 .askme__right-block{
     margin-top: 35px;
    
@@ -71,6 +83,7 @@ hr{
 	margin-top: 30px;	
 	margin-bottom: 25px;
 	text-align: center;
+	background-color: 
 
 }
 
@@ -151,8 +164,8 @@ a:hover{
 .pagination > li > a:focus,
 .pagination > li > span:focus {
   z-index: 2;
-  color: #23527c;
-  background-color: #eee;
+  color: #eee;
+  background-color: #aaa;
   border-color: #545454;
 }
 .pagination > .active > a,
@@ -181,4 +194,49 @@ a:hover{
 
 .askme__pagination{
 	margin-left: 100px;
+}
+
+.btn-dark {
+  color: #fff;
+  background-color: #535353;
+  border-color: #2a2a2a;
+}
+.btn-dark:hover{
+  color: #ddd;
+  background-color: #1274BD;
+  border-color: #0E67AA;
+}
+
+.btn-dark:active{
+  color: #ddd;
+  background-color: #104E7D;
+  border-color: #0E67AA;
+}
+
+.form-control{
+	color: #fff;
+	background-color: #545454;
+	border-color: #424242;
+}
+
+.dropdown-menu > li > a,
+.dropdown-menu {
+	color: #fff;
+	background-color: #545454;
+	border-color: #424242;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+	color: #eee;
+	background-color: #383838;
+}
+
+.btn-success{
+	background-color: #646464;
+	border-color: #545454;
+}
+.btn-danger{
+	background-color: #9f9f9f;
+	border-color: #7f7f7f;
 }
