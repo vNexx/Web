@@ -22,7 +22,7 @@ ul.nav > li.active > a {
 	padding-top: 15px;
 	margin-top: 35px;
 	margin-bottom: 35px;
-	background-color: #cec
+	background-color: #3e3e3e
 }
 
 .askme__question-block_user-data {
@@ -47,8 +47,8 @@ hr{
 .askme__right-block_popular-tags{
 	border-radius: 5px;
 	border: 3px;
-	border-color: #81f681;
-	background-color: #cec;
+	border-color: #3e3e3e;
+	background-color: #3e3e3e;
 	padding: 15px;
 	margin-right: 40px;
 	margin-bottom: 15px;
@@ -57,16 +57,15 @@ hr{
 .askme__right-block_best-members{
 	border-radius: 5px;
 	border: 3px;
-	border-color: #81f681;
-	background-color: #cec;
+	border-color: #3e3e3e;
+	background-color: #3e3e3e;
 	padding: 15px;
 	margin-right: 40px;
 	margin-bottom: 15px;
 }
 
-.askme__pagination{
-	margin-left: 100px;
-}
+
+
 
 .askme__footer{
 	margin-top: 30px;	
@@ -76,7 +75,15 @@ hr{
 }
 
 body {
-	background-color: #9dd592;
+	background-color: #2a2a2a;
+	color: #e6e6e6;
+}
+
+a{
+	color: #fff;
+}
+a:hover{
+	color:#4baaff;
 }
 
 .askme__question_answer-block{
@@ -84,7 +91,7 @@ body {
 	margin-top: 35px;
 	margin-bottom: 35px;
 	margin-left: 20px;
-	background-color: #8eff8e;
+	background-color: #717171;
 	border-radius: 5px;	
 }
 .askme__answer{
@@ -103,4 +110,75 @@ body {
 }
 .askme__login-error{
 	color: red;
+}
+
+
+
+.pagination {
+  display: inline-block;
+  padding-left: 0;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+.pagination > li {
+  display: inline;
+}
+.pagination > li > a,
+.pagination > li > span {
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  margin-left: -1px;
+  line-height: 1.42857143;
+  color: #fff;
+  text-decoration: none;
+  background-color: #505050;
+  border: 1px solid #545454;
+}
+.pagination > li:first-child > a,
+.pagination > li:first-child > span {
+  margin-left: 0;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+  z-index: 2;
+  color: #23527c;
+  background-color: #eee;
+  border-color: #545454;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  z-index: 3;
+  color: #fff;
+  cursor: default;
+  background-color: #121212;
+  border-color: #545454;
+}
+.pagination > .disabled > span,
+.pagination > .disabled > span:hover,
+.pagination > .disabled > span:focus,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover,
+.pagination > .disabled > a:focus {
+  color: #ddd;
+  cursor: not-allowed;
+  background-color: #868686;
+  border-color: #545454;
+}
+
+.askme__pagination{
+	margin-left: 100px;
 }
