@@ -71,6 +71,50 @@ hr{
 	margin-bottom: 15px;
 
 }
+
+.askme__right-block_popular-tags > a {
+	padding: 7px;
+
+}
+
+#Number1 {
+	color: #f00;
+	font-size: xx-large;
+}
+
+#Number2 {
+color: #f90;
+font-size: x-large;
+}
+
+#Number3 {
+	color: #cf0;
+	font-size: x-large;
+}
+
+#Number4 {
+    color: #ff00d8;
+    font-size: medium;
+}
+
+#Number5 {
+	color: #00d2ff;
+	font-size: medium;
+}
+
+#Number6 {
+	color: #00ff54;
+	font-size: medium;
+}
+
+#Number7 {
+	color: #ff005a;
+	font-size: medium;
+}
+
+#Number8 {
+	color: #9177f8;
+}
 .askme__right-block_best-members{
 	border-radius: 7px;
 	border: 3px;
