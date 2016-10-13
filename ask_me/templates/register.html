@@ -33,7 +33,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">
+      <a class="navbar-brand" href="http://ask.me/">
         <img src="../images/logo.png" alt="Ask me. Logo." width="30">
       </a>      
     </div>
@@ -41,7 +41,7 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="index.html">Номе <span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="http://ask.me/">Номе <span class="sr-only">(current)</span></a></li>
         <li><a href="#">Popular </a></li>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Topics <span class="caret"></span></a>
@@ -63,20 +63,9 @@
       </form>
 
 
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            <img src="../images/user_avatar.jpeg" width="30" class="img-circle" alt="avatar">
-            User <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu">
-            <li><a href="#">My questions</a></li>
-            <li><a href="#">My achievements</a></li>
-          </ul>
-        </li>
-        <li><a href="#">Settings</a></li>
-        <li><a href="ask.html">New question</a></li>
-        <li><a href="#">Log Out</a></li>
+      <ul class="nav navbar-nav navbar-right">        
+        <li><a href="register.html">Register</a></li>
+        <li><a href="login.html">Log In</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </nav>
@@ -85,6 +74,71 @@
 
   <div class="row">
     <div class="col-sm-7 col-sm-offset-1"> 
+      <div class="col-sm-11 col-sm-offset-1">
+        <h2>Registration</h2>
+      </div>
+
+      <hr></hr>
+
+
+      <form class="form-horizontal">
+        <fieldset>
+          <legend></legend>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Login</label>
+            <div class="col-lg-5">
+              <input type="text" class="form-control" name="login" placeholder="Username">
+            </div>
+          </div>        
+
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Email address</label>
+            <div class="col-lg-5">
+              <input type="text" class="form-control" name="email" placeholder="example@ask.com" required placeholder = "Enter your email!">
+            </div>
+          </div> 
+
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Nickname</label>
+            <div class="col-lg-5">
+              <input type="text" class="form-control" name="nickname" placeholder="Nick">
+            </div>
+          </div>  
+
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Password</label>
+            <div class="col-lg-5">
+              <input type="password" class="form-control" name="password">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Retype password</label>
+            <div class="col-lg-5">
+              <input type="password" class="form-control" name="confirmPassword">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Upload avatar</label>
+            <div class="col-lg-5">
+              <input type="file" name="avatar">
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="form-group">
+          <div class="col-lg-9 col-lg-offset-3">
+            <button type="submit" class="btn btn-dark">Register</button>
+            <div class="askme__login-error">
+              <p></p>
+              Email is already used.
+            </div>
+          </div>
+        </div>
+      </form>
+
+
     </div>
 
     <div class="col-sm-3  col-sm-offset-1 askme__right-block"> <!--right block-->

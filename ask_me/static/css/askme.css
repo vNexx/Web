@@ -115,6 +115,10 @@ font-size: x-large;
 #Number8 {
 	color: #9177f8;
 }
+
+.btn > .bage{
+	text-align: left;
+}
 .askme__right-block_best-members{
 	border-radius: 7px;
 	border: 3px;
