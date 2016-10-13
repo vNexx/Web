@@ -119,6 +119,10 @@ font-size: x-large;
 .btn > .bage{
 	text-align: left;
 }
+
+.noresize {
+	resize: none;
+}
 .askme__right-block_best-members{
 	border-radius: 7px;
 	border: 3px;
