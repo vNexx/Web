@@ -23,7 +23,7 @@
 </head>
 
 <body>
-
+  {% block navbar%}
   <nav class="navbar navbar-inverse" role="navigation">    
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -80,14 +80,22 @@
       </ul>
     </div><!-- /.navbar-collapse -->
   </nav>
+  {%endblock%}
+
+  {% block pagetitle %}
+  {% endblock %}
 
 
-
+  {% block page%}
   <div class="row">
     <div class="col-sm-7 col-sm-offset-1"> 
+      {% block pagecontent %}
+      {% endblock %}
     </div>
-
+  
+    {%block sidebar%}
     <div class="col-sm-3  col-sm-offset-1 askme__right-block"> <!--right block-->
+      {% block populartags %}
       <div class="askme__right-block_popular-tags">
         <h3>Popular tags</h3>
         <a href="#" id="Number3">TechnoPark</a>
@@ -99,7 +107,9 @@
         <a href="#" id="Number5">PostgreSQL</a>
         <a href="#" id="Number8">Ruby</a>
       </div>
+      {% endblock %}
 
+      {% block bestmaembers %}
       <div class="askme__right-block_best-members">
         <h3>Best Members</h3>
         <ul>
@@ -109,10 +119,16 @@
           <li><a href="#">User4</a></li>
         </ul>        
       </div>
+      {% endblock %}
     </div><!--/.right block-->
+    {% endblock %}
   </div>
+  {% endblock %}
 
+  {% block paginator %}
+  {% endblock %}
 
+  {% block footer %}
   <div class="askme__footer">
     <hr></hr>
     <p>
@@ -120,7 +136,7 @@
       All rights reserved (c)      
     </p>    
   </div>
-
+  {% endblock %}
   <!-- jQuery library -->
   <script src="../static/js/jquery.min.js"></script>
 
