@@ -5,4 +5,6 @@ from django.http import HttpResponse
 
 def index(request):
     #return HttpResponse("Hello, world. You're at ASKME APP.")
-    return render(request, '../templates/index.html')
+    str = "alah akbar!!!!"
+    return render(request, 'index.html', {"question": str}, )
+    
