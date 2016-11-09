@@ -61,8 +61,8 @@
         </div>
         <button type="submit" class="btn btn-dark">Ask!</button>
       </form>
-
-
+    {% if user.user_is_logged %}
+      {% block navbarUserLogged %}
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -76,11 +76,22 @@
         </li>
         <li><a href="#">Settings</a></li>
         <li><a href="/ask">New question</a></li>
-        <li><a href="login.html">Log Out</a></li>
+        <li><a href="/login">Log Out</a></li>
       </ul>
+      {% endblock %}
+    {% else %}
+      {% block navbarUserUnlogged %}
+      <ul class="nav navbar-nav navbar-right">
+
+        <li><a href="/register">Register</a></li>
+        <li><a href="/login">Log in</a></li>
+      </ul>
+      {% endblock %}
+    {% endif %}
+
     </div><!-- /.navbar-collapse -->
   </nav>
-  {%endblock%}
+  {% endblock %}
 
   {% block pagetitle %}
   {% endblock %}
@@ -90,9 +101,9 @@
   <div class="row">
     <div class="col-sm-7 col-sm-offset-1"> 
       {% block pagecontent %}
-      {% endblock %}
+      {% endblock %}      
     </div>
-  
+
     {%block sidebar%}
     <div class="col-sm-3  col-sm-offset-1 askme__right-block"> <!--right block-->
       {% block populartags %}
@@ -121,26 +132,25 @@
       </div>
       {% endblock %}
     </div><!--/.right block-->
-    {% endblock %}
-  </div>
-  {% endblock %}
+    {% endblock %}    
+</div>
+{% endblock %}
 
-  {% block paginator %}
-  {% endblock %}
 
-  {% block footer %}
-  <div class="askme__footer">
-    <hr></hr>
-    <p>
-      Site was built in 2016 by Vladislav.
-      All rights reserved (c)      
-    </p>    
-  </div>
-  {% endblock %}
-  <!-- jQuery library -->
-  <script src="../static/js/jquery.min.js"></script>
 
-  <!-- Latest compiled JavaScript -->
-  <script src="../static/js/bootstrap.min.js"></script>
+{% block footer %}
+<div class="askme__footer">
+  <hr></hr>
+  <p>
+    Site was built in 2016 by Vladislav.
+    All rights reserved (c)      
+  </p>    
+</div>
+{% endblock %}
+<!-- jQuery library -->
+<script src="../static/js/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="../static/js/bootstrap.min.js"></script>
 </body>
 </html>

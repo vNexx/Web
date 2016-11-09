@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+
+
 {% block pagetitle %}
 <span >
   <h3 class="askme_section-title">
@@ -46,22 +48,23 @@
   </div>
 </div> <!-- /.question block-->
 {% endfor %}
-{% endblock %}
-
-
-
 {% block paginator %}  
-<div>
- <ul class="pagination askme__pagination">
-  <li><a href="#">1</a></li>
-  <li class="active"><a href="#">2</a></li>
-  <li><a href="#">3</a></li>
-  <li><a href="#">4</a></li>
-  <li><a href="#">5</a></li>
-  <li class="disabled"><a href="#">...</a></li>
-  <li><a href="#">Last</a></li>
- </ul>
-</div>
+    <div>
+     <ul class="pagination askme__pagination">
+      <li><a href="#">1</a></li>
+      <li class="active"><a href="#">2</a></li>
+      <li><a href="#">3</a></li>
+      <li><a href="#">4</a></li>
+      <li><a href="#">5</a></li>
+      <li class="disabled"><a href="#">...</a></li>
+      <li><a href="#">Last</a></li>
+     </ul>
+    </div>
+  {% endblock %}
 {% endblock %}
+
+
+
+
 
 

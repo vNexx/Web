@@ -1,43 +1,47 @@
 {% extends "base.html" %}
 
+
 {% block page%}
-  <div class="row">
-    <div class="col-sm-10 col-sm-offset-2">      
-      <h2>New Question</h2>      
-    </div>        
-    <div class="col-sm-7 col-sm-offset-1 askme_ask-question-form"> <!-- ask question block-->
-      <div class = "col-sm-1">
-        <h4>Title:</h4>
+<div class="row">
+  <div class="col-sm-10 col-sm-offset-2">      
+    <h2>New Question</h2>      
+  </div>        
+  <div class="col-sm-7 col-sm-offset-1 askme_ask-question-form"> <!-- ask question block-->
+    <div class = "col-sm-1">
+      <h4>Title:</h4>
+    </div>
+    <div class = "col-sm-11">
+      <div class="form-group">
+        <textarea class="form-control noresize" rows="1" placeholder="Enter your title here"></textarea>
       </div>
-      <div class = "col-sm-11">
-        <div class="form-group">
-          <textarea class="form-control noresize" rows="1" placeholder="Enter your title here"></textarea>
-        </div>
-      </div>
+    </div>
 
-      <div class = "col-sm-1">
-        <h4>Text:</h4>
+    <div class = "col-sm-1">
+      <h4>Text:</h4>
+    </div>
+    <div class = "col-sm-11">
+      <div class="form-group">
+        <textarea class="form-control noresize" rows="14" placeholder="Enter your question here"></textarea>
       </div>
-      <div class = "col-sm-11">
-        <div class="form-group">
-          <textarea class="form-control noresize" rows="14" placeholder="Enter your question here"></textarea>
-        </div>
-      </div>
+    </div>
 
-      <div class = "col-sm-1">
-        <h4>Tags:</h4>
+    <div class = "col-sm-1">
+      <h4>Tags:</h4>
+    </div>
+    <div class = "col-sm-11">
+      <div class="form-group">
+        <textarea class="form-control noresize" rows="1"placeholder="Enter some tags here"></textarea>
       </div>
-      <div class = "col-sm-11">
-        <div class="form-group">
-          <textarea class="form-control noresize" rows="1"placeholder="Enter some tags here"></textarea>
-        </div>
-      </div>
-      <div class="col-sm-11  col-sm-offset-1">
-        <button type="button" class="btn btn-dark">Ask!</button>
-      </div>
-    </div> <!-- /ask question block-->        
-  </div>
-  {% endblock %}
+    </div>
+    <div class="col-sm-11  col-sm-offset-1">
+      <button type="button" class="btn btn-dark">Ask!</button>
+    </div>
+  </div> <!-- /ask question block-->        
+</div>
+{% endblock %}
+
+{% block paginator %}  
+{% endblock %}
 
 
-  
+
