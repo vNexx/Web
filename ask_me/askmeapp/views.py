@@ -7,7 +7,7 @@ import random
 
 questions = []
 answers = []
-for i in xrange (1,31):
+for i in xrange (1,7):
 	questions.append({
 		"title" : "Some Random Question Title?",
 		"text" : "Lorem Ipsum is simply dummy text of the printing and typesetting industry.\
@@ -45,12 +45,17 @@ def index(request):
 	return render(request, 'index.html', {"questions": questions, "user" : user}, )
     #return render(request, 'index.html', {'articles': models.Article.objects.all()} )
 
-
+def hot_questions(request):
+	user = { "user_is_logged" : True}	
+	return render(request, 'index.html', {"questions": questions, "user" : user}, )
 
 def single_question(request):
 	user = { "user_is_logged" : True}	
 	return render(request, 'question.html', {"question": questions[0], "answers" : answers, "user" : user},)
 
+def developing(request):
+	user = { "user_is_logged" : True}	
+	return render(request, 'developing.html', {"user" : user},)
 
 def ask_question(request):
 	user = { "user_is_logged" : True}	
