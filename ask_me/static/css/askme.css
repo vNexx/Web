@@ -44,6 +44,11 @@ hr{
 	text-align: center;
 }
 
+.askme_ask-question-section-title
+{
+	text-align: center;
+}
+
 .askme_section-title > span{
 	border-color: #111;
 	border-radius: 7px;
