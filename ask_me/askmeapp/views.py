@@ -55,5 +55,10 @@ def single_question(request):
 def ask_question(request):
 	user = { "user_is_logged" : True}	
 	return render(request, 'ask.html', {"user" : user},)
+
+def login(request):
+	user = { "user_is_logged" : False}
+	return render(request, 'login.html', {"user" : user},)
+	
 	
 
