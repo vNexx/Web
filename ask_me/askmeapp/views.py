@@ -59,6 +59,10 @@ def ask_question(request):
 def login(request):
 	user = { "user_is_logged" : False}
 	return render(request, 'login.html', {"user" : user},)
+
+def register(request):
+	user = { "user_is_logged" : False}
+	return render(request, 'register.html', {"user" : user},)
 	
 	
 
