@@ -52,7 +52,7 @@ def index(request):
 
 def hot_questions(request):
 	user = { "user_is_logged" : True}
-	return render(request, 'index.html', {"questions": questions, "user" : user}, )
+	return render(request, 'hot_questions.html', {"questions": questions, "user" : user}, )
 
 def user(request):
 	user = ({ 
