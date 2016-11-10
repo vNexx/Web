@@ -6,7 +6,7 @@
   <div class="row">
     <div class="col-md-2 askme__question-block_user-data">
       <img src="../static/images/avatar.jpeg" class="img-circle" width="110">
-      <p><b>{{ question.user_name }}</b></p>
+      <p><a href="/user"><b>{{ question.user_name }}</b></a></p>
 
       {% if question.user_rating >= 0 %}
         <p>Rating: <span class="like"><b> +{{ question.user_rating }}</b></span></p>
@@ -43,9 +43,9 @@
       <p>
         <a href="/question">Answers <span class="badge">5</span></a>
         Tags: 
-        <a href="/developing">#tag1  </a>
-        <a href="/developing">#tag2  </a>
-        <a href="/developing">#tag3  </a>
+        <a href="/tag">#tag1  </a>
+        <a href="/tag">#tag2  </a>
+        <a href="/tag">#tag3  </a>
       </p>        
     </div>
   </div>
@@ -58,7 +58,7 @@
   <div class="row">
     <div class="col-md-2 askme__question-block_user-data">
       <img src="../static/images/avatar2.png" class="img-circle" width="110">
-      <p><b>{{ answer.user_name }}</b></p>
+      <p><a href="/user"><b>{{ answer.user_name }}</b></a></p>
 
       {% if answer.user_rating >= 0 %}
         <p>Rating: <span class="like"><b> +{{ answer.user_rating }}</b></span></p>

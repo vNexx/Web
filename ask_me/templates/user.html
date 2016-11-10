@@ -1,29 +1,39 @@
 {% extends "base.html" %}
 
 
+{% block pageContent %}
 
-{% block pagetitle %}
-<span >
-  <h3 class="askme_section-title">
-    <span class="active"> New Questions </span>
-    <span><a href="/hot"> Hot Questions </a></span>
-  </h3>
-</span>
-{% endblock %}
+<div class="row askme_question_block">
+	<div class="col-md-2 askme__question-block_user-data">
+		<img src="../static/images/avatar.jpeg" class="img-circle" width="110">
+		<p><b>{{ user.name }}</b></p>
+
+		{% if user.rating >= 0 %}
+		<p>Rating: <span class="like"><b> +{{ user.rating }}</b></span></p>
+		{% else %}
+		<p>Rating: <span class="dislike"><b> {{ user.rating }}</b></span></p>
+		{% endif %}
+
+	</div>
+	<div class="col-md-9">             
+		<p>{{ user.info }}</p>           
+	</div>
+</div>
 
 
-{% block pageContent %}  
+<legend></legend>
+
 {% for question in questions %}   
 <div class="askme_question_block"> <!-- question block-->
   <div class="row">
     <div class="col-md-2 askme__question-block_user-data">
       <img src="../static/images/avatar.jpeg" class="img-circle" width="110">
-      <p><a href="/user"><b>{{ question.user_name }}</b></a></p>
+      <p><b>{{ user.name }}</b></p>
 
-      {% if question.user_rating >= 0 %}
-        <p>Rating: <span class="like"><b> +{{ question.user_rating }}</b></span></p>
+      {% if user.rating >= 0 %}
+        <p>Rating: <span class="like"><b> +{{ user.rating }}</b></span></p>
       {% else %}
-        <p>Rating: <span class="dislike"><b> {{ question.user_rating }}</b></span></p>
+        <p>Rating: <span class="dislike"><b> {{ user.rating }}</b></span></p>
       {% endif %}
 
       <div class="btn-group-vertical">
@@ -75,11 +85,5 @@
       <li><a href="#">Last</a></li>
      </ul>
     </div>
-  {% endblock %}
+ {% endblock %}
 {% endblock %}
-
-
-
-
-
-

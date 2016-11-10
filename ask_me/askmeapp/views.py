@@ -46,7 +46,22 @@ def index(request):
     #return render(request, 'index.html', {'articles': models.Article.objects.all()} )
 
 def hot_questions(request):
-	user = { "user_is_logged" : True}	
+	user = { "user_is_logged" : True}
+	return render(request, 'index.html', {"questions": questions, "user" : user}, )
+
+def user(request):
+	user = ({ 
+		"user_is_logged" : True,
+		"info" : " Some Random User Information Some Random User Information Some Random User\
+		 Information Some Random User Information Some Random User Information Some Random User\
+		 Information Some Random User Information Some Random User Information",
+		"name" : "Jarvis",	
+		"rating" : random.randint(-100,100)
+		})
+	return render(request, 'user.html', {"questions": questions, "user" : user}, )
+
+def tag(request):	
+	user = { "user_is_logged" : True}		
 	return render(request, 'index.html', {"questions": questions, "user" : user}, )
 
 def single_question(request):
