@@ -9,6 +9,6 @@ urlpatterns = [
 	url(r'^ask/', views.ask_question, name='ask'),
 	url(r'^developing/', views.developing, name='developing'),
 	url(r'^login/', views.login, name='login'),
-	url(r'^register/', views.register, name='register'),
+	url(r'^signup/', views.signup, name='signup'),
 ]
 

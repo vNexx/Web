@@ -19,9 +19,9 @@ for i in xrange (1,7):
 			and more recently with desktop publishing software like Aldus PageMaker\
 			including versions of Lorem Ipsum.",
 		"id" : i,
-		"user_rate" : random.randint(1,100),
+		"user_rating" : random.randint(-100,100),
 		"user_name" : "Random User",
-		"question_rate" : random.randint(1,100)
+		"question_rating" : random.randint(-100,100)
 		})
 	answers.append({
 		"text" : "Lorem, ipsum orci nam diam porta justo porttitor ornare massa - elementum,\
@@ -33,8 +33,8 @@ for i in xrange (1,7):
 			 lectus eros. Maecenas lorem nulla integer risus mattis odio sodales sem congue magna\
 			 at duis sem sit mauris, justo, nam lorem lectus. ",
 		"user_name" : "Loki",
-		"user_rate" : random.randint(1,100),
-		"answer_rate" : random.randint(1,100)
+		"user_rating" : random.randint(-100,100),
+		"answer_rating" : random.randint(-100,100)
 		})
 
 		
@@ -65,9 +65,9 @@ def login(request):
 	user = { "user_is_logged" : False}
 	return render(request, 'login.html', {"user" : user},)
 
-def register(request):
+def signup(request):
 	user = { "user_is_logged" : False}
-	return render(request, 'register.html', {"user" : user},)
+	return render(request, 'signup.html', {"user" : user},)
 	
 	
 

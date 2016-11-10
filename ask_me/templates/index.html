@@ -19,20 +19,35 @@
     <div class="col-md-2 askme__question-block_user-data">
       <img src="../static/images/avatar.jpeg" class="img-circle" width="110">
       <p><b>{{ question.user_name }}</b></p>
-      <p>User rating: {{ question.user_rate }}</p>
+
+      {% if question.user_rating >= 0 %}
+        <p>Rating: <span class="like"><b> +{{ question.user_rating }}</b></span></p>
+      {% else %}
+        <p>Rating: <span class="dislike"><b> {{ question.user_rating }}</b></span></p>
+      {% endif %}
+
       <div class="btn-group-vertical">
         <button type="button" class="btn btn-success btn-md">
-          <span class="glyphicon glyphicon-plus"></span>
-          <span class="badge">{{ question.question_rate }}</span>
+          <span class="glyphicon glyphicon-chevron-up"></span>          
         </button>
         <button type="button" class="btn btn-danger btn-md">
-          <span class="glyphicon glyphicon-minus"></span>
-          <span class="badge">2</span>
+          <span class="glyphicon glyphicon-chevron-down"></span>
         </button>
       </div>
     </div>
     <div class="col-md-9">
-      <p><a href="/question"><strong> {{ question.title }}</strong></a></p>
+    {% if question.question_rating >= 0 %}
+      <p>
+        <span class="askme__question-rate like pull-right"><b> +{{ question.question_rating }}</b></span>
+      </p>   
+    {% else %}
+      <p>
+        <span class="askme__question-rate dislike pull-right"><b> {{ question.question_rating }}</b></span>
+      </p> 
+    {% endif %}       
+      <p>
+        <a href="/question"><strong> {{ question.title }}</strong></a>
+      </p>         
       <p>{{ question.text }}</p>
       <p>
         <a href="/developing" class="pull-right">September 12, 2016</a>
