@@ -44,7 +44,7 @@
         <a href="/question">Answers <span class="badge">5</span></a>
         Tags: 
         {% for tag in question.tags %}
-        <a href="/tag">{{ tag.tag }}</a>
+        <a href="/tag/{{ tag.tag }}">{{ tag.tag }}</a>
         {% endfor %}
       </p>        
     </div>
