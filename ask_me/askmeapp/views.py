@@ -7,6 +7,10 @@ import random
 
 questions = []
 answers = []
+tags = []
+for i in xrange (1,4):
+	tags.append({
+		"tag" : "SomeTag "})
 for i in xrange (1,7):
 	questions.append({
 		"title" : "Some Random Question Title?",
@@ -21,7 +25,8 @@ for i in xrange (1,7):
 		"id" : i,
 		"user_rating" : random.randint(-100,100),
 		"user_name" : "Random User",
-		"question_rating" : random.randint(-100,100)
+		"question_rating" : random.randint(-100,100),
+		"tags" : tags
 		})
 	answers.append({
 		"text" : "Lorem, ipsum orci nam diam porta justo porttitor ornare massa - elementum,\
@@ -60,9 +65,9 @@ def user(request):
 		})
 	return render(request, 'user.html', {"questions": questions, "user" : user}, )
 
-def tag(request):	
+def tag(request, tag):	
 	user = { "user_is_logged" : True}		
-	return render(request, 'index.html', {"questions": questions, "user" : user}, )
+	return render(request, 'tag.html', {"questions": questions, "user" : user, "tag" : tag}, )
 
 def single_question(request):
 	user = { "user_is_logged" : True}	

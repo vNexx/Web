@@ -10,7 +10,7 @@ urlpatterns = [
 	url(r'^developing/', views.developing, name='developing'),
 	url(r'^login/', views.login, name='login'),
 	url(r'^signup/', views.signup, name='signup'),
-	url(r'^tag/', views.tag, name='tag'),
+	url(r'^tag/(?P<tag>\w+)/?$', views.tag, name='tag'),
 	url(r'^user/', views.user, name='user'),
 ]
 
