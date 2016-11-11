@@ -56,14 +56,14 @@
       </p> 
     {% endif %}       
       <p>
-        <a href="/question"><strong> {{ question.title }}</strong></a>
+        <a href="/question/id{{ question.id }}"><strong> {{ question.title }}</strong></a>
       </p>         
       <p>{{ question.text }}</p>
       <p>
         <a href="/developing" class="pull-right">September 12, 2016</a>
       </p>
       <p>
-        <a href="/question">Answers <span class="badge">5</span></a>
+        <a href="/question/id{{ question.id }}">Answers <span class="badge">5</span></a>
         Tags: 
         {% for tag in question.tags %}
         <a href="/tag/{{ tag.tag }}">{{ tag.tag }}</a>

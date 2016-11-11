@@ -11,6 +11,6 @@ urlpatterns = [
 	url(r'^login/', views.login, name='login'),
 	url(r'^signup/', views.signup, name='signup'),
 	url(r'^tag/(?P<tag>\w+)/?$', views.tag, name='tag'),
-	url(r'^user/', views.user, name='user'),
+	url(r'^profile/', views.profile, name='profile'),
 ]
 

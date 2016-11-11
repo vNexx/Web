@@ -1,0 +1,35 @@
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;	
+	
+	
+	root /home/nexx/github/Web/ask_me/;
+	
+	
+	server_name ask.me;
+	server_name 127.0.0.1;
+	
+
+	location ~* ^.+\.(js|css|png|jpe?g|gif|woff2|ttf|svg|eot)$ {		
+		root /home/nexx/github/Web/ask_me/;
+		
+		
+	}	
+
+	location /uploads/ {
+		root /home/nexx/github/Web/ask_me/;
+	}
+
+	location / {	
+		#root /home/nexx/github/Web/ask_me/templates/;	
+		#index index.html index.htm;
+		
+		proxy_pass http://backend;	
+		
+	}
+
+		
+
+}
+
+

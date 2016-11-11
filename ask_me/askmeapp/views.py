@@ -54,7 +54,7 @@ def hot_questions(request):
 	user = { "user_is_logged" : True}
 	return render(request, 'hot_questions.html', {"questions": questions, "user" : user}, )
 
-def user(request):
+def profile(request):
 	user = ({ 
 		"user_is_logged" : True,
 		"info" : " Some Random User Information Some Random User Information Some Random User\
@@ -63,7 +63,7 @@ def user(request):
 		"name" : "Jarvis",	
 		"rating" : random.randint(-100,100)
 		})
-	return render(request, 'user.html', {"questions": questions, "user" : user}, )
+	return render(request, 'profile.html', {"questions": questions, "user" : user}, )
 
 def tag(request, tag):	
 	user = { "user_is_logged" : True}		
