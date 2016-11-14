@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 from askmeapp import models
+from askmeapp import pagination_function
 import random
 
 
@@ -11,7 +13,7 @@ tags = []
 for i in xrange (1,4):
 	tags.append({
 		"tag" : "SomeTag "})
-for i in xrange (1,7):
+for i in xrange (1,30):
 	questions.append({
 		"title" : "Some Random Question Title?",
 		"text" : "Lorem Ipsum is simply dummy text of the printing and typesetting industry.\
@@ -24,7 +26,7 @@ for i in xrange (1,7):
 			including versions of Lorem Ipsum.",
 		"id" : i,
 		"user_rating" : random.randint(-100,100),
-		"user_name" : "Random User",
+		"user_name" : "RandomUser",
 		"question_rating" : random.randint(-100,100),
 		"tags" : tags
 		})
@@ -45,16 +47,18 @@ for i in xrange (1,7):
 		
 
 
-def index(request):
+def index(request, page = '1'):
 	user = { "user_is_logged" : False}	
-	return render(request, 'index.html', {"questions": questions, "user" : user}, )
+	question_list = pagination_function.pagination(questions, 5, page)
+	return render(request, 'index.html', {"questions": question_list, "user" : user}, )
     #return render(request, 'index.html', {'articles': models.Article.objects.all()} )
 
-def hot_questions(request):
+def hot_questions(request, page = '1'):
 	user = { "user_is_logged" : True}
-	return render(request, 'hot_questions.html', {"questions": questions, "user" : user}, )
+	question_list = pagination_function.pagination(questions, 5, page)
+	return render(request, 'hot_questions.html', {"questions": question_list, "user" : user}, )
 
-def profile(request):
+def profile(request, page = '1'):
 	user = ({ 
 		"user_is_logged" : True,
 		"info" : " Some Random User Information Some Random User Information Some Random User\
@@ -63,15 +67,18 @@ def profile(request):
 		"name" : "Jarvis",	
 		"rating" : random.randint(-100,100)
 		})
-	return render(request, 'profile.html', {"questions": questions, "user" : user}, )
+	question_list = pagination_function.pagination(questions, 5, page)
+	return render(request, 'profile.html', {"questions": question_list, "user" : user}, )
 
-def tag(request, tag):	
-	user = { "user_is_logged" : True}		
-	return render(request, 'tag.html', {"questions": questions, "user" : user, "tag" : tag}, )
+def tag(request, tag, page = '1'):	
+	user = { "user_is_logged" : True}
+	question_list = pagination_function.pagination(questions, 5, page)		
+	return render(request, 'tag.html', {"questions": question_list, "user" : user, "tag" : tag}, )
 
-def single_question(request):
-	user = { "user_is_logged" : True}	
-	return render(request, 'question.html', {"question": questions[0], "answers" : answers, "user" : user},)
+def single_question(request, page = '1'):
+	user = { "user_is_logged" : True}
+	answer_list = pagination_function.pagination(answers, 4, page)
+	return render(request, 'question.html', {"question": questions[0], "answers" : answer_list, "user" : user},)
 
 def developing(request):
 	user = { "user_is_logged" : True}	
@@ -88,6 +95,28 @@ def login(request):
 def signup(request):
 	user = { "user_is_logged" : False}
 	return render(request, 'signup.html', {"user" : user},)
+
+
+@csrf_exempt
+def get_post_params(request):
+    result = ['Hello, World!<br>']
+    result.append('Post test:')
+    result.append('<form method="post">')
+    result.append('<input type="text" name = "params">')
+    result.append('<input type="submit" value="Submit">')
+    result.append('</form>')
+
+    if request.method == 'GET':
+        if request.GET.urlencode() != '':
+            result.append('Get data:')            
+            for key, value in request.GET.items():
+                keyvalue=key+" = "+value
+                result.append(keyvalue)
+
+    if request.method == 'POST':
+        result.append(request.POST.urlencode())
+    return HttpResponse('<br>'.join(result))
+
 	
 	
 

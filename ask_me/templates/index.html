@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 
 
 {% block pagetitle %}
@@ -17,8 +17,8 @@
 <div class="askme_question_block"> <!-- question block-->
   <div class="row">
     <div class="col-md-2 askme__question-block_user-data">
-      <img src="../static/images/avatar.jpeg" class="img-circle" width="110">
-      <p><a href="/profile/{{ question.user_name }}"><b>{{ question.user_name }}</b></a></p>
+      <img src="{% static 'images/avatar.jpeg' %}" class="img-circle" width="110">
+      <p><a href="/profile/{{ question.user_name }}/"><b>{{ question.user_name }}</b></a></p>
 
       {% if question.user_rating >= 0 %}
         <p>Rating: <span class="like"><b> +{{ question.user_rating }}</b></span></p>
@@ -46,34 +46,44 @@
       </p> 
     {% endif %}       
       <p>
-        <a href="/question/id{{ question.id }}"><strong> {{ question.title }}</strong></a>
+        <a href="/question/id{{ question.id }}/"><strong> {{ question.title }}</strong></a>
       </p>         
       <p>{{ question.text }}</p>
       <p>
-        <a href="/developing" class="pull-right">September 12, 2016</a>
+        <a href="/developing/" class="pull-right">September 12, 2016</a>
       </p>
       <p>
-        <a href="/question/id{{ question.id }}">Answers <span class="badge">5</span></a>
+        <a href="/question/id{{ question.id }}/">Answers <span class="badge">5</span></a>
         Tags: 
         {% for tag in question.tags %}
-        <a href="/tag/{{ tag.tag }}">#{{ tag.tag }}</a>
+        <a href="/tag/{{ tag.tag }}/">#{{ tag.tag }}</a>
         {% endfor %}
         
-      </p>        
+        </p>        
+     </div>
     </div>
-  </div>
-</div> <!-- /.question block-->
-{% endfor %}
-{% block paginator %}  
+  </div> <!-- /.question block-->
+  {% endfor %}
+  {% block paginator %}  
     <div>
      <ul class="pagination askme__pagination">
-      <li><a href="#">1</a></li>
-      <li class="active"><a href="#">2</a></li>
-      <li><a href="#">3</a></li>
-      <li><a href="#">4</a></li>
-      <li><a href="#">5</a></li>
-      <li class="disabled"><a href="#">...</a></li>
-      <li><a href="#">Last</a></li>
+      {% if questions.has_previous %}
+        <li><a href="/{{ questions.previous_page_number }}/"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+      {% endif %}
+
+      {% for page_num in questions.paginator.page_range %}
+          {% if page_num == questions.number %}
+            <li class="active"><a href="/{{page_num}}/"> {{ page_num }}</a></li>
+          {% else %}
+            <li><a href="/{{page_num}}/"> {{ page_num }}</a></li>
+          {% endif %}
+      {% endfor %}      
+      
+      {% if questions.has_next %}
+        <li class="disabled"><a>...</a></li>
+        <li><a href="/{{ questions.next_page_number }}/"><span class="glyphicon glyphicon-chevron-right"></a></li>
+      {% endif %}
+
      </ul>
     </div>
   {% endblock %}
