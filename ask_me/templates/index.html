@@ -56,10 +56,10 @@
         <a href="/question/id{{ question.id }}/">Answers <span class="badge">5</span></a>
         Tags: 
         {% for tag in question.tags %}
-        <a href="/tag/{{ tag.tag }}/">#{{ tag.tag }}</a>
+        <a href="/tag/{{ tag.tag }}/">#{{ tag.tag }}</a> 
         {% endfor %}
         
-        </p>        
+      </p>        
      </div>
     </div>
   </div> <!-- /.question block-->
@@ -68,6 +68,7 @@
     <div>
      <ul class="pagination askme__pagination">
       {% if questions.has_previous %}
+        <li><a href="/1/"><span class="glyphicon glyphicon-fast-backward"></a></li>
         <li><a href="/{{ questions.previous_page_number }}/"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
       {% endif %}
 
@@ -82,6 +83,7 @@
       {% if questions.has_next %}
         <li class="disabled"><a>...</a></li>
         <li><a href="/{{ questions.next_page_number }}/"><span class="glyphicon glyphicon-chevron-right"></a></li>
+        <li><a href="/{{ questions.paginator.num_pages }}/"><span class="glyphicon glyphicon-fast-forward"></a></li>
       {% endif %}
 
      </ul>

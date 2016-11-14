@@ -12,7 +12,7 @@ answers = []
 tags = []
 for i in xrange (1,4):
 	tags.append({
-		"tag" : "SomeTag "})
+		"tag" : "SomeTag"})
 for i in xrange (1,30):
 	questions.append({
 		"title" : "Some Random Question Title?",
