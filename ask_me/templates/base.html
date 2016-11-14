@@ -60,7 +60,7 @@
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Enter your question">
         </div>
-        <button type="submit" class="btn btn-dark">Ask!</button>
+        <button type="submit" class="btn btn-dark"><span class="glyphicon glyphicon-search"></span></button>
       </form>
     {% if user.user_is_logged %}
       {% block navbarUserLogged %}
@@ -73,11 +73,12 @@
           <ul class="dropdown-menu">
             <li><a href="/profile/RandomUser/">My questions</a></li>
             <li><a href="/developing/">My achievements</a></li>
+            <hr>
+            <li><a href="/developing/">Settings <span class="glyphicon glyphicon-cog"></span></a></li>
           </ul>
-        </li>
-        <li><a href="/developing/">Settings</a></li>
+        </li>        
         <li><a href="/ask/">New question</a></li>
-        <li><a href="/login/">Log Out <span class="glyphicon glyphicon glyphicon-log-out"></span></a></li>
+        <li><a href="/login/">Log Out <span class="glyphicon glyphicon-log-out"></span></a></li>
       </ul>
       {% endblock %}
     {% else %}
@@ -85,7 +86,7 @@
       <ul class="nav navbar-nav navbar-right">
 
         <li><a href="/signup/">Register</a></li>
-        <li><a href="/login/">Log in</a></li>
+        <li><a href="/login/">Log in <span class="glyphicon glyphicon-log-in"></a></li>
       </ul>
       {% endblock %}
     {% endif %}
