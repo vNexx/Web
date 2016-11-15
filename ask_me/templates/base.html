@@ -102,8 +102,51 @@
   {% block page %}
   <div class="row">
     <div class="col-sm-7 col-sm-offset-1"> 
+
       {% block pageContent %}
-      {% endblock %}      
+      {% endblock %}
+
+      {% block paginator %}  
+    <div>
+     <ul class="pagination askme__pagination">
+      {% if data.has_previous %}
+        <li><a href="{{ data.paginator.baseurl }}1/"><span class="glyphicon glyphicon-fast-backward"></a></li>
+        <li><a href="{{ data.paginator.baseurl }}{{ data.previous_page_number }}/"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+      {% endif %}
+
+      
+        {% if data.paginator.show_gap_prev %}
+          <li class="disabled"><a>...</a></li> 
+        {% endif %}
+        {%if  data.paginator.show_prev_prev %}
+          <li><a href="{{ data.paginator.baseurl }}{{ data.paginator.prev_prev }}/">{{ data.paginator.prev_prev }}</a></li>
+        {% endif %} 
+        {% if data.has_previous %}
+          <li><a href="{{ data.paginator.baseurl }}{{ data.previous_page_number }}/">{{ data.previous_page_number }}</a></li>
+        {% endif %}                  
+        
+        <li class="active"><a> {{ data.number }}</a></li>        
+         
+        {% if data.has_next %}
+          <li><a href="{{ data.paginator.baseurl }}{{ data.next_page_number }}/">{{ data.next_page_number }}</a></li>
+        {% endif %}
+        {%if  data.paginator.show_next_next %}
+          <li><a href="{{ data.paginator.baseurl }}{{ data.paginator.next_next }}/">{{ data.paginator.next_next }}</a></li>
+        {% endif %}
+        {% if data.paginator.show_gap_next %}
+          <li class="disabled"><a>...</a></li> 
+        {% endif %}           
+
+      
+      
+      {% if data.has_next %}
+        <li><a href="{{ data.paginator.baseurl }}{{ data.next_page_number }}/"><span class="glyphicon glyphicon-chevron-right"></a></li>
+        <li><a href="{{ data.paginator.baseurl }}{{ data.paginator.num_pages }}/"><span class="glyphicon glyphicon-fast-forward"></a></li>
+      {% endif %}
+
+     </ul>
+    </div>
+  {% endblock %}      
     </div>
 
     {%block sidebar%}

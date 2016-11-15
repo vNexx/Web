@@ -50,13 +50,15 @@ for i in xrange (1,300):
 def index(request, page = '1'):
 	user = { "user_is_logged" : False}	
 	question_list = pagination_function.pagination(questions, 5, page)
-	return render(request, 'index.html', {"questions": question_list, "user" : user}, )
+	question_list.paginator.baseurl = "/"
+	return render(request, 'index.html', {"data": question_list, "user" : user}, )
     #return render(request, 'index.html', {'articles': models.Article.objects.all()} )
 
 def hot_questions(request, page = '1'):
-	user = { "user_is_logged" : True}
+	user = { "user_is_logged" : True}	
 	question_list = pagination_function.pagination(questions, 5, page)
-	return render(request, 'hot_questions.html', {"questions": question_list, "user" : user}, )
+	question_list.paginator.baseurl = "/hot/"
+	return render(request, 'hot_questions.html', {"data": question_list, "user" : user}, )
 
 def profile(request, page = '1'):
 	user = ({ 
@@ -68,17 +70,20 @@ def profile(request, page = '1'):
 		"rating" : random.randint(-100,100)
 		})
 	question_list = pagination_function.pagination(questions, 5, page)
-	return render(request, 'profile.html', {"questions": question_list, "user" : user}, )
+	question_list.paginator.baseurl = "/profile/" + user["name"] + "/"
+	return render(request, 'profile.html', {"data": question_list, "user" : user}, )
 
 def tag(request, tag, page = '1'):	
 	user = { "user_is_logged" : True}
-	question_list = pagination_function.pagination(questions, 5, page)		
-	return render(request, 'tag.html', {"questions": question_list, "user" : user, "tag" : tag}, )
+	question_list = pagination_function.pagination(questions, 5, page)
+	question_list.paginator.baseurl = "/tag/" + tag + "/"		
+	return render(request, 'tag.html', {"data": question_list, "user" : user, "tag" : tag}, )
 
-def single_question(request, page = '1'):
+def single_question(request, id, page = '1'):
 	user = { "user_is_logged" : True}
 	answer_list = pagination_function.pagination(answers, 4, page)
-	return render(request, 'question.html', {"question": questions[0], "answers" : answer_list, "user" : user},)
+	answer_list.paginator.baseurl = "/question/id" + id + "/"
+	return render(request, 'question.html', {"question": questions[0], "data" : answer_list, "user" : user},)
 
 def developing(request):
 	user = { "user_is_logged" : True}	

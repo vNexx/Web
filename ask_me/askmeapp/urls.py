@@ -8,8 +8,8 @@ urlpatterns = [
 	url(r'^hot/(?P<page>\d+)/', views.hot_questions, name='hot_questions'),
 	url(r'^hot/', views.hot_questions, name='hot_questions'),
 
-	url(r'^question/id\d+/(?P<page>\d+)?/$', views.single_question, name='question'),
-	url(r'^question/id\d+/$', views.single_question, name='question'),
+	url(r'^question/id(?P<id>\d+)/(?P<page>\d+)?/$', views.single_question, name='question'),
+	url(r'^question/id(?P<id>\d+)/$', views.single_question, name='question'),
 
 	url(r'^ask/', views.ask_question, name='ask'),
 	url(r'^developing/', views.developing, name='developing'),

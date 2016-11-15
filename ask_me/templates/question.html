@@ -52,7 +52,7 @@
   </div>
 </div> <!-- /.question block-->
 
-{% for answer in answers %}
+{% for answer in data %}
 <hr></hr>
 
 <div class="askme__question_answer-block"> <!-- answer block -->
@@ -101,46 +101,6 @@
   <textarea class="form-control" rows="5" placeholder="Enter your answer here" ></textarea>
   <button type="button" class="btn btn-dark askme__answer-button">Answer</button>
 </div>
-{% block paginator %}  
-    <div>
-     <ul class="pagination askme__pagination">
-      {% if answers.has_previous %}
-        <li><a href="/question/id{{question.id}}/1/"><span class="glyphicon glyphicon-fast-backward"></a></li>
-        <li><a href="/question/id{{question.id}}/{{ answers.previous_page_number }}/"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
-      {% endif %}
-
-
-      {% if answers.paginator.show_gap_prev %}
-          <li class="disabled"><a>...</a></li> 
-        {% endif %}
-        {%if  answers.paginator.show_prev_prev %}
-          <li><a href="/question/id{{question.id}}/{{ answers.paginator.prev_prev }}/">{{ answers.paginator.prev_prev }}</a></li>
-        {% endif %} 
-        {% if answers.has_previous %}
-          <li><a href="/question/id{{question.id}}/{{ answers.previous_page_number }}/">{{ answers.previous_page_number }}</a></li>
-        {% endif %}                  
-        
-        <li class="active"><a href="/question/id{{question.id}}/{{ answers.number }}/"> {{ answers.number }}</a></li>        
-         
-        {% if answers.has_next %}
-          <li><a href="/question/id{{question.id}}/{{ answers.next_page_number }}/">{{ answers.next_page_number }}</a></li>
-        {% endif %}
-        {%if  answers.paginator.show_next_next %}
-          <li><a href="/question/id{{question.id}}/{{ answers.paginator.next_next }}/">{{ answers.paginator.next_next }}</a></li>
-        {% endif %}
-        {% if answers.paginator.show_gap_next %}
-          <li class="disabled"><a>...</a></li> 
-        {% endif %}
-          
-      
-      {% if answers.has_next %}        
-        <li><a href="/question/id{{question.id}}/{{ answers.next_page_number }}/"><span class="glyphicon glyphicon-chevron-right"></a></li>
-        <li><a href="/question/id{{question.id}}/{{ answers.paginator.num_pages }}/"><span class="glyphicon glyphicon-fast-forward"></a></li>
-      {% endif %}
-
-     </ul>
-    </div>
-  {% endblock %}
 {% endblock %}
 
 
