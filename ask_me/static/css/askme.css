@@ -262,8 +262,7 @@ a:focus{
 .pagination > .disabled > a,
 .pagination > .disabled > a:hover,
 .pagination > .disabled > a:focus {
-  color: #ddd;
-  cursor: not-allowed;
+  color: #ddd;  
   background-color: #868686;
   border-color: #545454;
 }

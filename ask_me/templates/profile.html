@@ -81,16 +81,29 @@
         <li><a href="/profile/{{ user.name }}/{{ questions.previous_page_number }}/"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
       {% endif %}
 
-      {% for page_num in questions.paginator.page_range %}
-          {% if page_num == questions.number %}
-            <li class="active"><a href="?/{{page_num}}/"> {{ page_num }}</a></li>
-          {% else %}
-            <li><a href="/profile/{{ user.name }}/{{page_num}}/"> {{ page_num }}</a></li>
-          {% endif %}
-      {% endfor %}      
+      {% if questions.paginator.show_gap_prev %}
+          <li class="disabled"><a>...</a></li> 
+        {% endif %}
+        {%if  questions.paginator.show_prev_prev %}
+          <li><a href="/profile/{{ user.name }}/{{ questions.paginator.prev_prev }}/">{{ questions.paginator.prev_prev }}</a></li>
+        {% endif %} 
+        {% if questions.has_previous %}
+          <li><a href="/profile/{{ user.name }}/{{ questions.previous_page_number }}/">{{ questions.previous_page_number }}</a></li>
+        {% endif %}                  
+        
+        <li class="active"><a> {{ questions.number }}</a></li>        
+         
+        {% if questions.has_next %}
+          <li><a href="/profile/{{ user.name }}/{{ questions.next_page_number }}/">{{ questions.next_page_number }}</a></li>
+        {% endif %}
+        {%if  questions.paginator.show_next_next %}
+          <li><a href="/profile/{{ user.name }}/{{ questions.paginator.next_next }}/">{{ questions.paginator.next_next }}</a></li>
+        {% endif %}
+        {% if questions.paginator.show_gap_next %}
+          <li class="disabled"><a>...</a></li> 
+        {% endif %}          
       
-      {% if questions.has_next %}
-        <li class="disabled"><a>...</a></li>
+      {% if questions.has_next %}        
         <li><a href="/profile/{{ user.name }}/{{ questions.next_page_number }}/"><span class="glyphicon glyphicon-chevron-right"></a></li>
         <li><a href="/profile/{{ user.name }}/{{ questions.paginator.num_pages }}/"><span class="glyphicon glyphicon-fast-forward"></a></li>
       {% endif %}

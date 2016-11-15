@@ -1,9 +1,9 @@
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.mypaginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def pagination(data, howmany, page):
-    paginator = Paginator(data, howmany) # Show howmany questions per page
-    try:
+    paginator = Paginator(data, howmany, page) # Show howmany questions per page
+    try:	
         paginated_data_list = paginator.page(page)
     except PageNotAnInteger:
         # If page is not an integer, deliver first page.

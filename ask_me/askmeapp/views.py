@@ -13,7 +13,7 @@ tags = []
 for i in xrange (1,4):
 	tags.append({
 		"tag" : "SomeTag"})
-for i in xrange (1,30):
+for i in xrange (1,300):
 	questions.append({
 		"title" : "Some Random Question Title?",
 		"text" : "Lorem Ipsum is simply dummy text of the printing and typesetting industry.\
