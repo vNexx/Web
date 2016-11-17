@@ -5,8 +5,8 @@
 {% if profile  != 0 %}
 <div class="row askme_question_block">
 	<div class="col-md-2 askme__question-block_user-data">
-		<img src="{% static 'images/avatar.jpeg' %}" class="img-circle" width="110">
-		<p><b>{{ profile.user__username }}</b></p>
+		<img src="/{{ profile.avatar.url }}" class="img-circle askmee__user-avatar" width="110" height="110">
+		<p><b>{{ profile.user }}</b></p>
 
 		{% if profile.rating >= 0 %}
 		<p>Rating: <span class="like"><b> +{{ profile.rating }}</b></span></p>
@@ -16,7 +16,8 @@
 
 	</div>
 	<div class="col-md-9">             
-		<p>{{ profile.information }}</p>           
+		<p>{{ profile.information }}</p>  
+    <p>Date joined to ask.me: {{ profile.user.date_joined }}</p>         
 	</div>
 </div>
 {% endif %}
@@ -28,7 +29,7 @@
 <div class="askme_question_block"> <!-- question block-->
   <div class="row">
     <div class="col-md-2 askme__question-block_user-data">
-      <img src="{% static 'images/avatar.jpeg' %}" class="img-circle" width="110">
+      <img src="/{{ profile.avatar.url }}" class="img-circle askmee__user-avatar" width="110" height="110">
       <p><b>{{ question.user }}</b></p>
 
       {% if profile.rating >= 0 %}

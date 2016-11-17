@@ -42,7 +42,6 @@ class Question(models.Model):
 	title = models.CharField(max_length = 255, verbose_name=u'Заголовок')
 	text = models.TextField(verbose_name=u'Текст')
 	rating = models.IntegerField(verbose_name=u'Рэйтинг')
-	owner_rating = models.IntegerField()
 	is_published = models.BooleanField(default=False, verbose_name=u'Опубликована')
 	created = models.DateTimeField(default = datetime.datetime.now)
 	tag = models.ManyToManyField(Tag)
@@ -60,7 +59,7 @@ class Question(models.Model):
 
 class Profile(models.Model):
 	user = models.OneToOneField(User)
-	avatar = models.ImageField(upload_to='uploads')
+	avatar = models.ImageField(upload_to='uploads', default="uploads/user_avatar.jpeg")
 	information = models.TextField()
 	rating = models.IntegerField()
 
@@ -74,7 +73,6 @@ class Answer(models.Model):
 	question = models.ForeignKey(Question)
 	text = models.TextField()
 	rating = models.IntegerField(default = 0)
-	owner_rating = models.IntegerField()
 	created = models.DateTimeField(default = datetime.datetime.now)
 	is_correct = models.BooleanField(default = False)
 	id = models.IntegerField(primary_key=True)
