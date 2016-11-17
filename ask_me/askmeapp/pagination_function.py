@@ -14,7 +14,10 @@ def pagination(data, howmany, page):
         # If page is out of range (e.g. 9999), deliver last page of results.
         paginated_data_list = paginator.page(paginator.num_pages)
 	pagenum = paginator.num_pages
-
+    if paginator.num_pages == 1:
+		paginator.show_paginator = False
+    else:
+		paginator.show_paginator = True
     if pagenum >= 3:
 		paginator.show_prev_prev = True
 		paginator.prev_prev = pagenum - 2

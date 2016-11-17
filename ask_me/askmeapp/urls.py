@@ -19,8 +19,8 @@ urlpatterns = [
 	url(r'^tag/(?P<tag>\w+)/$', views.tag, name='tag'),
 	url(r'^tag/(?P<tag>\w+)/(?P<page>\d+)/$', views.tag, name='tag'),
 
-	url(r'^profile/\w+/(?P<page>\d+)?/$', views.profile, name='profile'),
-	url(r'^profile/\w+/$', views.profile, name='profile'),
+	url(r'^profile/(?P<user_name>\w+)/(?P<page>\d+)?/$', views.profile, name='profile'),
+	url(r'^profile/(?P<user_name>\w+)/$', views.profile, name='profile'),
 
 	url(r'get_post_params/', views.get_post_params, name='get_post_params'),
 ]

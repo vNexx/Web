@@ -316,3 +316,11 @@ a:focus{
 	background-color: #9f9f9f;
 	border-color: #7f7f7f;
 }
+
+.askmee__bottomblock{
+	margin-bottom: 15px;
+	margin-top: 15px;
+}
+.askmee__tickblock{	
+	margin-top: 15px;
+}
