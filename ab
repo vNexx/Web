@@ -1,0 +1,230 @@
+ab -c 10 -n 1000 ask.me/
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking ask.me (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        nginx/1.10.0
+Server Hostname:        ask.me
+Server Port:            80
+
+Document Path:          /
+Document Length:        15715 bytes
+
+Concurrency Level:      10
+Time taken for tests:   97.912 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      15890000 bytes
+HTML transferred:       15715000 bytes
+Requests per second:    10.21 [#/sec] (mean)
+Time per request:       979.122 [ms] (mean)
+Time per request:       97.912 [ms] (mean, across all concurrent requests)
+Transfer rate:          158.48 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.1      0       5
+Processing:    66  975 185.9    944    1361
+Waiting:       66  974 185.7    943    1361
+Total:         67  975 185.9    944    1361
+
+Percentage of the requests served within a certain time (ms)
+  50%    944
+  66%   1068
+  75%   1153
+  80%   1165
+  90%   1220
+  95%   1268
+  98%   1311
+  99%   1338
+ 100%   1361 (longest request)
+
+
+
+
+
+
+
+ ab -c 10 -n 1000 ask.me:8081/
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking ask.me (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        gunicorn/19.6.0
+Server Hostname:        ask.me
+Server Port:            8081
+
+Document Path:          /
+Document Length:        15715 bytes
+
+Concurrency Level:      10
+Time taken for tests:   110.180 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      15884000 bytes
+HTML transferred:       15715000 bytes
+Requests per second:    9.08 [#/sec] (mean)
+Time per request:       1101.800 [ms] (mean)
+Time per request:       110.180 [ms] (mean, across all concurrent requests)
+Transfer rate:          140.79 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.6      0       7
+Processing:   133 1098 149.7   1142    1427
+Waiting:      126 1097 149.6   1141    1426
+Total:        134 1098 149.6   1142    1427
+
+Percentage of the requests served within a certain time (ms)
+  50%   1142
+  66%   1168
+  75%   1186
+  80%   1206
+  90%   1283
+  95%   1312
+  98%   1346
+  99%   1367
+ 100%   1427 (longest request)
+
+
+ab -c 10 -n 1000 ask.me/
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking ask.me (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        nginx/1.10.0
+Server Hostname:        ask.me
+Server Port:            80
+
+Document Path:          /
+Document Length:        15715 bytes
+
+Concurrency Level:      10
+Time taken for tests:   53.930 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      15890000 bytes
+HTML transferred:       15715000 bytes
+Requests per second:    18.54 [#/sec] (mean)
+Time per request:       539.299 [ms] (mean)
+Time per request:       53.930 [ms] (mean, across all concurrent requests)
+Transfer rate:          287.74 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.7      0       8
+Processing:    72  537  29.4    534     621
+Waiting:       65  536  29.5    534     621
+Total:         73  537  29.0    534     629
+
+Percentage of the requests served within a certain time (ms)
+  50%    534
+  66%    537
+  75%    540
+  80%    545
+  90%    554
+  95%    556
+  98%    580
+  99%    595
+ 100%    629 (longest request)
+
+
+
+
+ab -c 10 -n 1000 http://ask.me/uploads/avatar2.png
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking ask.me (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        nginx/1.10.0
+Server Hostname:        ask.me
+Server Port:            80
+
+Document Path:          /uploads/avatar2.png
+Document Length:        657673 bytes
+
+Concurrency Level:      10
+Time taken for tests:   0.353 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      657920000 bytes
+HTML transferred:       657673000 bytes
+Requests per second:    2832.40 [#/sec] (mean)
+Time per request:       3.531 [ms] (mean)
+Time per request:       0.353 [ms] (mean, across all concurrent requests)
+Transfer rate:          1819819.46 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.2      0       2
+Processing:     1    3   1.5      3      10
+Waiting:        0    1   1.6      0       8
+Total:          1    3   1.5      3      11
+
+Percentage of the requests served within a certain time (ms)
+  50%      3
+  66%      3
+  75%      4
+  80%      4
+  90%      5
+  95%      7
+  98%      8
+  99%      9
+ 100%     11 (longest request)
+

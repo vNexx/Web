@@ -30,11 +30,7 @@ class Tag(models.Model):
 		return self.text
 
 
-class Like(models.Model):
-	rating = models.IntegerField(default = 0, db_index=True)
 
-	def __unicode__(self):
-		return str(self.rating)
 
 
 class Question(models.Model):
@@ -43,7 +39,7 @@ class Question(models.Model):
 	text = models.TextField(verbose_name=u'Текст')
 	rating = models.IntegerField(verbose_name=u'Рэйтинг')
 	is_published = models.BooleanField(default=False, verbose_name=u'Опубликована')
-	created = models.DateTimeField(default = datetime.datetime.now)
+	created = models.DateTimeField(default=datetime.datetime.now)
 	tag = models.ManyToManyField(Tag)
 	id = models.IntegerField(unique=True, primary_key=True)
 
@@ -77,6 +73,14 @@ class Answer(models.Model):
 	is_correct = models.BooleanField(default = False)
 	id = models.IntegerField(primary_key=True)
 
+
+class Like(models.Model):
+	status = models.IntegerField(default=0)
+	#question = models.ForeignKey(Question)
+
+
+	def __unicode__(self):
+		return str(self.rating)
 
 # class ArticleManager(models.Manager):
 # 	def published(self):

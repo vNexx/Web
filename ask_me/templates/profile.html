@@ -58,17 +58,17 @@
       </p> 
     {% endif %}       
       <p>
-        <a href="/question/id{{ question.id }}/"><strong> {{ question.title }}</strong></a>
+        <a href="{% url 'question' question.id %}"><strong> {{ question.title }}</strong></a>
       </p>         
       <p>{{ question.text }}</p>
       </div>  
     <div class="col-md-9 col-md-offset-2 askmee__bottomblock">
       <p>
-        <a href="/developing/" class="pull-right">{{ question.created }}</a>      
-        <a href="/question/id{{ question.id }}/">Answers <span class="badge">{{ question.answer_set.count }}</span></a>
+        <a href="{% url 'developing'%}" class="pull-right">{{ question.created }}</a>      
+        <a href="{% url 'question' question.id %}">Answers <span class="badge">{{ question.answer_set.count }}</span></a>
         Tags: 
         {% for tag in question.tag.all %}
-        <a href="/tag/{{ tag }}/">#{{ tag }}</a> 
+        <a href="{% url 'tag' tag %}">#{{ tag }}</a> 
         {% endfor %}
       </p>
     </div>       

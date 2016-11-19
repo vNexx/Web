@@ -34,7 +34,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">
+      <a class="navbar-brand" href="{% url 'index'%}">
         <img src="{% static 'images/logo.png' %}" alt="Ask me. Logo." width="30">
       </a>      
     </div>
@@ -43,13 +43,13 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         {% block navbar_active_buttons %}
-        <li><a href="/">Номе <span class="sr-only">(current)</span></a></li>
-        <li><a href="/hot/">Popular </a></li>
+        <li><a href="{% url 'index'%}">Номе <span class="sr-only">(current)</span></a></li>
+        <li><a href="{% url 'hot_questions'%}">Popular </a></li>
         {% endblock %}
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Topics <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/tag/Web/">Web </a></li>
+            <li><a href="{% url 'tag'  'Web'%}">Web </a></li>
             <li><a href="/tag/JavaScript/">JavaScript </a></li>
             <li><a href="/tag/Python/">Python </a></li>
             <li><a href="/hot/">Other </a></li>
@@ -73,22 +73,22 @@
             User <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="/profile/RandomUser/">My questions</a></li>
-            <li><a href="/developing/">My achievements</a></li>
+            <li><a href="{% url 'profile' 'RandomUser'%}">My questions</a></li>
+            <li><a href="{% url 'developing'%}">My achievements</a></li>
             <hr>
-            <li><a href="/developing/">Settings <span class="glyphicon glyphicon-cog"></span></a></li>
+            <li><a href="{% url 'developing'%}">Settings <span class="glyphicon glyphicon-cog"></span></a></li>
           </ul>
         </li>        
-        <li><a href="/ask/">New question</a></li>
-        <li><a href="/login/">Log Out <span class="glyphicon glyphicon-log-out"></span></a></li>
+        <li><a href="{% url 'ask'%}">New question</a></li>
+        <li><a href="{% url 'login'%}">Log Out <span class="glyphicon glyphicon-log-out"></span></a></li>
       </ul>
       {% endblock %}
     {% else %}
       {% block navbarUserUnlogged %}
       <ul class="nav navbar-nav navbar-right">
 
-        <li><a href="/signup/">Register</a></li>
-        <li><a href="/login/">Log in <span class="glyphicon glyphicon-log-in"></a></li>
+        <li><a href="{% url 'signup'%}">Register</a></li>
+        <li><a href="{% url 'login'%}">Log in <span class="glyphicon glyphicon-log-in"></a></li>
       </ul>
       {% endblock %}
     {% endif %}
@@ -158,14 +158,14 @@
       {% block populartags %}
       <div class="askme__right-block_popular-tags">
         <h3>Popular tags</h3>
-        <a href="/tag/TechnoPark/" id="Number3">TechnoPark</a>
-        <a href="/tag/Perl/" id="Number7">Perl</a>
-        <a href="/tag/Python/" id="Number1">Python</a>
-        <a href="/tag/CSS/" id="Number2">CSS</a>
-        <a href="/tag/HTML/" id="Number6">HTML</a>
-        <a href="/tag/TarantoolDB/" id="Number4">Tarantool DB</a>
-        <a href="/tag/PostgreSQL/" id="Number5">PostgreSQL</a>
-        <a href="/tag/Ruby/" id="Number8">Ruby</a>
+        <a href="{% url 'tag' 'TechnoPark' %}" id="Number3">TechnoPark</a>
+        <a href="{% url 'tag' 'Perl' %}" id="Number7">Perl</a>
+        <a href="{% url 'tag' 'Python' %}" id="Number1">Python</a>
+        <a href="{% url 'tag' 'CSS' %}" id="Number2">CSS</a>
+        <a href="{% url 'tag' 'HTML' %}" id="Number6">HTML</a>
+        <a href="{% url 'tag' 'TarantoolDB' %}" id="Number4">Tarantool DB</a>
+        <a href="{% url 'tag' 'PostgreSQL' %}" id="Number5">PostgreSQL</a>
+        <a href="{% url 'tag' 'Ruby' %}" id="Number8">Ruby</a>
       </div>
       {% endblock %}
 
@@ -173,10 +173,10 @@
       <div class="askme__right-block_best-members">
         <h3>Best Members</h3>
         <ul>
-          <li><a href="/profile/User/">User</a></li>
-          <li><a href="/profile/admin/">admin</a></li>
-          <li><a href="/profile/RandomUser/">RandomUser</a></li> 
-          <li><a href="/profile/Jarvis/">Jarvis</a></li>         
+          <li><a href="{% url 'profile' 'User' %}">User</a></li>
+          <li><a href="{% url 'profile' 'admin' %}">admin</a></li>
+          <li><a href="{% url 'profile' 'RandomUser' %}">RandomUser</a></li> 
+          <li><a href="{% url 'profile' 'Jarvis' %}">Jarvis</a></li>         
         </ul>        
       </div>
       {% endblock %}

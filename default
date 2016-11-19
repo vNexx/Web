@@ -9,16 +9,17 @@ server {
 	server_name ask.me;
 	server_name 127.0.0.1;
 	
+	location ^~ /uploads/ {
+		root /home/nexx/github/Web/ask_me/;
+	}
 
 	location ~* ^.+\.(js|css|png|jpe?g|gif|woff2|ttf|svg|eot)$ {		
-		root /home/nexx/github/Web/ask_me/;
+		root /home/nexx/github/Web/ask_me/static/;
 		
 		
 	}	
 
-	location /uploads/ {
-		root /home/nexx/github/Web/ask_me/;
-	}
+	
 
 	location / {	
 		#root /home/nexx/github/Web/ask_me/templates/;	

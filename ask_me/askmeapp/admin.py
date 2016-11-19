@@ -11,7 +11,7 @@ class AnswerAdmin(admin.ModelAdmin):
 class TagAdmin(admin.ModelAdmin):
 	list_display=('text',)
 class LikeAdmin(admin.ModelAdmin):
-	list_display=('rating',)
+	list_display=('status',)
 class ProfileAdmin(admin.ModelAdmin):
 	list_display=('user',)
 admin.site.register(models.Question, QuestionAdmin)

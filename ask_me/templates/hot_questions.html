@@ -2,15 +2,15 @@
 {% load static %}
 
 {% block navbar_active_buttons %}
-  <li><a href="/">Номе <span class="sr-only">(current)</span></a></li>
-  <li class="active"><a href="/hot/">Popular </a></li>
+  <li><a href="{% url 'index' %}">Номе <span class="sr-only">(current)</span></a></li>
+  <li class="active"><a href="{% url 'hot_questions' %}">Popular </a></li>
 {% endblock %}
 
 {% block pagetitle %}
 <span >
   <h3 class="askme_section-title">
-    <span> <a href="/"> New Questions </a></span>
-    <span class="active"><a href="/hot/"> Hot Questions </a></span>
+    <span> <a href="{% url 'index' %}"> New Questions </a></span>
+    <span class="active"><a href="{% url 'hot_questions' %}"> Hot Questions </a></span>
   </h3>
 </span>
 {% endblock %}
