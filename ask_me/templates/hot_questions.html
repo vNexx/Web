@@ -1,6 +1,11 @@
 {% extends "index.html" %}
 {% load static %}
 
+{% block navbar_active_buttons %}
+  <li><a href="/">Номе <span class="sr-only">(current)</span></a></li>
+  <li class="active"><a href="/hot/">Popular </a></li>
+{% endblock %}
+
 {% block pagetitle %}
 <span >
   <h3 class="askme_section-title">

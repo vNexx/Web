@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block navbar_active_buttons %}
+  <li class="active"><a href="/">Номе <span class="sr-only">(current)</span></a></li>
+  <li><a href="/hot/">Popular </a></li>
+{% endblock %}
 
 {% block pagetitle %}
 <span >
