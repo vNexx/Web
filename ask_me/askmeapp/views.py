@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
@@ -65,7 +65,7 @@ def hot_questions(request, page = '1'):
 def profile(request, user_name, page = '1'):
 	user = {"user_is_logged": True}
 	myquestions = Question.objects.user_questions(user_name)
-	profile = Profile.objects.get(user_name)
+	profile = Profile.objects.get_by_name(user_name)
 	question_list = pagination_function.pagination(myquestions, 5, page)
 	question_list.paginator.baseurl = "/profile/" + profile[0].user.username + "/"
 	return render(request, 'profile.html', {"data": question_list, "profile": profile[0], "user" : user}, )

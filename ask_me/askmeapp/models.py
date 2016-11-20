@@ -20,7 +20,7 @@ class QuestionManager(models.Manager):
 		return self.filter(user__username = user_name)
 
 class ProfileManager(models.Manager):
-	def get(self, user_name):
+	def get_by_name(self, user_name):
 		return self.filter(user__username = user_name)
 
 class Tag(models.Model):
@@ -29,22 +29,26 @@ class Tag(models.Model):
 	def __unicode__(self):
 		return self.text
 
-
-
+class Category(models.Model):
+	title = models.CharField(max_length = 50, verbose_name=u'Категория', default="General")
+	def __unicode__(self):
+		return self.title
 
 
 class Question(models.Model):
 	user = models.ForeignKey(User)
 	title = models.CharField(max_length = 255, verbose_name=u'Заголовок')
 	text = models.TextField(verbose_name=u'Текст')
-	rating = models.IntegerField(verbose_name=u'Рэйтинг')
+	rating = models.IntegerField(default=0, verbose_name=u'Рэйтинг')
 	is_published = models.BooleanField(default=False, verbose_name=u'Опубликована')
 	created = models.DateTimeField(default=datetime.datetime.now)
 	tag = models.ManyToManyField(Tag)
 	id = models.IntegerField(unique=True, primary_key=True)
-
+	category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL)
 	objects = QuestionManager()
 
+	def get_absolute_url(self):
+		return '/question/id%d/' % self.id
 	def __unicode__(self):
 		return self.title
 
