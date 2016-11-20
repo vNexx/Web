@@ -45,7 +45,7 @@
         <a href="{% url 'developing' %}" class="pull-right">{{ question.created }}</a>      
         <a href="{% url 'question'  question.id %}">Answers <span class="badge">{{ question.answer_set.count }}</span></a>
         Tags: 
-        {% for tag in question.tag.all %}
+        {% for tag in question.tags.all %}
         <a href="{% url 'tag'  tag %}">#{{ tag }}</a> 
         {% endfor %}
       </p>
@@ -62,7 +62,7 @@
 <div class="askme__question_answer-block"> <!-- answer block -->
   <div class="row">
     <div class="col-md-2 askme__question-block_user-data">
-      <img src="{% static 'images/avatar2.png' %}" class="img-circle askmee__user-avatar" width="110" height="110">
+      <img src="/{{ answer.user.profile.avatar.url }}" class="img-circle askmee__user-avatar" width="110" height="110">
       <p><a href="{% url 'profile'  answer.user %}"><b>{{ answer.user }}</b></a></p>
 
       {% if answer.user.profile.rating >= 0 %}

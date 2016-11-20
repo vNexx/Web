@@ -51,55 +51,67 @@ import random
 def index(request, page = '1'):
 	user = { "user_is_logged" : False}
 	myquestions = Question.objects.newest()
+	popular_tags = Tag.objects.get_popular_tags()
 	question_list = pagination_function.pagination(myquestions, 5, page)
 	question_list.paginator.baseurl = "/"
-	return render(request, 'index.html', {"data": question_list, "user" : user}, )
+	return render(request, 'index.html', {"data": question_list, "user" : user, "popular_tags" : popular_tags}, )
 
 def hot_questions(request, page = '1'):
 	user = { "user_is_logged" : True}
 	myquestions = Question.objects.hot()
+	popular_tags = Tag.objects.get_popular_tags()
 	question_list = pagination_function.pagination(myquestions, 5, page)
 	question_list.paginator.baseurl = "/hot/"
-	return render(request, 'hot_questions.html', {"data": question_list, "user" : user}, )
+	return render(request, 'hot_questions.html', {"data": question_list, "user" : user, "popular_tags" : popular_tags}, )
 
 def profile(request, user_name, page = '1'):
 	user = {"user_is_logged": True}
 	myquestions = Question.objects.user_questions(user_name)
 	profile = Profile.objects.get_by_name(user_name)
+	popular_tags = Tag.objects.get_popular_tags()
 	question_list = pagination_function.pagination(myquestions, 5, page)
 	question_list.paginator.baseurl = "/profile/" + profile[0].user.username + "/"
-	return render(request, 'profile.html', {"data": question_list, "profile": profile[0], "user" : user}, )
+	return render(request, 'profile.html', {"data": question_list, "profile": profile[0], "user" : user,
+											"popular_tags" : popular_tags}, )
 
 def tag(request, tag, page = '1'):	
 	user = { "user_is_logged" : True}
 	myquestions = Question.objects.tag_search(tag)
+	popular_tags = Tag.objects.get_popular_tags()
 	question_list = pagination_function.pagination(myquestions, 5, page)
 	question_list.paginator.baseurl = "/tag/" + tag + "/"		
-	return render(request, 'tag.html', {"data": question_list, "user" : user, "tag" : tag}, )
+	return render(request, 'tag.html', {"data": question_list, "user" : user, "tag" : tag,
+										"popular_tags" : popular_tags}, )
 
 def single_question(request, id, page = '1'):
 	user = { "user_is_logged" : True}
 	question = Question.objects.get(pk=id)
 	answers = question.answer_set.all()
+	popular_tags = Tag.objects.get_popular_tags()
 	answer_list = pagination_function.pagination(answers, 4, page)
 	answer_list.paginator.baseurl = "/question/id" + id + "/"
-	return render(request, 'question.html', {"question": question, "data" : answer_list, "user" : user},)
+	return render(request, 'question.html', {"question": question, "data" : answer_list, "user" : user,
+											 "popular_tags" : popular_tags},)
 
 def developing(request):
-	user = { "user_is_logged" : True}	
-	return render(request, 'developing.html', {"user" : user},)
+	user = { "user_is_logged" : True}
+	popular_tags = Tag.objects.get_popular_tags()
+	return render(request, 'developing.html', {"user" : user, "popular_tags" : popular_tags},)
 
 def ask_question(request):
-	user = { "user_is_logged" : True}	
-	return render(request, 'ask.html', {"user" : user},)
+	user = { "user_is_logged" : True}
+	popular_tags = Tag.objects.get_popular_tags()
+	return render(request, 'ask.html', {"user" : user, "popular_tags" : popular_tags},)
 
 def login(request):
 	user = { "user_is_logged" : False}
-	return render(request, 'login.html', {"user" : user},)
+	popular_tags = Tag.objects.get_popular_tags()
+	return render(request, 'login.html', {"user" : user, "popular_tags" : popular_tags},)
 
 def signup(request):
 	user = { "user_is_logged" : False}
-	return render(request, 'signup.html', {"user" : user},)
+	popular_tags = Tag.objects.get_popular_tags()
+	return render(request, 'signup.html', {"user" : user, "popular_tags" : popular_tags},)
 
 
 @csrf_exempt

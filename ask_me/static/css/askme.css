@@ -97,41 +97,42 @@ hr{
 
 #Number1 {
 	color: #f00;
-	font-size: xx-large;
+	font-size: large;
 }
 
 #Number2 {
-color: #f90;
-font-size: x-large;
+	color: #f90;
+	font-size: large;
 }
 
 #Number3 {
 	color: #cf0;
-	font-size: x-large;
+	font-size: large;
 }
 
 #Number4 {
     color: #ff00d8;
-    font-size: medium;
+    font-size: large;
 }
 
 #Number5 {
 	color: #00d2ff;
-	font-size: medium;
+	font-size: large;
 }
 
 #Number6 {
 	color: #00ff54;
-	font-size: medium;
+	font-size: large;
 }
 
 #Number7 {
 	color: #ff005a;
-	font-size: medium;
+	font-size: large;
 }
 
 #Number8 {
 	color: #9177f8;
+	font-size: large;
 }
 
 .btn > .bage{

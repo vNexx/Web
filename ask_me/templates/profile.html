@@ -67,7 +67,7 @@
         <a href="{% url 'developing'%}" class="pull-right">{{ question.created }}</a>      
         <a href="{% url 'question' question.id %}">Answers <span class="badge">{{ question.answer_set.count }}</span></a>
         Tags: 
-        {% for tag in question.tag.all %}
+        {% for tag in question.tags.all %}
         <a href="{% url 'tag' tag %}">#{{ tag }}</a> 
         {% endfor %}
       </p>

@@ -158,14 +158,10 @@
       {% block populartags %}
       <div class="askme__right-block_popular-tags">
         <h3>Popular tags</h3>
-        <a href="{% url 'tag' 'TechnoPark' %}" id="Number3">TechnoPark</a>
-        <a href="{% url 'tag' 'Perl' %}" id="Number7">Perl</a>
-        <a href="{% url 'tag' 'Python' %}" id="Number1">Python</a>
-        <a href="{% url 'tag' 'CSS' %}" id="Number2">CSS</a>
-        <a href="{% url 'tag' 'HTML' %}" id="Number6">HTML</a>
-        <a href="{% url 'tag' 'TarantoolDB' %}" id="Number4">Tarantool DB</a>
-        <a href="{% url 'tag' 'PostgreSQL' %}" id="Number5">PostgreSQL</a>
-        <a href="{% url 'tag' 'Ruby' %}" id="Number8">Ruby</a>
+        {% for tag in popular_tags %}
+        <a href="{% url 'tag' tag %}" id="Number{{ tag.style_number }}">{{ tag }}</a>
+        {% endfor %}
+       
       </div>
       {% endblock %}
 

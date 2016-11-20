@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.contrib.auth.models import User, UserManager
+from django.db.models import Count
 import datetime
 # Create your models here.
 
@@ -12,7 +13,7 @@ class QuestionManager(models.Manager):
 		return self.order_by('-rating')
 
 	def tag_search(self, input_tag):
-		return self.filter(tag__text = input_tag)
+		return self.filter(tags__text = input_tag)
 
 	def published(self):
 		return self.filter(is_published=True)
@@ -23,14 +24,28 @@ class ProfileManager(models.Manager):
 	def get_by_name(self, user_name):
 		return self.filter(user__username = user_name)
 
+class TagManager(models.Manager):
+	# adds number of questions to each tag
+	def with_question_count(self):
+		return self.annotate(questions_count=Count('question'))
+
+	# sorts tags using number of questions
+	def order_by_question_count(self):
+		return self.with_question_count().order_by('-questions_count')
+
+	def get_popular_tags(self):
+		return self.order_by_question_count().all()[:10]
+
 class Tag(models.Model):
 	text = models.CharField(max_length=50, verbose_name='Tag')
-
+	style_number = models.IntegerField(default=1)
+	objects = TagManager()
 	def __unicode__(self):
 		return self.text
 
 class Category(models.Model):
 	title = models.CharField(max_length = 50, verbose_name=u'Категория', default="General")
+
 	def __unicode__(self):
 		return self.title
 
@@ -42,7 +57,7 @@ class Question(models.Model):
 	rating = models.IntegerField(default=0, verbose_name=u'Рэйтинг')
 	is_published = models.BooleanField(default=False, verbose_name=u'Опубликована')
 	created = models.DateTimeField(default=datetime.datetime.now)
-	tag = models.ManyToManyField(Tag)
+	tags = models.ManyToManyField(Tag)
 	id = models.IntegerField(unique=True, primary_key=True)
 	category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL)
 	objects = QuestionManager()

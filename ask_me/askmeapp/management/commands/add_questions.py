@@ -13,7 +13,7 @@ class Command(BaseCommand):
         parser.add_argument('--number',
                 action='store',
                 dest='number',
-                default=10,
+                default=100,
                 help='Number of questions to add'
         )
 
@@ -29,7 +29,6 @@ class Command(BaseCommand):
                 'How to make recursive sorted list function work?',
                 'How to sort a table with persian content column in SQL Server'                
                 )
-        tags = Tag.objects.all()
         categorys = Category.objects.all()
 
         for i in range(0, number):
@@ -44,7 +43,6 @@ class Command(BaseCommand):
             q.user = choice(users)
             q.rating = randint(-100, 1000)
             q.is_published = True
-            #q.tag = choice(tags)
             q.category = choice(categorys)
             q.id = i
             q.save()
