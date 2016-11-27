@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.contrib import auth
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from askmeapp.models import *
 from askmeapp.forms import *
@@ -46,15 +47,42 @@ def single_question(request, id, page = '1'):
 	popular_tags = Tag.objects.get_popular_tags()
 	answer_list = pagination_function.pagination(answers, 4, page)
 	answer_list.paginator.baseurl = "/question/id" + id + "/"
-	return render(request, 'question.html', {"question": question, "data" : answer_list, "popular_tags" : popular_tags},)
+	last_page_num = (answers.count() + 1) / 4 +1
+
+	try:
+		question = Question.objects.get(pk=id)
+	except Question.DoesNotExist:
+		raise Http404
+
+	if request.method == "POST":
+		answer_form = AnswerForm(request.POST)
+
+		if answer_form.is_valid():
+			answer = answer_form.save(question, request.user)
+			return HttpResponseRedirect(reverse('question', kwargs={'id': question.id, 'page' : last_page_num})
+										+ '#answer_' + str(answer.id))
+	else:
+		answer_form = AnswerForm()
+	return render(request, 'question.html', {"question": question, "data" : answer_list,
+											 "popular_tags" : popular_tags, "form" : answer_form},)
 
 def developing(request):
 	popular_tags = Tag.objects.get_popular_tags()
 	return render(request, 'developing.html', {"popular_tags" : popular_tags},)
 
+
+@login_required
 def ask_question(request):
 	popular_tags = Tag.objects.get_popular_tags()
-	return render(request, 'ask.html', {"popular_tags" : popular_tags},)
+	if request.method == "POST":
+		form = QuestionForm(request.POST)
+		if form.is_valid():
+			q = form.save(request.user)
+			return HttpResponseRedirect(reverse('question', kwargs={'id': q.id}))
+	else:
+		form = QuestionForm()
+	return render(request, 'ask.html', {"popular_tags" : popular_tags, 'form': form},)
+
 
 def login(request):
 	popular_tags = Tag.objects.get_popular_tags()

@@ -6,38 +6,78 @@
 {% endblock %}
 
   {% block pageContent %}   
-
+<form class="form-horizontal" method="post">
+  {% csrf_token %}
   <div class="askme_ask-question-form"> <!-- ask question block-->
-    <div class = "col-sm-1">
-      <h4>Title:</h4>
-    </div>
-    <div class = "col-sm-11">
-      <div class="form-group">
-        <textarea class="form-control noresize" rows="1" placeholder="Enter your title here"></textarea>
+
+    <div class="form-group">
+      <label class="col-lg-1 control-label">Title</label>
+      <div class = "col-sm-11">      
+        {{ form.title }}
+        {% if form.title.errors %} 
+          {% for e in form.title.errors %}
+          <p></p>
+          <div class="askme__login-error" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            {{ e }}
+          </div>
+          {% endfor %}
+        {% endif %}
       </div>
     </div>
 
-    <div class = "col-sm-1">
-      <h4>Text:</h4>
-    </div>
-    <div class = "col-sm-11">
-      <div class="form-group">
-        <textarea class="form-control noresize" rows="14" placeholder="Enter your question here"></textarea>
+    <div class="form-group">
+      <label class="col-lg-1 control-label">Text</label>
+      <div class = "col-sm-11">      
+        {{ form.text }}
+        {% if form.text.errors %} 
+          {% for e in form.text.errors %}
+          <p></p>
+          <div class="askme__login-error" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            {{ e }}
+          </div>
+          {% endfor %}
+        {% endif %}
       </div>
     </div>
 
-    <div class = "col-sm-1">
-      <h4>Tags:</h4>
-    </div>
-    <div class = "col-sm-11">
-      <div class="form-group">
-        <textarea class="form-control noresize" rows="1"placeholder="Enter some tags here"></textarea>
+    <div class="form-group">
+      <label class="col-lg-1 control-label">Category</label>
+      <div class = "col-sm-11">      
+        {{ form.category }}
+        {% if form.category.errors %} 
+          {% for e in form.category.errors %}
+          <p></p>
+          <div class="askme__login-error" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            {{ e }}
+          </div>
+          {% endfor %}
+        {% endif %}
       </div>
     </div>
-    <div class="col-sm-11  col-sm-offset-1">
-      <button type="button" class="btn btn-dark">Ask!</button>
+
+    <div class="form-group">
+      <label for="tag" class="col-sm-1 control-label">Tags</label>
+      <div class="col-sm-4">
+        {{ form.tag1 }}
+      </div>
+      <div class="col-sm-4">
+        {{ form.tag2 }}
+      </div>
+      <div class="col-sm-3">
+        {{ form.tag3 }}
+      </div>
+    </div>    
+ 
+    <div class="form-group">
+    <div class="col-sm-12 col-sm-offset-1">
+      <button type="submit" class="btn btn-dark">Ask</button>      
     </div>
-  </div> <!-- /ask question block-->       
+  </div>  
+  </div> <!-- /ask question block--> 
+</form>      
 
 {% endblock %}
 {% block paginator %}

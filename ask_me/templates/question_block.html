@@ -34,6 +34,9 @@
         <a href="{% url 'question' question.id %}"><strong> {{ question.title }}</strong></a>
       </p>         
       <p>{{ question.text }}</p>
+        <div>
+          Category: <a href="{% url 'developing'%}">{{ question.category.title }}</a>
+        </div>
       </div>  
     <div class="col-md-9 col-md-offset-2 askmee__bottomblock">
       <p>

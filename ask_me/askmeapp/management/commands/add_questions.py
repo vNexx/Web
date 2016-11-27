@@ -44,6 +44,6 @@ class Command(BaseCommand):
             q.rating = randint(-100, 1000)
             q.is_published = True
             q.category = choice(categorys)
-            q.id = i
+            #q.id = i
             q.save()
             self.stdout.write('add question [%d]' % (q.id))

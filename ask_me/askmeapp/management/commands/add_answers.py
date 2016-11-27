@@ -43,7 +43,7 @@ class Command(BaseCommand):
                 ans.question = q
                 ans.rating = randint(-100, 400)
                 ans.is_correct = choice(is_correct)
-                ans.id = counter
+                #ans.id = counter
                 counter += 1
                 ans.save()
                 self.stdout.write('in question [%d] add ans [%d]' % (q.id, ans.id))

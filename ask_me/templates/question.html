@@ -10,11 +10,21 @@
     {% include 'answer_block.html' %}
   {% endfor %}   
 
-  <hr></hr>
-  <div class="askme__answer">
-    <textarea class="form-control" rows="5" placeholder="Enter your answer here" ></textarea>
-    <button type="button" class="btn btn-dark askme__answer-button">Answer</button>
-  </div>
+ 
+  {%if request.user.is_authenticated %}
+    <hr></hr>
+    <div class="askme__answer">      
+      <form class="form-horizontal" method="post" action="">
+        {% csrf_token %}
+        <div class="form-group">          
+            {{ form.text }}          
+        </div>
+        <div class="form-group">          
+            <button type="submit" class="btn btn-dark">Answer</button>
+        </div>        
+      </form>
+    </div>
+  {% endif %}  
 {% endblock %}
 
 

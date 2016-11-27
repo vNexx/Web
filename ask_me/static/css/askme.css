@@ -196,9 +196,7 @@ a:focus{
 .askme__answer{
 	margin-left: 35px;
 }
-.askme__answer-button{
-	margin-top: 20px;
-}
+
 
 .askme_ask-question-form{
 	margin-top: 15px;
@@ -350,7 +348,7 @@ a:focus{
 .top {
 	background: url("/static/images/arrow-up.png") 50% 30% no-repeat;
 	background-size: 1.3em;
-	border: #ababab 1px solid;
+	border: #535353 1px solid;
 	border-radius: 30px;
 	color: #fff;
 	display: inline-block;
@@ -359,7 +357,7 @@ a:focus{
 	position: relative;
 	text-align: center;
 	font-size: larger;
-	background-color: #868686;
+	background-color: #535353;
 	top: -30px;
 	width: 60px;
 }

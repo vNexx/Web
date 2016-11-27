@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django.core.files import File
-from askmeapp.models import Profile
+from askmeapp.models import *
 from django import forms
 
 
@@ -101,3 +101,60 @@ class SignupForm(forms.Form):
         up.save()
 
         return authenticate(username=u.username, password=password)
+
+class QuestionForm(forms.Form):
+    title = forms.CharField(
+            widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter question title here', }),
+            max_length=100
+            )
+    text = forms.CharField(
+            widget=forms.Textarea(attrs={'class': 'form-control', 'rows': '14', 'placeholder': 'Enter your question here',}),
+            max_length=100000
+            )
+    category = forms.CharField(
+            widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter question categoty', }),
+            max_length=50,
+            required=False
+            )
+    tag1 = forms.CharField(
+            widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Tag 1'}),
+            required=False
+            )
+    tag2 = forms.CharField(
+            widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Tag 2'}),
+            required=False
+            )
+    tag3 = forms.CharField(
+            widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Tag 3'}),
+            required=False
+            )
+
+    def save(self, user):
+        data = self.cleaned_data
+        q = Question.objects.create(title=data.get('title'), text=data.get('text'),
+                                    user=user, is_published=True)
+        q.save()
+
+        for tag_num in ['tag1', 'tag2', 'tag3']:
+            tag_text = data.get(tag_num)
+            if tag_text is not None and tag_text != '':
+                tag = Tag.objects.get_or_create(text=tag_text)
+                q.tags.add(tag)
+
+        category_text = data.get('category')
+        if category_text is not None and category_text != '':
+            category = Category.objects.get_or_create(title=category_text)
+            q.category = category
+        #q.save()
+        return q
+
+
+
+class AnswerForm(forms.Form):
+    text = forms.CharField(
+            widget=forms.Textarea(attrs={'class': 'form-control', 'rows': '5', 'placeholder': 'Enter your answer here', })
+            )
+
+    def save(self, question, user):
+        data = self.cleaned_data
+        return question.answer_set.create(text=data.get('text'), user=user)
