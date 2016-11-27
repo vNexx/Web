@@ -208,7 +208,12 @@ a:focus{
 	margin-bottom: 10px;
 }
 .askme__login-error{
-	color: red;
+	color: #fe4a4a;
+	padding: 15px;
+	margin-bottom: 20px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	background-color: #4E4E4E;	
 }
 
 

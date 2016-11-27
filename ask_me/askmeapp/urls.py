@@ -14,6 +14,7 @@ urlpatterns = [
 	url(r'^ask/', views.ask_question, name='ask'),
 	url(r'^developing/', views.developing, name='developing'),
 	url(r'^login/', views.login, name='login'),
+	url(r'^logout/?$', views.logout, name='logout'),
 	url(r'^signup/', views.signup, name='signup'),
 
 	url(r'^tag/(?P<tag>(\d|\w|[-+#~*])+)/$', views.tag, name='tag'),

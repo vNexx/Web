@@ -26,7 +26,7 @@
         <img src="{% static 'images/tick.png' %}"  width="30">
       
       {% else %} 
-        {% if question.user == answer.user %}
+        {% if question.user == request.user %}
       <div class="checkbox">
         <label><input type="checkbox" value="">Correct!</label>
       </div> 
