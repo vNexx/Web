@@ -9,61 +9,95 @@
 
 {% block pageContent %}  
 
-<form class="form-horizontal">
+<form class="form-horizontal" method="post">
+  {% csrf_token %}
   <fieldset>
-    <legend></legend>
-    <div class="form-group">
-      <label class="col-lg-3 control-label">Login</label>
-      <div class="col-lg-5">
-        <input type="text" class="form-control noresize" name="login" placeholder="Username">
-      </div>
-    </div>        
+    <legend></legend>       
 
     <div class="form-group">
       <label class="col-lg-3 control-label ">Email address</label>
       <div class="col-lg-5">
-        <input type="text" class="form-control noresize" name="email" placeholder="example@ask.com" required placeholder = "Enter your email!">
+        {{ form.email }}
+        {% if form.email.errors %} 
+          {% for e in form.email.errors %}
+          <p></p>
+          <div class="askme__login-error" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            {{ e }}
+          </div>
+          {% endfor %}
+        {% endif %}
       </div>
     </div> 
 
     <div class="form-group">
-      <label class="col-lg-3 control-label">Nickname</label>
+      <label class="col-lg-3 control-label">Login</label>
       <div class="col-lg-5">
-        <input type="text" class="form-control noresize" name="nickname" placeholder="Nick">
+        {{ form.username }}
+        {% if form.username.errors %} 
+          {% for e in form.username.errors %}
+          <p></p>
+          <div class="askme__login-error" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            {{ e }}
+          </div>
+          {% endfor %}
+        {% endif %}
       </div>
     </div>  
 
     <div class="form-group">
       <label class="col-lg-3 control-label">Password</label>
       <div class="col-lg-5">
-        <input type="password" class="form-control noresize" name="password">
+        {{ form.password }}
+        {% if form.password.errors %} 
+          {% for e in form.password.errors %}
+          <p></p>
+          <div class="askme__login-error" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            {{ e }}
+          </div>
+          {% endfor %}
+        {% endif %}
       </div>
     </div>
 
     <div class="form-group">
       <label class="col-lg-3 control-label">Retype password</label>
       <div class="col-lg-5">
-        <input type="password" class="form-control noresize" name="confirmPassword">
+        {{ form.password_repeat }}
+        {% if form.password_repeat.errors %} 
+          {% for e in form.password_repeat.errors %}
+          <p></p>
+          <div class="askme__login-error" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            {{ e }}
+          </div>
+          {% endfor %}
+        {% endif %}
       </div>
     </div>
 
     <div class="form-group">
       <label class="col-lg-3 control-label">Upload avatar</label>
       <div class="col-lg-5">
-        <input type="file" name="avatar">
+        {{ form.avatar }}
       </div>
     </div>
   </fieldset>
 
   <div class="form-group">
     <div class="col-lg-9 col-lg-offset-3">
-      <button type="submit" class="btn btn-dark">Register</button>
-      <div class="askme__login-error">
-        <p></p>
-        Email is already used.
-      </div>
+      <button type="submit" class="btn btn-dark">Register</button>      
     </div>
-  </div>
+  </div>  
+
+  {% for error in form.non_field_errors %}
+    <div class="askme__login-error col-lg-5 col-lg-offset-3" role="alert">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      {{ error }}        
+    </div>
+  {% endfor %}
 </form>
 {% endblock %}
 {% block paginator %}

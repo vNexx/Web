@@ -38,8 +38,7 @@ def tag(request, tag, page = '1'):
 	popular_tags = Tag.objects.get_popular_tags()
 	question_list = pagination_function.pagination(myquestions, 5, page)
 	question_list.paginator.baseurl = "/tag/" + tag + "/"		
-	return render(request, 'tag.html', {"data": question_list, "tag" : tag,
-										"popular_tags" : popular_tags}, )
+	return render(request, 'tag.html', {"data": question_list, "tag" : tag,	"popular_tags" : popular_tags}, )
 
 def single_question(request, id, page = '1'):
 	question = Question.objects.get(pk=id)
@@ -60,6 +59,7 @@ def ask_question(request):
 def login(request):
 	popular_tags = Tag.objects.get_popular_tags()
 	redirect = request.GET.get('continue', '/')
+
 	if request.user.is_authenticated():
 		return HttpResponseRedirect(redirect)
 
@@ -81,7 +81,19 @@ def logout(request):
 
 def signup(request):
 	popular_tags = Tag.objects.get_popular_tags()
-	return render(request, 'signup.html', {"popular_tags" : popular_tags},)
+	if request.user.is_authenticated():
+		return HttpResponseRedirect('/')
+
+	if request.method == "POST":
+		form = SignupForm(request.POST, request.FILES)
+		if form.is_valid():
+			user = form.save()
+			auth.login(request, user)
+			return HttpResponseRedirect('/')
+	else:
+		form = SignupForm()
+
+	return render(request, 'signup.html', {"popular_tags" : popular_tags, 'form': form},)
 
 
 @csrf_exempt

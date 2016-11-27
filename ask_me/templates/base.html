@@ -80,7 +80,7 @@
           </ul>
         </li>        
         <li><a href="{% url 'ask'%}">New question</a></li>
-        <li><a href="{% url 'logout'%}"><span class="glyphicon glyphicon-log-out"></span> Log Out </a></li>
+        <li><a href="{% url 'logout'%}?continue={{ request.path }}"><span class="glyphicon glyphicon-log-out"></span> Log Out </a></li>
       </ul>
       {% endblock %}
     {% else %}
@@ -88,7 +88,7 @@
       <ul class="nav navbar-nav navbar-right">
 
         <li><a href="{% url 'signup'%}">Register</a></li>
-        <li><a href="{% url 'login'%}"><span class="glyphicon glyphicon-log-in"></span> Log in </a></li>
+        <li><a href="{% url 'login'%}?continue={{ request.path }}"><span class="glyphicon glyphicon-log-in"></span> Log in </a></li>
       </ul>
       {% endblock %}
     {% endif %}

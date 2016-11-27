@@ -75,7 +75,7 @@ class Question(models.Model):
 class Profile(models.Model):
 	user = models.OneToOneField(User)
 	avatar = models.ImageField(upload_to='uploads', default="uploads/user_avatar.jpeg")
-	information = models.TextField()
+	information = models.TextField(default="My info")
 	rating = models.IntegerField()
 
 	objects = ProfileManager()
