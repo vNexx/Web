@@ -25,54 +25,7 @@
 
 <legend></legend>
 
-{% for question in data %}   
-<div class="askme_question_block"> <!-- question block-->
-  <div class="row">
-    <div class="col-md-2 askme__question-block_user-data">
-      <img src="/{{ profile.avatar.url }}" class="img-circle askmee__user-avatar" width="110" height="110">
-      <p><b>{{ question.user }}</b></p>
-
-      {% if profile.rating >= 0 %}
-        <p>Rating: <span class="like"><b> +{{ profile.rating }}</b></span></p>
-      {% else %}
-        <p>Rating: <span class="dislike"><b> {{ profile.rating }}</b></span></p>
-      {% endif %}
-
-      <div class="btn-group-vertical">
-        <button type="button" class="btn btn-success btn-md">
-          <span class="glyphicon glyphicon-chevron-up"></span>          
-        </button>
-        <button type="button" class="btn btn-danger btn-md">
-          <span class="glyphicon glyphicon-chevron-down"></span>
-        </button>
-      </div>
-    </div>
-    <div class="col-md-9">
-    {% if question.rating >= 0 %}
-      <p>
-        <span class="askme__question-rate like pull-right"><b> +{{ question.rating }}</b></span>
-      </p>   
-    {% else %}
-      <p>
-        <span class="askme__question-rate dislike pull-right"><b> {{ question.rating }}</b></span>
-      </p> 
-    {% endif %}       
-      <p>
-        <a href="{% url 'question' question.id %}"><strong> {{ question.title }}</strong></a>
-      </p>         
-      <p>{{ question.text }}</p>
-      </div>  
-    <div class="col-md-9 col-md-offset-2 askmee__bottomblock">
-      <p>
-        <a href="{% url 'developing'%}" class="pull-right">{{ question.created }}</a>      
-        <a href="{% url 'question' question.id %}">Answers <span class="badge">{{ question.answer_set.count }}</span></a>
-        Tags: 
-        {% for tag in question.tags.all %}
-        <a href="{% url 'tag' tag %}">#{{ tag }}</a> 
-        {% endfor %}
-      </p>
-    </div>       
-   </div>
-  </div> <!-- /.question block-->
-{% endfor %}
+  {% for question in data %}   
+    {% include 'question_block.html' %}
+  {% endfor %}
 {% endblock %}

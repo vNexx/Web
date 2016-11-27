@@ -3,121 +3,18 @@
 
 
 {% block pageContent %}    
-<div class="askme_question_block"> <!-- question block-->
-  <div class="row">
-    <div class="col-md-2 askme__question-block_user-data">
-      <img src="/{{ question.user.profile.avatar.url }}" class="img-circle askmee__user-avatar" width="110" height="110">
-      <p><a href="{% url 'profile' question.user %}"><b>{{ question.user }}</b></a></p>
+  {% include 'question_block.html' %}
 
-      {% if question.user.profile.rating >= 0 %}
-        <p>Rating: <span class="like"><b> +{{ question.user.profile.rating }}</b></span></p>
-      {% else %}
-        <p>Rating: <span class="dislike"><b> {{ question.user.profile.rating }}</b></span></p>
-      {% endif %}
+  {% for answer in data %}
+    <hr></hr>
+    {% include 'answer_block.html' %}
+  {% endfor %}   
 
-      <div class="btn-group-vertical">
-        <button type="button" class="btn btn-success btn-md">
-          <span class="glyphicon glyphicon-chevron-up"></span>          
-        </button>
-        <button type="button" class="btn btn-danger btn-md">
-          <span class="glyphicon glyphicon-chevron-down"></span>          
-        </button>
-      </div>
-    </div>
-    <div class="col-md-9">
-
-    {% if question.rating >= 0 %}
-      <p>
-        <span class="askme__question-rate like pull-right"><b> +{{ question.rating }}</b></span>
-      </p>   
-    {% else %}
-      <p>
-        <span class="askme__question-rate dislike pull-right"><b> {{ question.rating }}</b></span>
-      </p> 
-    {% endif %}  
-
-      <p><a href="{%url 'question'  question.id %}"><strong> {{ question.title }}</strong></a></p>
-      <p>{{ question.text }}</p>
-      
-    </div>    
-    <div class="col-md-9 col-md-offset-2 askmee__bottomblock">
-      <p>
-        <a href="{% url 'developing' %}" class="pull-right">{{ question.created }}</a>      
-        <a href="{% url 'question'  question.id %}">Answers <span class="badge">{{ question.answer_set.count }}</span></a>
-        Tags: 
-        {% for tag in question.tags.all %}
-        <a href="{% url 'tag'  tag %}">#{{ tag }}</a> 
-        {% endfor %}
-      </p>
-    </div>
+  <hr></hr>
+  <div class="askme__answer">
+    <textarea class="form-control" rows="5" placeholder="Enter your answer here" ></textarea>
+    <button type="button" class="btn btn-dark askme__answer-button">Answer</button>
   </div>
-           
-    
-  
-</div> <!-- /.question block-->
-
-{% for answer in data %}
-<hr></hr>
-
-<div class="askme__question_answer-block"> <!-- answer block -->
-  <div class="row">
-    <div class="col-md-2 askme__question-block_user-data">
-      <img src="/{{ answer.user.profile.avatar.url }}" class="img-circle askmee__user-avatar" width="110" height="110">
-      <p><a href="{% url 'profile'  answer.user %}"><b>{{ answer.user }}</b></a></p>
-
-      {% if answer.user.profile.rating >= 0 %}
-        <p>Rating: <span class="like"><b> +{{ answer.user.profile.rating }}</b></span></p>
-      {% else %}
-        <p>Rating: <span class="dislike"><b> {{ answer.user.profile.rating }}</b></span></p>
-      {% endif %}
-
-      <div class="btn-group-vertical">
-        <button type="button" class="btn btn-success btn-md">
-          <span class="glyphicon glyphicon-chevron-up"></span>         
-        </button>
-        <button type="button" class="btn btn-danger btn-md">
-          <span class="glyphicon glyphicon-chevron-down"></span>
-        </button>
-      </div>
-      <div class="askmee__tickblock">
-    
-      {% if answer.is_correct %}
-      
-        <img src="{% static 'images/tick.png' %}"  width="30">
-      
-      {% else %} 
-        {% if question.user == answer.user %}
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Correct!</label>
-      </div> 
-        {% endif %}
-      {% endif %}
-     </div>
-    </div>
-    <div class="col-md-9">
-      {% if  answer.rating >= 0 %}
-      
-        <div class="askme__question-rate like"><b> +{{ answer.rating }}</b></div>
-        <p></p>
-    {% else %}      
-        <div class="askme__question-rate dislike"><b> {{ answer.rating }}</b></div>
-        <p></p>
-      
-    {% endif %} 
-      <p>{{ answer.text }}</p>
-    </div>
-    <div class="col-md-10 col-md-offset-1 askmee__bottomblock">
-      <a href="{% url 'developing' %}" class="pull-right">{{ answer.created }}</a>     
-    </div>
-  </div>
-</div> <!-- /.answer block --> 
-{% endfor %}   
-
-<hr></hr>
-<div class="askme__answer">
-  <textarea class="form-control" rows="5" placeholder="Enter your answer here" ></textarea>
-  <button type="button" class="btn btn-dark askme__answer-button">Answer</button>
-</div>
 {% endblock %}
 
 

@@ -1,0 +1,53 @@
+{% load static %}
+<div class="askme__question_answer-block"> <!-- answer block -->
+  <div class="row">
+    <div class="col-md-2 askme__question-block_user-data">
+      <img src="/{{ answer.user.profile.avatar.url }}" class="img-circle askmee__user-avatar" width="110" height="110">
+      <p><a href="{% url 'profile'  answer.user %}"><b>{{ answer.user }}</b></a></p>
+
+      {% if answer.user.profile.rating >= 0 %}
+        <p>Rating: <span class="like"><b> +{{ answer.user.profile.rating }}</b></span></p>
+      {% else %}
+        <p>Rating: <span class="dislike"><b> {{ answer.user.profile.rating }}</b></span></p>
+      {% endif %}
+
+      <div class="btn-group-vertical">
+        <button type="button" class="btn btn-success btn-md">
+          <span class="glyphicon glyphicon-chevron-up"></span>         
+        </button>
+        <button type="button" class="btn btn-danger btn-md">
+          <span class="glyphicon glyphicon-chevron-down"></span>
+        </button>
+      </div>
+      <div class="askmee__tickblock">
+    
+      {% if answer.is_correct %}
+      
+        <img src="{% static 'images/tick.png' %}"  width="30">
+      
+      {% else %} 
+        {% if question.user == answer.user %}
+      <div class="checkbox">
+        <label><input type="checkbox" value="">Correct!</label>
+      </div> 
+        {% endif %}
+      {% endif %}
+     </div>
+    </div>
+    <div class="col-md-9">
+      {% if  answer.rating >= 0 %}
+      
+        <div class="askme__question-rate like"><b> +{{ answer.rating }}</b></div>
+        <p></p>
+    {% else %}      
+        <div class="askme__question-rate dislike"><b> {{ answer.rating }}</b></div>
+        <p></p>
+      
+    {% endif %} 
+      <p>{{ answer.text }}</p>
+    </div>
+    <div class="col-md-10 col-md-offset-1 askmee__bottomblock">
+      <a href="{% url 'developing' %}" class="pull-right">{{ answer.created }}</a>     
+    </div>
+  </div>
+</div> <!-- /.answer block --> 
