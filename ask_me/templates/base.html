@@ -108,49 +108,9 @@
       {% block pageContent %}
       {% endblock %}
 
-      {% block paginator %}  
-      {% if data.paginator.show_paginator %}
-    <div>
-     <ul class="pagination askme__pagination">
-      {% if data.has_previous %}
-        <li><a href="{{ data.paginator.baseurl }}1/"><span class="glyphicon glyphicon-fast-backward"></a></li>
-        <li><a href="{{ data.paginator.baseurl }}{{ data.previous_page_number }}/"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
-      {% endif %}
-
-      
-        {% if data.paginator.show_gap_prev %}
-          <li class="disabled"><a>...</a></li> 
-        {% endif %}
-        {%if  data.paginator.show_prev_prev %}
-          <li><a href="{{ data.paginator.baseurl }}{{ data.paginator.prev_prev }}/">{{ data.paginator.prev_prev }}</a></li>
-        {% endif %} 
-        {% if data.has_previous %}
-          <li><a href="{{ data.paginator.baseurl }}{{ data.previous_page_number }}/">{{ data.previous_page_number }}</a></li>
-        {% endif %}                  
-        
-        <li class="active"><a> {{ data.number }}</a></li>        
-         
-        {% if data.has_next %}
-          <li><a href="{{ data.paginator.baseurl }}{{ data.next_page_number }}/">{{ data.next_page_number }}</a></li>
-        {% endif %}
-        {%if  data.paginator.show_next_next %}
-          <li><a href="{{ data.paginator.baseurl }}{{ data.paginator.next_next }}/">{{ data.paginator.next_next }}</a></li>
-        {% endif %}
-        {% if data.paginator.show_gap_next %}
-          <li class="disabled"><a>...</a></li> 
-        {% endif %}           
-
-      
-      
-      {% if data.has_next %}
-        <li><a href="{{ data.paginator.baseurl }}{{ data.next_page_number }}/"><span class="glyphicon glyphicon-chevron-right"></a></li>
-        <li><a href="{{ data.paginator.baseurl }}{{ data.paginator.num_pages }}/"><span class="glyphicon glyphicon-fast-forward"></a></li>
-      {% endif %}
-
-     </ul>
-    </div>
-    {% endif %}
-  {% endblock %}      
+      {% block paginator %}
+      {% include 'paginator_block.html'%}
+      {% endblock %}      
     </div>
 
     {%block sidebar%}
@@ -159,7 +119,7 @@
       <div class="askme__right-block_popular-tags">
         <h3>Popular tags</h3>
         {% for tag in popular_tags %}
-        <a href="{% url 'tag' tag %}" id="Number{{ tag.style_number }}">{{ tag }}</a>
+          <a href="{% url 'tag' tag %}" id="Number{{ tag.style_number }}">{{ tag }}</a>
         {% endfor %}
        
       </div>
@@ -184,8 +144,13 @@
 
 
 {% block footer %}
-<div class="askme__footer">
-  <hr></hr>
+<div class="askme__footer footer-wrapper">
+  
+    <div class="footer-container">
+      <a href="#" class="top">
+        <img src="{% static 'images/arrow-up.png' %}" alt="arrow-up" width="26" height="15">       
+      </a>
+    </div>
   <p>
     Site was built in 2016 by Vladislav.
     All rights reserved (c)      
