@@ -10,6 +10,7 @@ urlpatterns = [
 
 	url(r'^question/id(?P<id>\d+)/(?P<page>\d+)?/$', views.single_question, name='question'),
 	url(r'^question/id(?P<id>\d+)/$', views.single_question, name='question'),
+	url(r'^edit_question/id(?P<id>\d+)/$', views.edit_question, name='edit_question'),
 
 	url(r'^ask/', views.ask_question, name='ask'),
 	url(r'^developing/', views.developing, name='developing'),

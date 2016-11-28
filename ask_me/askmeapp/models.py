@@ -37,14 +37,14 @@ class TagManager(models.Manager):
 		return self.order_by_question_count().all()[:10]
 
 class Tag(models.Model):
-	text = models.CharField(max_length=50, verbose_name='Tag')
+	text = models.CharField(max_length=50, verbose_name='Tag', unique=True)
 	style_number = models.IntegerField(default=1)
 	objects = TagManager()
 	def __unicode__(self):
 		return self.text
 
 class Category(models.Model):
-	title = models.CharField(max_length = 50, verbose_name=u'Категория', default="General")
+	title = models.CharField(max_length = 50, verbose_name=u'Категория')
 
 	def __unicode__(self):
 		return self.title
@@ -58,7 +58,7 @@ class Question(models.Model):
 	is_published = models.BooleanField(default=False, verbose_name=u'Опубликована')
 	created = models.DateTimeField(default=datetime.datetime.now)
 	tags = models.ManyToManyField(Tag)
-	category = models.ForeignKey(Category)
+	category = models.ForeignKey(Category, default=1)
 	objects = QuestionManager()
 
 	def get_absolute_url(self):

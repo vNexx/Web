@@ -213,10 +213,16 @@ class QuestionForm(forms.Form):
         #if tag :
          #   raise forms.ValidationError('Tag contains spaces')
 
-    def save(self, user):
+    def save(self, user, id):
         data = self.cleaned_data
-        q = Question.objects.create(title=data.get('title'), text=data.get('text'),
+        if id <= 0:
+            q = Question.objects.create(title=data.get('title'), text=data.get('text'),
                                     user=user, is_published=True)
+        else:
+            q = Question.objects.get(pk=id)
+            q.title = data.get('title')
+            q.text = data.get('text')
+
         q.save()
 
         for tag_num in ['tag1', 'tag2', 'tag3']:
@@ -229,7 +235,7 @@ class QuestionForm(forms.Form):
         if category_text is not None and category_text != '':
             category = Category.objects.get_or_create(title=category_text)
             q.category = category
-        #q.save()
+        q.save()
         return q
 
 

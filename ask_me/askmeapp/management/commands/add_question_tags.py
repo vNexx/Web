@@ -31,6 +31,7 @@ class Command(BaseCommand):
         number = int(options['number'])
 
         tags = Tag.objects.all()
+        #category = Category.objects.get(name = u'General')
 
         questions = Question.objects.all()
 

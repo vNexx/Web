@@ -78,11 +78,32 @@ def ask_question(request):
 	if request.method == "POST":
 		form = QuestionForm(request.POST)
 		if form.is_valid():
-			q = form.save(request.user)
+			q = form.save(request.user, 0)
 			return HttpResponseRedirect(reverse('question', kwargs={'id': q.id}))
 	else:
 		form = QuestionForm()
 	return render(request, 'ask.html', {"popular_tags" : popular_tags, 'form': form},)
+@login_required
+def edit_question(request, id):
+	question = Question.objects.get(pk=id)
+	if question.user != request.user:
+		return HttpResponseRedirect(reverse('question', kwargs={'id': id}))
+	popular_tags = Tag.objects.get_popular_tags()
+	if request.method == "POST":
+		form = QuestionForm(request.POST)
+		if form.is_valid():
+			q = form.save(request.user, id)
+			return HttpResponseRedirect(reverse('question', kwargs={'id': q.id}))
+	else:
+		q = model_to_dict(question)
+		tags = question.tags.all()
+		i = 1
+		for tag in tags:
+			q['tag' + str(i)] = tag
+			i = i + 1
+
+		form = QuestionForm(q)
+	return render(request, 'ask.html', {"popular_tags": popular_tags, 'form': form}, )
 
 
 def login(request):

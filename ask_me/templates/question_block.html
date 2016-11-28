@@ -18,8 +18,20 @@
           <span class="glyphicon glyphicon-triangle-bottom"></span>
         </button>
       </div>
+    
+    
+    {% if question.user == request.user %}
+    <div>
+      <p></p>
+      <a href="{% url 'edit_question'  question.id  %}">
+        <button type="button" class="btn btn-success btn-md">
+          Edit <span class="glyphicon glyphicon-pencil"></span>
+        </button>
+      </a>  
     </div>
-      
+    {% endif %}
+    </div>
+    
     <div class="col-md-9">
     {% if question.rating >= 0 %}
       <p>
