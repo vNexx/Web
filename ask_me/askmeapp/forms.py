@@ -110,6 +110,43 @@ class SignupForm(forms.Form):
 
         return authenticate(username=u.username, password=password)
 
+class ChangePasswordForm(forms.Form):
+    oldpassword = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': '********'}),
+        min_length=8
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': '********'}),
+        min_length=8
+    )
+    password_repeat = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': '********'}),
+        min_length=8
+    )
+
+
+    # def clean_oldpassword(self):
+    #     oldpswd = self.cleaned_data('oldpassword')
+    #     pswd = self.cleaned_data('password')
+    #     if oldpswd == pswd:
+    #         raise forms.ValidationError('old and new password matched')
+
+    def clean_password_repeat(self):
+        pswd = self.cleaned_data.get('password', '')
+        pswd_repeat = self.cleaned_data.get('password_repeat', '')
+
+        if pswd != pswd_repeat:
+            raise forms.ValidationError('Passwords does not matched')
+
+    def save(self, user):
+        password = self.cleaned_data.get('password', '')
+        if password != '':
+            #user.password = make_password(password)
+            user.set_password(password)
+            user.save()
+
+        return self
+
 class ProfileEditForm(forms.Form):
 
     information = forms.CharField(
@@ -132,7 +169,6 @@ class ProfileEditForm(forms.Form):
 
     def save(self, user):
         data = self.cleaned_data
-        print data
 
         up = user.profile
         up.information = data.get('information')

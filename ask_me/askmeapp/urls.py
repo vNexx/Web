@@ -16,6 +16,7 @@ urlpatterns = [
 	url(r'^login/', views.login, name='login'),
 	url(r'^logout/?$', views.logout, name='logout'),
 	url(r'^signup/', views.signup, name='signup'),
+	url(r'^change_password/', views.change_password, name='change_password'),
 
 	url(r'^tag/(?P<tag>(\d|\w|[-+#~*])+)/$', views.tag, name='tag'),
 	url(r'^tag/(?P<tag>(\d|\w|[-+#~*])+)/(?P<page>\d+)/$', views.tag, name='tag'),

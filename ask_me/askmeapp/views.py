@@ -142,6 +142,20 @@ def profile_edit(request):
 	popular_tags = Tag.objects.get_popular_tags()
 	return render(request, 'edit_profile.html', {"popular_tags" : popular_tags,'form': form},)
 
+@login_required
+def change_password(request):
+	if request.method == "POST":
+		form = ChangePasswordForm(request.POST)
+		if form.is_valid():
+			form.save(request.user)
+			return HttpResponseRedirect('/')
+	else:
+		form = ChangePasswordForm()
+	popular_tags=Tag.objects.get_popular_tags()
+	return render(request, 'change_password.html', {"popular_tags": popular_tags, 'form': form}, )
+
+
+
 @csrf_exempt
 def get_post_params(request):
 	result = ['Hello, World!<br>']
