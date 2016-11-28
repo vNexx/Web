@@ -207,11 +207,23 @@ class QuestionForm(forms.Form):
             widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Tag 3'}),
             required=False
             )
+    def check_tag(self, tag):
+        if (' ' in tag) or ('\n' in tag) or('\t' in tag) :
+            raise forms.ValidationError('Tag contains spaces')
+        if ('/' in tag) or ('\\' in tag) or ('?' in tag):
+            raise forms.ValidationError('You can use only this symbols -+_~&@*%$')
 
-    #def clean_tag1(self):
-         #tag = self.cleaned_data.get('tag1','')
-        #if tag :
-         #   raise forms.ValidationError('Tag contains spaces')
+    def clean_tag1(self):
+        tag = self.cleaned_data.get('tag1')
+        self.check_tag(tag)
+
+    def clean_tag2(self):
+        tag = self.cleaned_data.get('tag2')
+        self.check_tag(tag)
+
+    def clean_tag3(self):
+        tag = self.cleaned_data.get('tag3')
+        self.check_tag(tag)
 
     def save(self, user, id):
         data = self.cleaned_data
@@ -229,12 +241,14 @@ class QuestionForm(forms.Form):
             tag_text = data.get(tag_num, '')
             if tag_text is not None and tag_text != '':
                 tag = Tag.objects.get_or_create(text=tag_text)
-                q.tags.add(tag)
+                q.tags.add(tag[0])
 
-        category_text = data.get('category','')
+        category_text = data.get('category')
         if category_text is not None and category_text != '':
             category = Category.objects.get_or_create(title=category_text)
-            q.category = category
+        else:
+            category = Category.objects.get_or_create(title='General')
+        q.category = category[0]
         q.save()
         return q
 

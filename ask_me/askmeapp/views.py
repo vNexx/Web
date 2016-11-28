@@ -101,7 +101,7 @@ def edit_question(request, id):
 		for tag in tags:
 			q['tag' + str(i)] = tag
 			i = i + 1
-
+		q['category'] = question.category.title
 		form = QuestionForm(q)
 	return render(request, 'ask.html', {"popular_tags": popular_tags, 'form': form}, )
 
