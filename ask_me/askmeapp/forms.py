@@ -49,7 +49,7 @@ class SignupForm(forms.Form):
             min_length=8
             )
     avatar = forms.FileField(
-            widget=forms.ClearableFileInput(attrs={ 'class': 'ask-signup-avatar-input', }),
+            widget=forms.ClearableFileInput(),
             required=False
             )
 
@@ -77,6 +77,14 @@ class SignupForm(forms.Form):
             raise forms.ValidationError('Email is already used')
         except User.DoesNotExist:
             return email
+
+    def clean_avatar(self):
+        avatar = self.cleaned_data.get('avatar')
+
+        if avatar is not None:
+            if 'image' not in avatar.content_type:
+                raise forms.ValidationError('Wrong image type')
+        return avatar
 
     def save(self):
         data = self.cleaned_data
@@ -108,43 +116,30 @@ class ProfileEditForm(forms.Form):
             widget=forms.Textarea(attrs={'class': 'form-control', 'rows': '4', 'placeholder': 'Enter information about yourself'}),
             required=False
             )
-    password = forms.CharField(
-            widget=forms.PasswordInput(attrs={ 'class': 'form-control', 'placeholder': '********' }),
-            min_length=8
-            )
-    password_repeat = forms.CharField(
-            widget=forms.PasswordInput(attrs={ 'class': 'form-control', 'placeholder': '********' }),
-            min_length=8
-            )
-    avatar = forms.FileField(
-            widget=forms.ClearableFileInput(attrs={ 'class': 'ask-signup-avatar-input', }),
-            required=False
-            )
 
-    def clean_password_repeat(self):
-        pswd = self.cleaned_data.get('password', '')
-        pswd_repeat = self.cleaned_data.get('password_repeat', '')
+    avatar = forms.FileField(widget=forms.ClearableFileInput(), required=False)
 
-        if pswd != pswd_repeat:
-            raise forms.ValidationError('Passwords does not matched')
+
+
+    def clean_avatar(self):
+        avatar = self.cleaned_data.get('avatar')
+
+        if avatar is not None:
+            if 'image' not in avatar.content_type:
+                raise forms.ValidationError('Wrong image type')
+        return avatar
 
 
     def save(self, user):
         data = self.cleaned_data
-
-
-        password = self.cleaned_data.get('password', '')
-        if password != '':
-            user.set_password(password)
-
-        user.save()
+        print data
 
         up = user.profile
-        up.info = data.get('information')
+        up.information = data.get('information')
 
         if data.get('avatar') is not None:
             avatar = data.get('avatar')
-            up.avatar.save('%s_%s' % (u.username, avatar.name), avatar, save=True)
+            up.avatar.save('%s_%s' % (user.username, avatar.name), avatar, save=True)
 
         up.save()
 
@@ -156,7 +151,7 @@ class QuestionForm(forms.Form):
             max_length=100
             )
     text = forms.CharField(
-            widget=forms.Textarea(attrs={'class': 'form-control', 'rows': '14', 'placeholder': 'Enter your question here',}),
+            widget=forms.Textarea(attrs={'class': 'form-control noresize', 'rows': '14', 'placeholder': 'Enter your question here',}),
             max_length=100000
             )
     category = forms.CharField(

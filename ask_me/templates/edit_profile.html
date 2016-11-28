@@ -6,42 +6,12 @@
 {% endblock %}
 
 {% block pageContent %}
-<form class="form-horizontal" method="post">
+<form class="form-horizontal" enctype="multipart/form-data" method="post">
   {% csrf_token %}
   <fieldset>
     <legend></legend>        
 
-    <div class="form-group">
-      <label class="col-lg-3 control-label">Password</label>
-      <div class="col-lg-5">
-        {{ form.password }}
-        {% if form.password.errors %} 
-          {% for e in form.password.errors %}
-          <p></p>
-          <div class="askme__login-error" role="alert">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            {{ e }}
-          </div>
-          {% endfor %}
-        {% endif %}
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label class="col-lg-3 control-label">Retype password</label>
-      <div class="col-lg-5">
-        {{ form.password_repeat }}
-        {% if form.password_repeat.errors %} 
-          {% for e in form.password_repeat.errors %}
-          <p></p>
-          <div class="askme__login-error" role="alert">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            {{ e }}
-          </div>
-          {% endfor %}
-        {% endif %}
-      </div>
-    </div>
+    
 
     <div class="form-group">
       <label class="col-lg-3 control-label">Information</label>
@@ -69,7 +39,10 @@
 
   <div class="form-group">
     <div class="col-lg-9 col-lg-offset-3">
-      <button type="submit" class="btn btn-dark">Save changes</button>      
+      <button type="submit" class="btn btn-dark">Save changes</button>
+      
+          <a href="/"><button type="button" class="btn btn-success btn-md">Change password</button> </a>         
+            
     </div>
   </div>  
 

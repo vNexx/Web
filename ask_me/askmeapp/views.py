@@ -130,10 +130,10 @@ def profile_edit(request):
 
 	if request.method == "POST":
 		form = ProfileEditForm(request.POST, request.FILES)
+
 		if form.is_valid():
 			form.save(request.user)
 			return HttpResponseRedirect('/profile/' + request.user.username + '/')
-			#return  HttpResponseRedirect('')
 	else:
 		u = model_to_dict(request.user)
 		up = request.user.profile

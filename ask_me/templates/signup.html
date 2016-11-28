@@ -9,7 +9,7 @@
 
 {% block pageContent %}  
 
-<form class="form-horizontal" method="post">
+<form class="form-horizontal" enctype="multipart/form-data" method="post">
   {% csrf_token %}
   <fieldset>
     <legend></legend>       
