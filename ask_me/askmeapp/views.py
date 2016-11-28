@@ -43,17 +43,13 @@ def tag(request, tag, page = '1'):
 	return render(request, 'tag.html', {"data": question_list, "tag" : tag,	"popular_tags" : popular_tags}, )
 
 def single_question(request, id, page = '1'):
-	question = Question.objects.get(pk=id)
+
+	question = get_object_or_404(Question, pk=id)
 	answers = question.answer_set.all()
 	popular_tags = Tag.objects.get_popular_tags()
 	answer_list = pagination_function.pagination(answers, 4, page)
 	answer_list.paginator.baseurl = "/question/id" + id + "/"
-	last_page_num = (answers.count() + 1) / 4 +1
-
-	try:
-		question = Question.objects.get(pk=id)
-	except Question.DoesNotExist:
-		raise Http404
+	last_page_num = (answers.count() + 1) / 4 + 1
 
 	if request.method == "POST":
 		answer_form = AnswerForm(request.POST)
@@ -85,7 +81,7 @@ def ask_question(request):
 	return render(request, 'ask.html', {"popular_tags" : popular_tags, 'form': form},)
 @login_required
 def edit_question(request, id):
-	question = Question.objects.get(pk=id)
+	question = get_object_or_404(Question, pk=id)
 	if question.user != request.user:
 		return HttpResponseRedirect(reverse('question', kwargs={'id': id}))
 	popular_tags = Tag.objects.get_popular_tags()

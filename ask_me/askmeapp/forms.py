@@ -207,23 +207,29 @@ class QuestionForm(forms.Form):
             widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Tag 3'}),
             required=False
             )
-    def check_tag(self, tag):
-        if (' ' in tag) or ('\n' in tag) or('\t' in tag) :
-            raise forms.ValidationError('Tag contains spaces')
-        if ('/' in tag) or ('\\' in tag) or ('?' in tag):
-            raise forms.ValidationError('You can use only this symbols -+_~&@*%$')
 
-    def clean_tag1(self):
-        tag = self.cleaned_data.get('tag1')
-        self.check_tag(tag)
 
-    def clean_tag2(self):
-        tag = self.cleaned_data.get('tag2')
-        self.check_tag(tag)
 
-    def clean_tag3(self):
-        tag = self.cleaned_data.get('tag3')
-        self.check_tag(tag)
+    # def clean_tag1(self):
+    #     tag = self.cleaned_data.get('tag1', '')
+    #     if (' ' in tag) or ('\n' in tag) or('\t' in tag) :
+    #         raise forms.ValidationError('Tag contains spaces')
+    #     if ('/' in tag) or ('\\' in tag) or ('?' in tag):
+    #         raise forms.ValidationError('You can use only this symbols -+_~&@*%$')
+    #
+    # def clean_tag2(self):
+    #     tag = self.cleaned_data.get('tag2')
+    #     if (' ' in tag) or ('\n' in tag) or('\t' in tag) :
+    #         raise forms.ValidationError('Tag contains spaces')
+    #     if ('/' in tag) or ('\\' in tag) or ('?' in tag):
+    #         raise forms.ValidationError('You can use only this symbols -+_~&@*%$')
+    #
+    # def clean_tag3(self):
+    #     tag = self.cleaned_data.get('tag3')
+    #     if (' ' in tag) or ('\n' in tag) or('\t' in tag) :
+    #         raise forms.ValidationError('Tag contains spaces')
+    #     if ('/' in tag) or ('\\' in tag) or ('?' in tag):
+    #         raise forms.ValidationError('You can use only this symbols -+_~&@*%$')
 
     def save(self, user, id):
         data = self.cleaned_data
