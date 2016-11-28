@@ -364,8 +364,10 @@ a:focus{
 
 .top:hover,
 .top:focus {
+	transform: rotate(360deg);
 	background-color: #E09703;
 	color: #fff;
+
 }
 .footer-container{
 	max-width: 1100px;

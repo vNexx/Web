@@ -58,7 +58,6 @@ class Question(models.Model):
 	is_published = models.BooleanField(default=False, verbose_name=u'Опубликована')
 	created = models.DateTimeField(default=datetime.datetime.now)
 	tags = models.ManyToManyField(Tag)
-	#id = models.IntegerField(unique=True, primary_key=True)
 	category = models.ForeignKey(Category)
 	objects = QuestionManager()
 
@@ -90,7 +89,7 @@ class Answer(models.Model):
 	rating = models.IntegerField(default = 0)
 	created = models.DateTimeField(default = datetime.datetime.now)
 	is_correct = models.BooleanField(default = False)
-	#id = models.IntegerField(primary_key=True)
+
 
 
 class Like(models.Model):

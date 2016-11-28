@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block pagetitle %}
+	<h2 class="askme_ask-question-section-title"> Profile Edit </h2>   
+{% endblock %}
+
+{% block pageContent %}
+<form class="form-horizontal" method="post">
+  {% csrf_token %}
+  <fieldset>
+    <legend></legend>        
+
+    <div class="form-group">
+      <label class="col-lg-3 control-label">Password</label>
+      <div class="col-lg-5">
+        {{ form.password }}
+        {% if form.password.errors %} 
+          {% for e in form.password.errors %}
+          <p></p>
+          <div class="askme__login-error" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            {{ e }}
+          </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-lg-3 control-label">Retype password</label>
+      <div class="col-lg-5">
+        {{ form.password_repeat }}
+        {% if form.password_repeat.errors %} 
+          {% for e in form.password_repeat.errors %}
+          <p></p>
+          <div class="askme__login-error" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            {{ e }}
+          </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-lg-3 control-label">Information</label>
+      <div class="col-lg-5">
+        {{ form.information }}
+        {% if form.information.errors %} 
+          {% for e in form.information.errors %}
+          <p></p>
+          <div class="askme__login-error" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            {{ e }}
+          </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-lg-3 control-label">Upload avatar</label>
+      <div class="col-lg-5">
+        {{ form.avatar }}
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="form-group">
+    <div class="col-lg-9 col-lg-offset-3">
+      <button type="submit" class="btn btn-dark">Save changes</button>      
+    </div>
+  </div>  
+
+  {% for error in form.non_field_errors %}
+    <div class="askme__login-error col-lg-5 col-lg-offset-3" role="alert">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      {{ error }}        
+    </div>
+  {% endfor %}
+</form>
+{% endblock %}
+
+{% block paginator %}       
+{% endblock %}    

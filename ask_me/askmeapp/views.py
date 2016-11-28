@@ -4,6 +4,7 @@ from django.contrib import auth
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.forms.models import model_to_dict
 from django.contrib.auth.models import User
 from askmeapp.models import *
 from askmeapp.forms import *
@@ -103,9 +104,9 @@ def login(request):
 
 @login_required
 def logout(request):
-    redirect = request.GET.get('continue', '/')
-    auth.logout(request)
-    return HttpResponseRedirect(redirect)
+	redirect = request.GET.get('continue', '/')
+	auth.logout(request)
+	return HttpResponseRedirect(redirect)
 
 def signup(request):
 	popular_tags = Tag.objects.get_popular_tags()
@@ -123,26 +124,43 @@ def signup(request):
 
 	return render(request, 'signup.html', {"popular_tags" : popular_tags, 'form': form},)
 
+@login_required
+def profile_edit(request):
+
+
+	if request.method == "POST":
+		form = ProfileEditForm(request.POST, request.FILES)
+		if form.is_valid():
+			form.save(request.user)
+			return HttpResponseRedirect('/profile/' + request.user.username + '/')
+			#return  HttpResponseRedirect('')
+	else:
+		u = model_to_dict(request.user)
+		up = request.user.profile
+		u['information'] = up.information
+		form = ProfileEditForm(u)
+	popular_tags = Tag.objects.get_popular_tags()
+	return render(request, 'edit_profile.html', {"popular_tags" : popular_tags,'form': form},)
 
 @csrf_exempt
 def get_post_params(request):
-    result = ['Hello, World!<br>']
-    result.append('Post test:')
-    result.append('<form method="post">')
-    result.append('<input type="text" name = "params">')
-    result.append('<input type="submit" value="Submit">')
-    result.append('</form>')
+	result = ['Hello, World!<br>']
+	result.append('Post test:')
+	result.append('<form method="post">')
+	result.append('<input type="text" name = "params">')
+	result.append('<input type="submit" value="Submit">')
+	result.append('</form>')
 
-    if request.method == 'GET':
-        if request.GET.urlencode() != '':
-            result.append('Get data:')            
-            for key, value in request.GET.items():
-                keyvalue=key+" = "+value
-                result.append(keyvalue)
+	if request.method == 'GET':
+		if request.GET.urlencode() != '':
+			result.append('Get data:')
+			for key, value in request.GET.items():
+				keyvalue=key+" = "+value
+				result.append(keyvalue)
 
-    if request.method == 'POST':
-        result.append(request.POST.urlencode())
-    return HttpResponse('<br>'.join(result))
+	if request.method == 'POST':
+		result.append(request.POST.urlencode())
+	return HttpResponse('<br>'.join(result))
 
 	
 	

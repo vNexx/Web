@@ -22,6 +22,7 @@ urlpatterns = [
 
 	url(r'^profile/(?P<user_name>\w+)/(?P<page>\d+)?/$', views.profile, name='profile'),
 	url(r'^profile/(?P<user_name>\w+)/$', views.profile, name='profile'),
+	url(r'^profile_edit/$', views.profile_edit, name='profile_edit'),
 
 	url(r'get_post_params/', views.get_post_params, name='get_post_params'),
 ]

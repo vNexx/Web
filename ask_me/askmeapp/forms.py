@@ -102,6 +102,54 @@ class SignupForm(forms.Form):
 
         return authenticate(username=u.username, password=password)
 
+class ProfileEditForm(forms.Form):
+
+    information = forms.CharField(
+            widget=forms.Textarea(attrs={'class': 'form-control', 'rows': '4', 'placeholder': 'Enter information about yourself'}),
+            required=False
+            )
+    password = forms.CharField(
+            widget=forms.PasswordInput(attrs={ 'class': 'form-control', 'placeholder': '********' }),
+            min_length=8
+            )
+    password_repeat = forms.CharField(
+            widget=forms.PasswordInput(attrs={ 'class': 'form-control', 'placeholder': '********' }),
+            min_length=8
+            )
+    avatar = forms.FileField(
+            widget=forms.ClearableFileInput(attrs={ 'class': 'ask-signup-avatar-input', }),
+            required=False
+            )
+
+    def clean_password_repeat(self):
+        pswd = self.cleaned_data.get('password', '')
+        pswd_repeat = self.cleaned_data.get('password_repeat', '')
+
+        if pswd != pswd_repeat:
+            raise forms.ValidationError('Passwords does not matched')
+
+
+    def save(self, user):
+        data = self.cleaned_data
+
+
+        password = self.cleaned_data.get('password', '')
+        if password != '':
+            user.set_password(password)
+
+        user.save()
+
+        up = user.profile
+        up.info = data.get('information')
+
+        if data.get('avatar') is not None:
+            avatar = data.get('avatar')
+            up.avatar.save('%s_%s' % (u.username, avatar.name), avatar, save=True)
+
+        up.save()
+
+        return self
+
 class QuestionForm(forms.Form):
     title = forms.CharField(
             widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter question title here', }),
@@ -129,6 +177,11 @@ class QuestionForm(forms.Form):
             required=False
             )
 
+    #def clean_tag1(self):
+         #tag = self.cleaned_data.get('tag1','')
+        #if tag :
+         #   raise forms.ValidationError('Tag contains spaces')
+
     def save(self, user):
         data = self.cleaned_data
         q = Question.objects.create(title=data.get('title'), text=data.get('text'),
@@ -136,12 +189,12 @@ class QuestionForm(forms.Form):
         q.save()
 
         for tag_num in ['tag1', 'tag2', 'tag3']:
-            tag_text = data.get(tag_num)
+            tag_text = data.get(tag_num, '')
             if tag_text is not None and tag_text != '':
                 tag = Tag.objects.get_or_create(text=tag_text)
                 q.tags.add(tag)
 
-        category_text = data.get('category')
+        category_text = data.get('category','')
         if category_text is not None and category_text != '':
             category = Category.objects.get_or_create(title=category_text)
             q.category = category
