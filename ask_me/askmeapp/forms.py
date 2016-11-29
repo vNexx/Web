@@ -120,8 +120,6 @@ class SignupForm(forms.Form):
 
 class ChangePasswordForm(forms.Form):
 
-    # def __init__(self, user):
-    #     self._user = user
 
     password_old = forms.CharField(
         label='Old Password',
@@ -145,10 +143,10 @@ class ChangePasswordForm(forms.Form):
     def clean_password_old(self):
         oldpswd = self.cleaned_data.get('password_old')
         pswd = self.cleaned_data.get('password')
-        print self._user.check_password(oldpswd)
+        print self.user.check_password(oldpswd)
         if oldpswd == pswd:
             raise forms.ValidationError('old and new password matched')
-        if self._user.check_password(oldpswd):
+        if self.user.check_password(oldpswd):
             raise forms.ValidationError('Wrong old password')
         return oldpswd
 
@@ -285,7 +283,7 @@ class QuestionForm(forms.Form):
 
 class AnswerForm(forms.Form):
     text = forms.CharField(
-        widget=forms.Textarea(attrs={'class': 'form-control', 'rows': '5', 'placeholder': 'Enter your answer here', })
+        widget=forms.Textarea(attrs={'class': 'form-control noresize', 'rows': '5', 'placeholder': 'Enter your answer here', })
     )
 
     def save(self, question, user):

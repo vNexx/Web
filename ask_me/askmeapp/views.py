@@ -170,13 +170,13 @@ def profile_edit(request):
 def change_password(request):
 	if request.method == "POST":
 		form = ChangePasswordForm(request.POST)
-		form._user = request.user
+		form.user = request.user
 		if form.is_valid():
 			form.save(request.user)
 			return HttpResponseRedirect('/')
 	else:
 		form = ChangePasswordForm()
-		form._user = request.user
+		form.user = request.user
 	popular_tags=Tag.objects.get_popular_tags()
 	return render(request, 'change_password.html', {"popular_tags": popular_tags, 'form': form}, )
 

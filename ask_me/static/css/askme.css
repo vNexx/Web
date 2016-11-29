@@ -373,7 +373,6 @@ a:focus{
 
 .top:hover,
 .top:focus {
-	transform: rotate(360deg);
 	background-color: #E09703;
 	color: #fff;
 
@@ -385,3 +384,14 @@ a:focus{
 	clear: both;
 	text-align: center;
 }
+.askme__password-change_username {
+	color: #fff;
+	padding: 5px;
+	margin-left: 15px;
+	border: 1px solid transparent;
+	border-radius: 3px;
+	background-color: #545454;
+	padding-left: 15px;
+	width: 305px;
+}
+
