@@ -141,13 +141,15 @@ class ChangePasswordForm(forms.Form):
 
 
     def clean_password_old(self):
-        oldpswd = self.cleaned_data.get('password_old')
-        pswd = self.cleaned_data.get('password')
-        print self.user.check_password(oldpswd)
+        oldpswd = self.cleaned_data.get('password_old','')
+        pswd = self.cleaned_data.get('password','')
+
+        if not self.user.check_password(oldpswd):
+            raise forms.ValidationError('Wrong old password')
+
         if oldpswd == pswd:
             raise forms.ValidationError('old and new password matched')
-        if self.user.check_password(oldpswd):
-            raise forms.ValidationError('Wrong old password')
+
         return oldpswd
 
 
@@ -163,16 +165,16 @@ class ChangePasswordForm(forms.Form):
         password = self.cleaned_data.get('password', '')
         if password is not None and password != '':
             #user.password = make_password(password)
-            user.set_password(password)
-            user.save()
+            self.user.set_password(password)
+            self.user.save()
 
-        return self
+        return authenticate(username=self.user, password=password)
 
 class ProfileEditForm(forms.Form):
 
     information = forms.CharField(
         label='User Info',
-        widget=forms.Textarea(attrs={'class': 'form-control', 'rows': '4', 'placeholder': 'Enter information about yourself'}),
+        widget=forms.Textarea(attrs={'class': 'form-control noresize', 'rows': '4', 'placeholder': 'Enter information about yourself'}),
         required=False
     )
 

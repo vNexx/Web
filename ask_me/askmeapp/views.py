@@ -173,7 +173,8 @@ def change_password(request):
 		form.user = request.user
 		if form.is_valid():
 			form.save(request.user)
-			return HttpResponseRedirect('/')
+			form.status = True
+			#return HttpResponseRedirect('/')
 	else:
 		form = ChangePasswordForm()
 		form.user = request.user
