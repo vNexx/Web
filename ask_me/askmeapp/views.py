@@ -150,12 +150,14 @@ def profile_edit(request):
 
 		if form.is_valid():
 			form.save(request.user)
-			return HttpResponseRedirect('/profile/' + request.user.username + '/')
+			form.status = True
+			#return HttpResponseRedirect('/profile/' + request.user.username + '/')
 	else:
 		u = model_to_dict(request.user)
 		up = request.user.profile
 		u['information'] = up.information
 		form = ProfileEditForm(u)
+		form.status = False
 	popular_tags = Tag.objects.get_popular_tags()
 	return render(request, 'edit_profile.html', {"popular_tags" : popular_tags,'form': form},)
 

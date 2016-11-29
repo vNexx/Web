@@ -208,28 +208,24 @@ class QuestionForm(forms.Form):
             required=False
             )
 
+    def check_tag(self, tag):
+        if (' ' in tag) or ('\n' in tag) or('\t' in tag) :
+            raise forms.ValidationError('Tag contains spaces')
+        if ('/' in tag) or ('\\' in tag) or ('?' in tag):
+            raise forms.ValidationError('You can use only this symbols -+_~&@*%$')
+        return tag
 
+    def clean_tag1(self):
+        tag = self.cleaned_data.get('tag1', '')
+        return self.check_tag(tag)
 
-    # def clean_tag1(self):
-    #     tag = self.cleaned_data.get('tag1', '')
-    #     if (' ' in tag) or ('\n' in tag) or('\t' in tag) :
-    #         raise forms.ValidationError('Tag contains spaces')
-    #     if ('/' in tag) or ('\\' in tag) or ('?' in tag):
-    #         raise forms.ValidationError('You can use only this symbols -+_~&@*%$')
-    #
-    # def clean_tag2(self):
-    #     tag = self.cleaned_data.get('tag2')
-    #     if (' ' in tag) or ('\n' in tag) or('\t' in tag) :
-    #         raise forms.ValidationError('Tag contains spaces')
-    #     if ('/' in tag) or ('\\' in tag) or ('?' in tag):
-    #         raise forms.ValidationError('You can use only this symbols -+_~&@*%$')
-    #
-    # def clean_tag3(self):
-    #     tag = self.cleaned_data.get('tag3')
-    #     if (' ' in tag) or ('\n' in tag) or('\t' in tag) :
-    #         raise forms.ValidationError('Tag contains spaces')
-    #     if ('/' in tag) or ('\\' in tag) or ('?' in tag):
-    #         raise forms.ValidationError('You can use only this symbols -+_~&@*%$')
+    def clean_tag2(self):
+        tag = self.cleaned_data.get('tag2')
+        return self.check_tag(tag)
+
+    def clean_tag3(self):
+        tag = self.cleaned_data.get('tag3')
+        return self.check_tag(tag)
 
     def save(self, user, id):
         data = self.cleaned_data
@@ -240,6 +236,7 @@ class QuestionForm(forms.Form):
             q = Question.objects.get(pk=id)
             q.title = data.get('title')
             q.text = data.get('text')
+        q.tags.clear()
 
         q.save()
 
@@ -247,6 +244,7 @@ class QuestionForm(forms.Form):
             tag_text = data.get(tag_num, '')
             if tag_text is not None and tag_text != '':
                 tag = Tag.objects.get_or_create(text=tag_text)
+
                 q.tags.add(tag[0])
 
         category_text = data.get('category')

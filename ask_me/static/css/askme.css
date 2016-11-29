@@ -209,11 +209,20 @@ a:focus{
 	color: #fe4a4a;
 	padding: 15px;	
 	margin-bottom: 10px;
+	margin-right: 5px;
 	border: 1px solid transparent;
 	border-radius: 4px;
 	background-color: #4E4E4E;	
 }
 
+.askme__status-ok {
+	color: #5bfe4a;
+	padding: 10px;	
+	margin-bottom: 10px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	background-color: #4E4E4E;
+}
 
 
 .pagination {

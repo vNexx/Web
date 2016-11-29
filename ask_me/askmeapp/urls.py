@@ -10,7 +10,7 @@ urlpatterns = [
 
 	url(r'^question/id(?P<id>\d+)/(?P<page>\d+)?/$', views.single_question, name='question'),
 	url(r'^question/id(?P<id>\d+)/$', views.single_question, name='question'),
-	url(r'^edit_question/id(?P<id>\d+)/$', views.edit_question, name='edit_question'),
+	url(r'^edit/question/id(?P<id>\d+)/$', views.edit_question, name='edit_question'),
 
 	url(r'^ask/', views.ask_question, name='ask'),
 	url(r'^developing/', views.developing, name='developing'),
@@ -24,7 +24,7 @@ urlpatterns = [
 
 	url(r'^profile/(?P<user_name>\w+)/(?P<page>\d+)?/$', views.profile, name='profile'),
 	url(r'^profile/(?P<user_name>\w+)/$', views.profile, name='profile'),
-	url(r'^profile_edit/$', views.profile_edit, name='profile_edit'),
+	url(r'^edit/profile/$', views.profile_edit, name='profile_edit'),
 
 	url(r'get_post_params/', views.get_post_params, name='get_post_params'),
 ]
