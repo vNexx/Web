@@ -10,7 +10,7 @@
   {% csrf_token %}
   <div class="askme_ask-question-form"> <!-- ask question block-->
 
-    <div class="form-group">
+    <div class="form-group {% if form.title.errors %}has-error{% endif %}">
       <label class="col-lg-1 control-label">Title</label>
       <div class = "col-sm-11">      
         {{ form.title }}
@@ -26,7 +26,7 @@
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group {% if form.text.errors %}has-error{% endif %}">
       <label class="col-lg-1 control-label">Text</label>
       <div class = "col-sm-11">      
         {{ form.text }}
@@ -42,7 +42,7 @@
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group {% if form.category.errors %}has-error{% endif %}">
       <label class="col-lg-1 control-label">Category</label>
       <div class = "col-sm-11">      
         {{ form.category }}
@@ -57,10 +57,10 @@
         {% endif %}
       </div>
     </div>
-
-    <div class="form-group">
-      <label for="tag" class="col-sm-1 control-label">Tags</label>
-      <div class="col-sm-4">
+    <label for="tag" class="col-sm-1 control-label">Tags</label>
+    <div class="form-group col-sm-4 {% if form.tag1.errors %}has-error{% endif %}">
+      
+      <div class="">
         {{ form.tag1 }}
         {% if form.tag1.errors %} 
           {% for e in form.tag1.errors %}
@@ -72,7 +72,9 @@
           {% endfor %}
         {% endif %}
       </div>
-      <div class="col-sm-4">
+    </div>
+    <div class="form-group col-sm-4 {% if form.tag2.errors %}has-error{% endif %}">
+      <div class="">
         {{ form.tag2 }}
         {% if form.tag2.errors %} 
           {% for e in form.tag2.errors %}
@@ -84,7 +86,9 @@
           {% endfor %}
         {% endif %}
       </div>
-      <div class="col-sm-3">
+    </div>
+    <div class="form-group col-sm-4 {% if form.tag2.errors %}has-error{% endif %}">
+      <div class="">
         {{ form.tag3 }}
         {% if form.tag3.errors %} 
           {% for e in form.tag3.errors %}

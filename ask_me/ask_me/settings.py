@@ -70,7 +70,7 @@ TEMPLATES = [
 
 
 WSGI_APPLICATION = 'ask_me.wsgi.application'
-
+LOGIN_URL = '/login/'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
@@ -122,3 +122,6 @@ USE_TZ = True
 #STATIC_URL = '/static/'
 STATIC_URL = '/'
 STATICFILES_DIRS = (BASE_DIR,)
+
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+#MEDIA_URL = '/uploads/'

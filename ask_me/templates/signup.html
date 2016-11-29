@@ -14,7 +14,7 @@
   <fieldset>
     <legend></legend>       
 
-    <div class="form-group">
+    <div class="form-group {% if form.email.errors %}has-error{% endif %}">
       <label class="col-lg-3 control-label ">Email address</label>
       <div class="col-lg-5">
         {{ form.email }}
@@ -30,7 +30,7 @@
       </div>
     </div> 
 
-    <div class="form-group">
+    <div class="form-group {% if form.username.errors %}has-error{% endif %}">
       <label class="col-lg-3 control-label">Login</label>
       <div class="col-lg-5">
         {{ form.username }}

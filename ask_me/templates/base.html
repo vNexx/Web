@@ -50,9 +50,9 @@
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Topics <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="{% url 'tag'  'Web'%}">Web </a></li>
-            <li><a href="/tag/JavaScript/">JavaScript </a></li>
-            <li><a href="/tag/Python/">Python </a></li>
-            <li><a href="/hot/">Other </a></li>
+            <li><a href="{% url 'tag'  'JavaScript'%}">JavaScript </a></li>
+            <li><a href="{% url 'tag'  'Python'%}">Python </a></li>
+            <li><a href="{% url 'hot_questions' %}">Other </a></li>
           </ul>
         </li>
       </ul>
