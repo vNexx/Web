@@ -2,7 +2,11 @@
 {% load static %}
 
 {% block pagetitle %}
+  {% if new_question %}
   <h2 class="askme_ask-question-section-title"> New Question </h2>
+   {% else %}
+  <h2 class="askme_ask-question-section-title"> Edit Question </h2>
+   {% endif %}
 {% endblock %}
 
   {% block pageContent %}   
@@ -56,51 +60,23 @@
           {% endfor %}
         {% endif %}
       </div>
-    </div>
-    <label for="tag" class="col-sm-1 control-label">Tags</label>
-    <div class="form-group col-sm-4 {% if form.tag1.errors %}has-error{% endif %}">
-      
-      <div class="">
-        {{ form.tag1 }}
-        {% if form.tag1.errors %} 
-          {% for e in form.tag1.errors %}
-          <p></p>
-          <div class="askme__login-error" role="alert">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            {{ e }}
-          </div>
-          {% endfor %}
-        {% endif %}
-      </div>
-    </div>
-    <div class="form-group col-sm-4 {% if form.tag2.errors %}has-error{% endif %}">
-      <div class="">
-        {{ form.tag2 }}
-        {% if form.tag2.errors %} 
-          {% for e in form.tag2.errors %}
-          <p></p>
-          <div class="askme__login-error" role="alert">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            {{ e }}
-          </div>
-          {% endfor %}
-        {% endif %}
-      </div>
-    </div>
-    <div class="form-group col-sm-4 {% if form.tag2.errors %}has-error{% endif %}">
-      <div class="">
-        {{ form.tag3 }}
-        {% if form.tag3.errors %} 
-          {% for e in form.tag3.errors %}
-          <p></p>
-          <div class="askme__login-error" role="alert">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            {{ e }}
-          </div>
-          {% endfor %}
-        {% endif %}
-      </div>
     </div>    
+    <div class="form-group {% if form.tag1.errors %}has-error{% endif %}">
+    <label for="tag" class="col-sm-1 control-label">Tags</label> 
+      <div class="col-sm-11">       
+        {{ form.tags }}
+        {% if form.tags.errors %} 
+          {% for e in form.tags.errors %}
+          <p></p>
+          <div class="askme__login-error" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            {{ e }}
+          </div>
+          {% endfor %}
+        {% endif %}
+      </div>      
+    </div>
+    
  
     <div class="form-group">
     <div class="col-sm-12 col-sm-offset-1">

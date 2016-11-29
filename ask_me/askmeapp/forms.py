@@ -226,38 +226,33 @@ class QuestionForm(forms.Form):
         max_length=50,
         required=False
     )
-    tag1 = forms.CharField(
+    tags = forms.CharField(
         label='Tags',
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Tag 1'}),
-        required=False
-    )
-    tag2 = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Tag 2'}),
-        required=False
-    )
-    tag3 = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Tag 3'}),
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Tag1,Tag2,Tag3'}),
         required=False
     )
 
+
     def check_tag(self, tag):
         if (' ' in tag) or ('\n' in tag) or('\t' in tag) :
-            raise forms.ValidationError('Tag contains spaces')
+            raise forms.ValidationError('Tags contain spaces')
         if ('/' in tag) or ('\\' in tag) or ('?' in tag):
             raise forms.ValidationError('You can use only this symbols -+_~&@*%$')
         return tag
 
-    def clean_tag1(self):
-        tag = self.cleaned_data.get('tag1', '')
-        return self.check_tag(tag)
+    def parse_tags(self, tags):
+        self._tag_list = tags.split(',', 10)
+        print self._tag_list
 
-    def clean_tag2(self):
-        tag = self.cleaned_data.get('tag2')
-        return self.check_tag(tag)
 
-    def clean_tag3(self):
-        tag = self.cleaned_data.get('tag3')
-        return self.check_tag(tag)
+    def clean_tags(self):
+        tags = self.cleaned_data.get('tags', '')
+        self.parse_tags(tags)
+        for tag in self._tag_list:
+            self.check_tag(tag)
+        #return self.check_tag(tag)
+
+
 
     def save(self, user, id):
         data = self.cleaned_data
@@ -272,11 +267,9 @@ class QuestionForm(forms.Form):
 
         q.save()
 
-        for tag_num in ['tag1', 'tag2', 'tag3']:
-            tag_text = data.get(tag_num, '')
+        for tag_text in self._tag_list:
             if tag_text is not None and tag_text != '':
                 tag = Tag.objects.get_or_create(text=tag_text)
-
                 q.tags.add(tag[0])
 
         category_text = data.get('category')

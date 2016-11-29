@@ -60,7 +60,7 @@ def single_question(request, id, page = '1'):
 										+ '#answer_' + str(answer.id))
 	else:
 		answer_form = AnswerForm()
-	return render(request, 'question.html', {"question": question, "data" : answer_list,
+	return render(request, 'question.html', {"question": question, "data" : answer_list, "new_question" : True,
 											 "popular_tags" : popular_tags, "form" : answer_form},)
 
 def developing(request):
@@ -93,10 +93,15 @@ def edit_question(request, id):
 	else:
 		q = model_to_dict(question)
 		tags = question.tags.all()
-		i = 1
+		q['tags'] = ''
+		first = True
 		for tag in tags:
-			q['tag' + str(i)] = tag
-			i = i + 1
+			if first:
+				q['tags'] = str(tag.text)
+				first = False
+			else:
+				q['tags'] = str(q['tags']) + ',' + str(tag.text)
+
 		q['category'] = question.category.title
 		form = QuestionForm(q)
 	return render(request, 'ask.html', {"popular_tags": popular_tags, 'form': form}, )
