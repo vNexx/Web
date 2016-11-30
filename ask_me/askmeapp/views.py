@@ -182,8 +182,9 @@ def change_password(request):
 	return render(request, 'change_password.html', {"popular_tags": popular_tags, 'form': form}, )
 
 def tag_list(request):
+	tags = Tag.objects.order_by_name_with_question_count()
 	popular_tags = Tag.objects.get_popular_tags()
-	return render(request, 'tag_list.html', {"popular_tags": popular_tags, 'tag_list' : Tag.objects.order_by('text')},)
+	return render(request, 'tag_list.html', {"popular_tags": popular_tags, 'tag_list' : tags},)
 
 
 

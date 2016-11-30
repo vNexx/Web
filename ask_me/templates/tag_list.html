@@ -7,9 +7,9 @@
 {% endblock %}
 
 {% block pageContent %} 
-  <div class="col-md-4  askme__tag-list">
+  <div class="col-md-7  askme__tag-list">
 	{% for tag in tag_list %}
-		<a href="{% url 'tag' tag %}">#{{ tag }}</a><br>
+		<a href="{% url 'tag' tag %}">#{{ tag }}</a> - {{ tag.questions_count }} questions<br>
 	{% endfor %}
   </div>
 

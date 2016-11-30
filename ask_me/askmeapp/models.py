@@ -33,6 +33,9 @@ class TagManager(models.Manager):
 	def order_by_question_count(self):
 		return self.with_question_count().order_by('-questions_count')
 
+	def order_by_name_with_question_count(self):
+		return  self.with_question_count().order_by('text')
+
 	def get_popular_tags(self):
 		return self.order_by_question_count().all()[:10]
 
