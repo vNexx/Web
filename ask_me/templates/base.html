@@ -121,7 +121,7 @@
         {% for tag in popular_tags %}
           <a href="{% url 'tag' tag %}" id="Number{{ tag.style_number }}">{{ tag }}</a>
         {% endfor %}
-       
+        <a href="{% url 'tag_list' %}">Others</a>       
       </div>
       {% endblock %}
 

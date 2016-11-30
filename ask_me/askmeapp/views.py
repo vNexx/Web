@@ -181,6 +181,10 @@ def change_password(request):
 	popular_tags=Tag.objects.get_popular_tags()
 	return render(request, 'change_password.html', {"popular_tags": popular_tags, 'form': form}, )
 
+def tag_list(request):
+	popular_tags = Tag.objects.get_popular_tags()
+	return render(request, 'tag_list.html', {"popular_tags": popular_tags, 'tag_list' : Tag.objects.order_by('text')},)
+
 
 
 @csrf_exempt

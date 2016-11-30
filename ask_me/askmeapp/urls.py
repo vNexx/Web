@@ -21,6 +21,7 @@ urlpatterns = [
 
 	url(r'^tag/(?P<tag>(\d|\w|[-+_.:;~&@*%$])+)/$', views.tag, name='tag'),
 	url(r'^tag/(?P<tag>(\d|\w|[-+_.:;~&@*%$])+)/(?P<page>\d+)/$', views.tag, name='tag'),
+	url(r'^tag_list/$', views.tag_list, name='tag_list'),
 
 	url(r'^profile/(?P<user_name>\w+)/(?P<page>\d+)?/$', views.profile, name='profile'),
 	url(r'^profile/(?P<user_name>\w+)/$', views.profile, name='profile'),

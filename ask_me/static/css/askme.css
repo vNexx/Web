@@ -395,3 +395,11 @@ a:focus{
 	width: 305px;
 }
 
+.askme__tag-list{
+	border-radius: 7px;	
+	padding: 15px; 
+	margin-top: 35px;
+	margin-bottom: 35px;
+	background-color: #3e3e3e
+}
+
