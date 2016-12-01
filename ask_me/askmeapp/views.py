@@ -97,10 +97,10 @@ def edit_question(request, id):
 		first = True
 		for tag in tags:
 			if first:
-				q['tags'] = str(tag.text)
+				q['tags'] = tag.text
 				first = False
 			else:
-				q['tags'] = str(q['tags']) + ',' + str(tag.text)
+				q['tags'] = q['tags'] + ',' + tag.text
 
 		q['category'] = question.category.title
 		form = QuestionForm(q)
