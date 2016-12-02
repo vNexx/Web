@@ -96,62 +96,67 @@ class Answer(models.Model):
 
 class QuestionLikeManager(models.Manager):
 	def like(self, id, user):
+		compose_key = str(user) + str(id)
+		question = Question.objects.get(pk=id)
 		try:
-			qLike = QuestionLike.objects.get(question=Question.objects.get(pk=id), user=user)
+			qLike = QuestionLike.objects.get(compose_key=compose_key)
 		except QuestionLike.DoesNotExist:
-			qLike = QuestionLike.objects.create(question=Question.objects.get(pk=id), user=user)
+			qLike = QuestionLike.objects.create(compose_key=compose_key)
 		if qLike.value == 0:
 			qLike.value = 1
-			qLike.question.rating = qLike.question.rating + 1
-			qLike.question.user.profile.rating = qLike.question.user.profile.rating + 1
+			question.rating = question.rating + 1
+			question.user.profile.rating = question.user.profile.rating + 1
 			qLike.is_liked = True
 		elif qLike.value == -1:
 			qLike.value = 1
-			qLike.question.rating = qLike.question.rating + 2
-			qLike.question.user.profile.rating = qLike.question.user.profile.rating + 2
+			question.rating = question.rating + 2
+			question.user.profile.rating = question.user.profile.rating + 2
 			qLike.is_liked = True
 		elif qLike.value == 1:
 			qLike.value = 0
-			qLike.question.rating = qLike.question.rating - 1
-			qLike.question.user.profile.rating = qLike.question.user.profile.rating - 1
+			question.rating = question.rating - 1
+			question.user.profile.rating = question.user.profile.rating - 1
 			qLike.is_liked = False
-		qLike.question.save()
-		qLike.question.user.profile.save()
+		question.save()
+		question.user.profile.save()
 		qLike.save()
 
 	def dislike(self, id, user):
+		compose_key = str(user) + str(id)
+		question = Question.objects.get(pk=id)
 		try:
-			qLike = QuestionLike.objects.get(question=Question.objects.get(pk=id), user=user)
+			qLike = QuestionLike.objects.get(compose_key=compose_key)
 		except QuestionLike.DoesNotExist:
-			qLike = QuestionLike.objects.create(question=Question.objects.get(pk=id), user=user)
+			qLike = QuestionLike.objects.create(compose_key=compose_key)
 
 		if qLike.value == 0:
 			qLike.value = -1
-			qLike.question.rating = qLike.question.rating - 1
-			qLike.question.user.profile.rating = qLike.question.user.profile.rating - 1
+			question.rating = question.rating - 1
+			question.user.profile.rating = question.user.profile.rating - 1
 			qLike.is_disliked = True
 		elif qLike.value == 1:
 			qLike.value = -1
-			qLike.question.rating = qLike.question.rating - 2
-			qLike.question.user.profile.rating = qLike.question.user.profile.rating - 2
+			question.rating = question.rating - 2
+			question.user.profile.rating = question.user.profile.rating - 2
 			qLike.is_disliked = True
 		elif qLike.value == -1:
 			qLike.value = 0
-			qLike.question.rating = qLike.question.rating + 1
-			qLike.question.user.profile.rating = qLike.question.user.profile.rating + 1
+			question.rating = question.rating + 1
+			question.user.profile.rating = question.user.profile.rating + 1
 			qLike.is_disliked = False
-		qLike.question.save()
-		qLike.question.user.profile.save()
+		question.save()
+		question.user.profile.save()
 		qLike.save()
 
 
 
 
 class QuestionLike(models.Model):
-	
+
 	value = models.IntegerField(default=0)
-	question = models.ForeignKey(Question)
-	user = models.OneToOneField(User)
+	#question = models.ForeignKey(Question)
+	#user = models.OneToOneField(User)
+	compose_key = models.CharField(max_length=70, unique=True, default='None0')
 	is_liked = models.BooleanField(default=False)
 	is_disliked = models.BooleanField(default=False)
 

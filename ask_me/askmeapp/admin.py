@@ -11,7 +11,7 @@ class AnswerAdmin(admin.ModelAdmin):
 class TagAdmin(admin.ModelAdmin):
 	list_display=('text',)
 class QuestionLikeAdmin(admin.ModelAdmin):
-	list_display=('value', 'user')
+	list_display=('value', 'compose_key')
 class ProfileAdmin(admin.ModelAdmin):
 	list_display=('user',)
 class CategoryAdmin(admin.ModelAdmin):
