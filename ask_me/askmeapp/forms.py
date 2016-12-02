@@ -242,7 +242,7 @@ class QuestionForm(forms.Form):
 
     def parse_tags(self, tags):
         self._tag_list = tags.split(',', 10)
-        print self._tag_list
+        #print self._tag_list
 
 
     def clean_tags(self):

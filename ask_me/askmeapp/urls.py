@@ -27,6 +27,7 @@ urlpatterns = [
 	url(r'^profile/(?P<user_name>\w+)/$', views.profile, name='profile'),
 	url(r'^edit/profile/$', views.profile_edit, name='profile_edit'),
 
+	url(r'^like/question/$', views.question_like, name='question_like'),
 	url(r'get_post_params/', views.get_post_params, name='get_post_params'),
 ]
 

@@ -41,10 +41,12 @@ ul.nav > li.active > a {
 
 .like {
 	color: #12ff12;
+	font-weight: bold;
 }
 
 .dislike {
 	color: #ff2121;
+	font-weight: bold;
 }
 
 hr{

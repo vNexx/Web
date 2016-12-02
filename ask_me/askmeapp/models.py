@@ -78,7 +78,7 @@ class Profile(models.Model):
 	user = models.OneToOneField(User)
 	avatar = models.ImageField(upload_to='uploads', default="uploads/user_avatar.jpeg")
 	information = models.TextField(default="My info")
-	rating = models.IntegerField()
+	rating = models.IntegerField( default=0)
 
 	objects = ProfileManager()
 
@@ -94,44 +94,71 @@ class Answer(models.Model):
 	is_correct = models.BooleanField(default = False)
 
 
+class QuestionLikeManager(models.Manager):
+	def like(self, id, user):
+		try:
+			qLike = QuestionLike.objects.get(question=Question.objects.get(pk=id), user=user)
+		except QuestionLike.DoesNotExist:
+			qLike = QuestionLike.objects.create(question=Question.objects.get(pk=id), user=user)
+		if qLike.value == 0:
+			qLike.value = 1
+			qLike.question.rating = qLike.question.rating + 1
+			qLike.question.user.profile.rating = qLike.question.user.profile.rating + 1
+			qLike.is_liked = True
+		elif qLike.value == -1:
+			qLike.value = 1
+			qLike.question.rating = qLike.question.rating + 2
+			qLike.question.user.profile.rating = qLike.question.user.profile.rating + 2
+			qLike.is_liked = True
+		elif qLike.value == 1:
+			qLike.value = 0
+			qLike.question.rating = qLike.question.rating - 1
+			qLike.question.user.profile.rating = qLike.question.user.profile.rating - 1
+			qLike.is_liked = False
+		qLike.question.save()
+		qLike.question.user.profile.save()
+		qLike.save()
 
-class Like(models.Model):
-	status = models.IntegerField(default=0)
-	#question = models.ForeignKey(Question)
+	def dislike(self, id, user):
+		try:
+			qLike = QuestionLike.objects.get(question=Question.objects.get(pk=id), user=user)
+		except QuestionLike.DoesNotExist:
+			qLike = QuestionLike.objects.create(question=Question.objects.get(pk=id), user=user)
+
+		if qLike.value == 0:
+			qLike.value = -1
+			qLike.question.rating = qLike.question.rating - 1
+			qLike.question.user.profile.rating = qLike.question.user.profile.rating - 1
+			qLike.is_disliked = True
+		elif qLike.value == 1:
+			qLike.value = -1
+			qLike.question.rating = qLike.question.rating - 2
+			qLike.question.user.profile.rating = qLike.question.user.profile.rating - 2
+			qLike.is_disliked = True
+		elif qLike.value == -1:
+			qLike.value = 0
+			qLike.question.rating = qLike.question.rating + 1
+			qLike.question.user.profile.rating = qLike.question.user.profile.rating + 1
+			qLike.is_disliked = False
+		qLike.question.save()
+		qLike.question.user.profile.save()
+		qLike.save()
 
 
+
+
+class QuestionLike(models.Model):
+	
+	value = models.IntegerField(default=0)
+	question = models.ForeignKey(Question)
+	user = models.OneToOneField(User)
+	is_liked = models.BooleanField(default=False)
+	is_disliked = models.BooleanField(default=False)
+
+	objects = QuestionLikeManager()
 	def __unicode__(self):
-		return str(self.rating)
+		return str(self.value)
 
-# class ArticleManager(models.Manager):
-# 	def published(self):
-# 		return self.filter(is_published=True)
-#
-#
-# class Article(models.Model):
-# 	title = models.CharField(max_length=255, verbose_name=u'заголовок')
-# 	text = models.TextField(verbose_name=u'Текст')
-# 	is_published = models.BooleanField(default = False, verbose_name=u'Опубликована')
-# 	author = models.ForeignKey('Author')
-# 	objects = ArticleManager()
-#
-# 	#author = models.ForeignKey('User')
-#
-# 	class Meta:
-# 		verbose_name = u'Статья'
-# 		verbose_name_plural = u'Статьи'
-# 	def __unicode__(self):
-# 		return self.title
-#
-#
-# class Author(models.Model):
-# 	name = models.CharField(max_length=255, verbose_name=u'имя')
-# 	birthday = models.DateField(null=False, blank=False, verbose_name=u'Data rozhdeniya')
-#
-# 	class Meta:
-# 		verbose_name = u'Автор'
-# 		verbose_name_plural = u'Авторы'
-# 	def __unicode__(self):
-# 		return u"{} {}".format(self.name, self.birthday)
+
 
 

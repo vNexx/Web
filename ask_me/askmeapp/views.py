@@ -3,12 +3,15 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.contrib import auth
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from django.core.urlresolvers import reverse
 from django.forms.models import model_to_dict
 from django.contrib.auth.models import User
+import json
 from askmeapp.models import *
 from askmeapp.forms import *
 from askmeapp import pagination_function
+from askmeapp.ajax_funcs import *
 
 
 
@@ -187,6 +190,41 @@ def tag_list(request):
 	return render(request, 'tag_list.html', {"popular_tags": popular_tags, 'tag_list' : tags},)
 
 
+@login_required_ajax
+@require_POST
+def question_like(request):
+	if request.method == 'POST':
+		user = request.user
+		id = int(request.POST.get('id'))
+		is_like = int(request.POST.get('like'))
+		print request.POST
+		question = get_object_or_404(Question, pk=id)
+		if is_like == 1:
+			QuestionLike.objects.like(question.id, user)
+		else:
+			QuestionLike.objects.dislike(question.id, user)
+		question = get_object_or_404(Question, pk=id)
+		if question.rating >= 0:
+			qrating = '+' + str(question.rating)
+			qstyleid = '#like'
+		else:
+			qrating = str(question.rating)
+			qstyleid = '#dislike'
+
+		if question.user.profile.rating >= 0:
+			urating = '+' + str(question.user.profile.rating)
+			ustyleid = '.like' + str(question.user.id) + '.like'
+		else:
+			urating = str(question.user.profile.rating)
+			ustyleid = '.dislike' + str(question.user.id) + '.dislike'
+
+
+	message = u'liked'
+
+	ctx = {'message': message, 'qid' : question.id, 'qrating' : qrating, 'qstyleid' : qstyleid,
+		   'uid' : question.user.id, 'urating' : urating, 'ustyleid' : ustyleid}
+
+	return HttpResponse(json.dumps(ctx), content_type='application/json')
 
 @csrf_exempt
 def get_post_params(request):
@@ -208,6 +246,5 @@ def get_post_params(request):
 		result.append(request.POST.urlencode())
 	return HttpResponse('<br>'.join(result))
 
-	
-	
+
 

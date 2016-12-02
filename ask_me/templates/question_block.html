@@ -5,19 +5,20 @@
       <p><a href="{% url 'profile'  question.user  %}"><b>{{ question.user }}</b></a></p>  
 
       {% if question.user.profile.rating >= 0 %}
-        <p>Rating: <span class="like"><b> +{{ question.user.profile.rating }}</b></span></p>
+        <p>Rating: <span class="like{{question.user.id}} like"><b> +{{ question.user.profile.rating }}</b></span></p>
       {% else %}
-        <p>Rating: <span class="dislike"><b> {{ question.user.profile.rating }}</b></span></p>
+        <p>Rating: <span class="dislike{{question.user.id}} dislike"><b> {{ question.user.profile.rating }}</b></span></p>
       {% endif %}
 
       <div class="btn-group-vertical">
-        <button type="button" class="btn btn-success btn-md">
+        <button type="button" class="btn btn-success btn-md likebutton" dataid="{{ question.id }}"> 
           <span class="glyphicon glyphicon-triangle-top"></span>          
         </button>
-        <button type="button" class="btn btn-danger btn-md">
+        <button type="button" class="btn btn-danger btn-md dislikebutton" dataid="{{ question.id }}">
           <span class="glyphicon glyphicon-triangle-bottom"></span>
         </button>
       </div>
+      
     
     
     {% if question.user == request.user %}
@@ -35,16 +36,16 @@
     <div class="col-md-9">
     {% if question.rating >= 0 %}
       <p>
-        <span class="askme__question-rate like pull-right"><b> +{{ question.rating }}</b></span>
+        <span id="like{{question.id}}" class="askme__question-rate like pull-right"> +{{ question.rating }}</span>
       </p>   
     {% else %}
       <p>
-        <span class="askme__question-rate dislike pull-right"><b> {{ question.rating }}</b></span>
+        <span id="dislike{{question.id}}" class="askme__question-rate dislike pull-right"> {{ question.rating }}</span>
       </p> 
     {% endif %}       
       <p>
         <a href="{% url 'question' question.id %}"><strong> {{ question.title }}</strong></a>
-      </p>         
+      </p>          
       <p>{{ question.text }}</p>
         <div>
           Category: <a href="{% url 'developing'%}">{{ question.category.title }}</a>
@@ -64,3 +65,4 @@
     </div>       
    </div>
   </div> <!-- /.question block-->
+  

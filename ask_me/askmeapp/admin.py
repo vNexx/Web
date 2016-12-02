@@ -10,8 +10,8 @@ class AnswerAdmin(admin.ModelAdmin):
 	list_display=('text',)
 class TagAdmin(admin.ModelAdmin):
 	list_display=('text',)
-class LikeAdmin(admin.ModelAdmin):
-	list_display=('status',)
+class QuestionLikeAdmin(admin.ModelAdmin):
+	list_display=('value', 'user')
 class ProfileAdmin(admin.ModelAdmin):
 	list_display=('user',)
 class CategoryAdmin(admin.ModelAdmin):
@@ -19,6 +19,6 @@ class CategoryAdmin(admin.ModelAdmin):
 admin.site.register(models.Question, QuestionAdmin)
 admin.site.register(models.Answer, AnswerAdmin)
 admin.site.register(models.Tag, TagAdmin)
-admin.site.register(models.Like, LikeAdmin)
+admin.site.register(models.QuestionLike, QuestionLikeAdmin)
 admin.site.register(models.Profile, ProfileAdmin)
 admin.site.register(models.Category, CategoryAdmin)

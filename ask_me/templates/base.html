@@ -162,5 +162,37 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
+<!-- My JavaScript -->
+<script src="{% static 'js/askme.js' %}"></script>
+
+
+<script type="text/javascript">  
+  $('.likebutton').click(function () {    
+    $.ajax({
+        url: "{% url 'question_like' %}",
+        type: "POST",
+        data: {'id': $(this).attr('dataid'), 'like' : '1','csrfmiddlewaretoken': '{{ csrf_token }}'},
+        success: function(response) {
+          $(response.qstyleid + response.qid).text(response.qrating);
+          $(response.ustyleid + response.uid).text(response.urating);
+            
+            }
+        });
+  });
+
+  $('.dislikebutton').click(function () {    
+    $.ajax({
+        url: "{% url 'question_like' %}",
+        type: "POST",
+        data: {'id': $(this).attr('dataid'), 'like' : '0', 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+        success: function(response) {
+          $(response.qstyleid + response.qid).text(response.qrating);
+          $(response.ustyleid + response.uid).text(response.urating);
+            
+            }
+        });
+  });
+  
+  </script>
 </body>
 </html>
