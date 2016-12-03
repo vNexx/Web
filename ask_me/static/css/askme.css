@@ -336,11 +336,26 @@ a:focus{
 	background-color: #646464;
 	border-color: #545454;
 }
+.btn-liked{
+	color: #fff;
+	background-color: #5cb85c;
+	border-color: #4cae4c;
+}
+
+.btn-disliked{
+	color: #fff;
+	background-color: #d9534f;
+	border-color: #d43f3a;
+}
 .btn-danger{
 	background-color: #9f9f9f;
 	border-color: #7f7f7f;
 }
-
+.btn-disliked{
+	color: #fff;
+	background-color: #d9534f;
+	border-color: #d43f3a;
+}
 .askmee__bottomblock{
 	margin-bottom: 15px;
 	margin-top: 15px;

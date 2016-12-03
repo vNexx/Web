@@ -177,6 +177,7 @@ def change_password(request):
 		if form.is_valid():
 			form.save(request.user)
 			form.status = True
+			auth.login(request, form.user)
 			#return HttpResponseRedirect('/')
 	else:
 		form = ChangePasswordForm()
@@ -197,7 +198,6 @@ def question_like(request):
 		user = request.user
 		id = int(request.POST.get('id'))
 		is_like = int(request.POST.get('like'))
-		print request.POST
 		question = get_object_or_404(Question, pk=id)
 		if is_like == 1:
 			QuestionLike.objects.like(question.id, user)

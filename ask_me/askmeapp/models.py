@@ -74,16 +74,7 @@ class Question(models.Model):
 	def __unicode__(self):
 		return self.text
 
-class Profile(models.Model):
-	user = models.OneToOneField(User)
-	avatar = models.ImageField(upload_to='uploads', default="uploads/user_avatar.jpeg")
-	information = models.TextField(default="My info")
-	rating = models.IntegerField( default=0)
 
-	objects = ProfileManager()
-
-	def __unicode__(self):
-		return unicode(self.user)
 
 class Answer(models.Model):
 	user = models.ForeignKey(User)
@@ -102,6 +93,10 @@ class QuestionLikeManager(models.Manager):
 			qLike = QuestionLike.objects.get(compose_key=compose_key)
 		except QuestionLike.DoesNotExist:
 			qLike = QuestionLike.objects.create(compose_key=compose_key)
+			qLike.question = question
+			user.profile.questionlikes.add(qLike)
+			user.profile.save()
+
 		if qLike.value == 0:
 			qLike.value = 1
 			question.rating = question.rating + 1
@@ -112,11 +107,14 @@ class QuestionLikeManager(models.Manager):
 			question.rating = question.rating + 2
 			question.user.profile.rating = question.user.profile.rating + 2
 			qLike.is_liked = True
+			qLike.is_disliked = False
+
 		elif qLike.value == 1:
 			qLike.value = 0
 			question.rating = question.rating - 1
 			question.user.profile.rating = question.user.profile.rating - 1
 			qLike.is_liked = False
+
 		question.save()
 		question.user.profile.save()
 		qLike.save()
@@ -128,6 +126,9 @@ class QuestionLikeManager(models.Manager):
 			qLike = QuestionLike.objects.get(compose_key=compose_key)
 		except QuestionLike.DoesNotExist:
 			qLike = QuestionLike.objects.create(compose_key=compose_key)
+			qLike.question = question
+			user.profile.questionlikes.add(qLike)
+			user.profile.save()
 
 		if qLike.value == 0:
 			qLike.value = -1
@@ -139,6 +140,7 @@ class QuestionLikeManager(models.Manager):
 			question.rating = question.rating - 2
 			question.user.profile.rating = question.user.profile.rating - 2
 			qLike.is_disliked = True
+			qLike.is_liked = False
 		elif qLike.value == -1:
 			qLike.value = 0
 			question.rating = question.rating + 1
@@ -154,8 +156,7 @@ class QuestionLikeManager(models.Manager):
 class QuestionLike(models.Model):
 
 	value = models.IntegerField(default=0)
-	#question = models.ForeignKey(Question)
-	#user = models.OneToOneField(User)
+	question = models.ForeignKey(Question, default=0)
 	compose_key = models.CharField(max_length=70, unique=True, default='None0')
 	is_liked = models.BooleanField(default=False)
 	is_disliked = models.BooleanField(default=False)
@@ -165,5 +166,15 @@ class QuestionLike(models.Model):
 		return str(self.value)
 
 
+class Profile(models.Model):
+	user = models.OneToOneField(User)
+	avatar = models.ImageField(upload_to='uploads', default="uploads/user_avatar.jpeg")
+	information = models.TextField(default="My info")
+	rating = models.IntegerField( default=0)
+	questionlikes = models.ManyToManyField(QuestionLike)
 
+	objects = ProfileManager()
+
+	def __unicode__(self):
+		return unicode(self.user)
 

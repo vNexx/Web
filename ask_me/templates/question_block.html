@@ -10,14 +10,33 @@
         <p>Rating: <span class="dislike{{question.user.id}} dislike"><b> {{ question.user.profile.rating }}</b></span></p>
       {% endif %}
 
+      {% if question.user != request.user %}
       <div class="btn-group-vertical">
-        <button type="button" class="btn btn-success btn-md likebutton" dataid="{{ question.id }}"> 
-          <span class="glyphicon glyphicon-triangle-top"></span>          
-        </button>
-        <button type="button" class="btn btn-danger btn-md dislikebutton" dataid="{{ question.id }}">
+        
+            <button type="button" class="btn btn-success btn-md 
+
+            {% for like in request.user.profile.questionlikes.all %}
+              {% if question.id == like.question.id and like.is_liked %}btn-liked{% endif %}
+            {% endfor %}
+
+             likebutton" dataid="{{ question.id }}"> 
+              <span class="glyphicon glyphicon-triangle-top"></span>          
+            </button>
+
+          
+        <button type="button" class="btn btn-danger btn-md
+
+          {% for like in request.user.profile.questionlikes.all %}
+              {% if question.id == like.question.id and like.is_disliked %}btn-disliked{% endif %}
+          {% endfor %}
+
+          dislikebutton" dataid="{{ question.id }}">
           <span class="glyphicon glyphicon-triangle-bottom"></span>
         </button>
       </div>
+      {% endif %}
+      
+       
       
     
     
