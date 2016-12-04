@@ -233,7 +233,7 @@ def question_like(request):
 		dislikebuttonid = '#d' + str(question.id)
 		likebuttonstyle = 'btn btn-success btn-md likebutton'
 		dislikebuttonstyle = 'btn btn-danger btn-md dislikebutton'
-		
+
 		if qLike.is_liked:
 			likebuttonstyle = likebuttonstyle + ' btn-liked'
 		elif qLike.is_disliked:

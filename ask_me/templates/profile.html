@@ -9,9 +9,9 @@
 		<p><b>{{ profile.user }}</b></p>
 
 		{% if profile.rating >= 0 %}
-		<p>Rating: <span class="like"><b> +{{ profile.rating }}</b></span></p>
+		<p>Rating: <span class="likeu{{ profile.user.id }} like"><b> +{{ profile.rating }}</b></span></p>
 		{% else %}
-		<p>Rating: <span class="dislike"><b> {{ profile.rating }}</b></span></p>
+		<p>Rating: <span class="dislikeu{{ profile.user.id }} dislike"><b> {{ profile.rating }}</b></span></p>
 		{% endif %}
 
 	</div>
