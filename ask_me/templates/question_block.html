@@ -72,7 +72,7 @@
       </div>  
     <div class="col-md-9 col-md-offset-2 askmee__bottomblock">
       <p>
-        <a href="{% url 'developing'%}" class="pull-right">{{ question.created }}</a>      
+        <a href="/questions/{{ question.created|date:"Y/m/d" }}" class="pull-right">{{ question.created }}</a>      
         <a href="{% url 'question' question.id %}">Answers <span class="badge">{{ question.answer_set.count }}</span></a>
         {% if question.tags.all %}
         Tags: 

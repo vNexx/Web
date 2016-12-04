@@ -191,6 +191,17 @@ def tag_list(request):
 	return render(request, 'tag_list.html', {"popular_tags": popular_tags, 'tag_list' : tags},)
 
 
+def date_search(request, month, day, year, page = '1'):
+	year = int(year)
+	month = int(month)
+	day = int(day)
+	search_date = datetime.date(year, month, day)
+	questions = Question.objects.date_search(search_date)
+	popular_tags = Tag.objects.get_popular_tags()
+	question_list = pagination_function.pagination(questions, 5, page)
+	question_list.paginator.baseurl = "/questions/" + str(year) + "/" + str(month) + "/" + str(day) + "/"
+	return render(request, 'dates.html', {"data" : question_list, "popular_tags": popular_tags, 'date': search_date}, )
+
 @login_required_ajax
 @require_POST
 def question_like(request):

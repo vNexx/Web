@@ -23,6 +23,9 @@ urlpatterns = [
 	url(r'^tag/(?P<tag>(\d|\w|[-+_.:;~&@*%$])+)/(?P<page>\d+)/$', views.tag, name='tag'),
 	url(r'^tag_list/$', views.tag_list, name='tag_list'),
 
+	url(r'^questions/(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d+)/$', views.date_search, name='date_search'),
+	url(r'^questions/(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d+)/(?P<page>\d+)/$', views.date_search, name='date_search'),
+
 	url(r'^profile/(?P<user_name>\w+)/(?P<page>\d+)?/$', views.profile, name='profile'),
 	url(r'^profile/(?P<user_name>\w+)/$', views.profile, name='profile'),
 	url(r'^edit/profile/$', views.profile_edit, name='profile_edit'),

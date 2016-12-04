@@ -17,8 +17,11 @@ class QuestionManager(models.Manager):
 
 	def published(self):
 		return self.filter(is_published=True)
+
 	def user_questions(self, user_name):
 		return self.filter(user__username = user_name)
+	def date_search(self, date):
+		return self.filter(date = date)
 
 class ProfileManager(models.Manager):
 	def get_by_name(self, user_name):
@@ -60,6 +63,7 @@ class Question(models.Model):
 	rating = models.IntegerField(default=0, verbose_name=u'Рэйтинг')
 	is_published = models.BooleanField(default=False, verbose_name=u'Опубликована')
 	created = models.DateTimeField(default=datetime.datetime.now)
+	date = models.DateField(default=datetime.date.today)
 	tags = models.ManyToManyField(Tag)
 	category = models.ForeignKey(Category, default=1)
 	objects = QuestionManager()
