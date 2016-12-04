@@ -173,8 +173,10 @@
         type: "POST",
         data: {'id': $(this).attr('dataid'), 'like' : '1','csrfmiddlewaretoken': '{{ csrf_token }}'},
         success: function(response) {
-          $(response.qstyleid + response.qid).text(response.qrating);
-          $(response.ustyleid + response.uid).text(response.urating);
+          $(response.qstyleid).text(response.qrating);
+          $(response.qstyleid).removeClass().addClass(response.qstyle);
+          $(response.ustyleid).text(response.urating);
+          $(response.ustyleid).removeClass().addClass(response.ustyle);
             
             }
         });
@@ -186,8 +188,10 @@
         type: "POST",
         data: {'id': $(this).attr('dataid'), 'like' : '0', 'csrfmiddlewaretoken': '{{ csrf_token }}'},
         success: function(response) {
-          $(response.qstyleid + response.qid).text(response.qrating);
-          $(response.ustyleid + response.uid).text(response.urating);
+          $(response.qstyleid).text(response.qrating);
+          $(response.qstyleid).removeClass().addClass(response.qstyle);
+          $(response.ustyleid).text(response.urating);
+          $(response.ustyleid).removeClass().addClass(response.ustyle);
             
             }
         });

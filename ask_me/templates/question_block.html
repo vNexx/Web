@@ -5,9 +5,9 @@
       <p><a href="{% url 'profile'  question.user  %}"><b>{{ question.user }}</b></a></p>  
 
       {% if question.user.profile.rating >= 0 %}
-        <p>Rating: <span class="like{{question.user.id}} like"><b> +{{ question.user.profile.rating }}</b></span></p>
+        <p>Rating: <span class="likeu{{question.user.id}} like"><b> +{{ question.user.profile.rating }}</b></span></p>
       {% else %}
-        <p>Rating: <span class="dislike{{question.user.id}} dislike"><b> {{ question.user.profile.rating }}</b></span></p>
+        <p>Rating: <span class="dislikeu{{question.user.id}} dislike"><b> {{ question.user.profile.rating }}</b></span></p>
       {% endif %}
 
       {% if question.user != request.user %}
@@ -55,11 +55,11 @@
     <div class="col-md-9">
     {% if question.rating >= 0 %}
       <p>
-        <span id="like{{question.id}}" class="askme__question-rate like pull-right"> +{{ question.rating }}</span>
+        <span class="askme__question-rate like{{question.id}} like pull-right"> +{{ question.rating }}</span>
       </p>   
     {% else %}
       <p>
-        <span id="dislike{{question.id}}" class="askme__question-rate dislike pull-right"> {{ question.rating }}</span>
+        <span class="askme__question-rate dislike{{question.id}} dislike pull-right"> {{ question.rating }}</span>
       </p> 
     {% endif %}       
       <p>
