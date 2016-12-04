@@ -13,24 +13,24 @@
       {% if question.user != request.user %}
       <div class="btn-group-vertical">
         
-            <button type="button" class="btn btn-success btn-md 
+            <button type="button" id="l{{ question.id }}" class="btn btn-success btn-md likebutton
 
             {% for like in request.user.profile.questionlikes.all %}
               {% if question.id == like.question.id and like.is_liked %}btn-liked{% endif %}
             {% endfor %}
 
-             likebutton" dataid="{{ question.id }}"> 
+             " dataid="{{ question.id }}"> 
               <span class="glyphicon glyphicon-triangle-top"></span>          
             </button>
 
           
-        <button type="button" class="btn btn-danger btn-md
+        <button type="button" id="d{{ question.id }}" class="btn btn-danger btn-md dislikebutton
 
           {% for like in request.user.profile.questionlikes.all %}
               {% if question.id == like.question.id and like.is_disliked %}btn-disliked{% endif %}
           {% endfor %}
 
-          dislikebutton" dataid="{{ question.id }}">
+          " dataid="{{ question.id }}">
           <span class="glyphicon glyphicon-triangle-bottom"></span>
         </button>
       </div>

@@ -211,9 +211,9 @@ def question_like(request):
 			ustyleid = '.dislikeu' + str(question.user.id) + '.dislike'
 
 		if is_like == 1:
-			QuestionLike.objects.like(question.id, user)
+			qLike = QuestionLike.objects.like(question.id, user)
 		else:
-			QuestionLike.objects.dislike(question.id, user)
+			qLike = QuestionLike.objects.dislike(question.id, user)
 		question = get_object_or_404(Question, pk=id)
 
 		if question.rating >= 0:
@@ -229,10 +229,22 @@ def question_like(request):
 		else:
 			urating = str(question.user.profile.rating)
 			ustyle = 'dislikeu' + str(question.user.id) + ' dislike'
+		likebuttonid = '#l' + str(question.id)
+		dislikebuttonid = '#d' + str(question.id)
+		likebuttonstyle = 'btn btn-success btn-md likebutton'
+		dislikebuttonstyle = 'btn btn-danger btn-md dislikebutton'
+		
+		if qLike.is_liked:
+			likebuttonstyle = likebuttonstyle + ' btn-liked'
+		elif qLike.is_disliked:
+			dislikebuttonstyle = dislikebuttonstyle + ' btn-disliked'
+
+		ctx = {'qrating': qrating, 'qstyleid': qstyleid, 'qstyle': qstyle,
+			   'urating': urating, 'ustyleid': ustyleid, 'ustyle': ustyle,
+			   'likebuttonid': likebuttonid, 'likebuttonstyle': likebuttonstyle,
+			   'dislikebuttonid': dislikebuttonid, 'dislikebuttonstyle': dislikebuttonstyle}
 
 
-	ctx = {'qrating' : qrating, 'qstyleid' : qstyleid, 'qstyle' : qstyle,
-		   'urating' : urating, 'ustyleid' : ustyleid, 'ustyle' : ustyle}
 	return HttpResponse(json.dumps(ctx), content_type='application/json')
 
 @csrf_exempt

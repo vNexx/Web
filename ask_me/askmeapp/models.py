@@ -118,6 +118,7 @@ class QuestionLikeManager(models.Manager):
 		question.save()
 		question.user.profile.save()
 		qLike.save()
+		return qLike
 
 	def dislike(self, id, user):
 		compose_key = str(user) + str(id)
@@ -149,6 +150,7 @@ class QuestionLikeManager(models.Manager):
 		question.save()
 		question.user.profile.save()
 		qLike.save()
+		return qLike
 
 
 
