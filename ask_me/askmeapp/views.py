@@ -274,6 +274,63 @@ def question_like(request):
 
 	return HttpResponse(json.dumps(response), content_type='application/json')
 
+
+
+@login_required_ajax
+@require_POST
+def answer_like(request):
+	if request.method == 'POST':
+		user = request.user
+		id = int(request.POST.get('id'))
+		is_like = int(request.POST.get('like'))
+		answer = get_object_or_404(Answer, pk=id)
+		if answer.rating >= 0:
+			astyleid = '.askme__question-rate.alike' + str(answer.id) + '.like'
+		else:
+			astyleid = '.askme__question-rate.adislike' + str(answer.id) + '.dislike'
+
+		if answer.user.profile.rating >= 0:
+			ustyleid = '.likeu' + str(answer.user.id) + '.like'
+		else:
+			ustyleid = '.dislikeu' + str(answer.user.id) + '.dislike'
+
+		if is_like == 1:
+			aLike = AnswerLike.objects.like(answer.id, user)
+		else:
+			aLike = AnswerLike.objects.dislike(answer.id, user)
+		answer = get_object_or_404(Answer, pk=id)
+
+		if answer.rating >= 0:
+			arating = '+' + str(answer.rating)
+			astyle = 'askme__question-rate alike' + str(answer.id) + ' like'
+		else:
+			arating = str(answer.rating)
+			astyle = 'askme__question-rate adislike' + str(answer.id) + ' dislike'
+
+		if answer.user.profile.rating >= 0:
+			urating = '+' + str(answer.user.profile.rating)
+			ustyle = 'likeu' + str(answer.user.id) + ' like'
+		else:
+			urating = str(answer.user.profile.rating)
+			ustyle = 'dislikeu' + str(answer.user.id) + ' dislike'
+		likebuttonid = '#al' + str(answer.id)
+		dislikebuttonid = '#ad' + str(answer.id)
+		likebuttonstyle = 'btn btn-success btn-md alikebutton'
+		dislikebuttonstyle = 'btn btn-danger btn-md adislikebutton'
+
+		if aLike.is_liked:
+			likebuttonstyle = likebuttonstyle + ' btn-liked'
+		elif aLike.is_disliked:
+			dislikebuttonstyle = dislikebuttonstyle + ' btn-disliked'
+
+		response = {'arating': arating, 'astyleid': astyleid, 'astyle': astyle,
+			   		'urating': urating, 'ustyleid': ustyleid, 'ustyle': ustyle,
+			   		'likebuttonid': likebuttonid, 'likebuttonstyle': likebuttonstyle,
+			   		'dislikebuttonid': dislikebuttonid, 'dislikebuttonstyle': dislikebuttonstyle}
+
+	print response
+	return HttpResponse(json.dumps(response), content_type='application/json')
+
 @csrf_exempt
 def get_post_params(request):
 	result = ['Hello, World!<br>']

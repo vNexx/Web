@@ -157,6 +157,73 @@ class QuestionLikeManager(models.Manager):
 		return qLike
 
 
+class AnswerLikeManager(models.Manager):
+	def like(self, id, user):
+		compose_key = str(user) + str(id) + 'a'
+		answer = Answer.objects.get(pk=id)
+		try:
+			aLike = AnswerLike.objects.get(compose_key=compose_key)
+		except AnswerLike.DoesNotExist:
+			aLike = AnswerLike.objects.create(compose_key=compose_key)
+			aLike.answer = answer
+			user.profile.answerlikes.add(aLike)
+			user.profile.save()
+
+		if aLike.value == 0:
+			aLike.value = 1
+			answer.rating = answer.rating + 1
+			answer.user.profile.rating = answer.user.profile.rating + 1
+			aLike.is_liked = True
+		elif aLike.value == -1:
+			aLike.value = 1
+			answer.rating = answer.rating + 2
+			answer.user.profile.rating = answer.user.profile.rating + 2
+			aLike.is_liked = True
+			aLike.is_disliked = False
+
+		elif aLike.value == 1:
+			aLike.value = 0
+			answer.rating = answer.rating - 1
+			answer.user.profile.rating = answer.user.profile.rating - 1
+			aLike.is_liked = False
+
+		answer.save()
+		answer.user.profile.save()
+		aLike.save()
+		return aLike
+
+	def dislike(self, id, user):
+		compose_key = str(user) + str(id) + 'a'
+		answer = Answer.objects.get(pk=id)
+		try:
+			aLike = AnswerLike.objects.get(compose_key=compose_key)
+		except AnswerLike.DoesNotExist:
+			aLike = AnswerLike.objects.create(compose_key=compose_key)
+			aLike.answer = answer
+			user.profile.answerlikes.add(aLike)
+			user.profile.save()
+
+		if aLike.value == 0:
+			aLike.value = -1
+			answer.rating = answer.rating - 1
+			answer.user.profile.rating = answer.user.profile.rating - 1
+			aLike.is_disliked = True
+		elif aLike.value == 1:
+			aLike.value = -1
+			answer.rating = answer.rating - 2
+			answer.user.profile.rating = answer.user.profile.rating - 2
+			aLike.is_disliked = True
+			aLike.is_liked = False
+		elif aLike.value == -1:
+			aLike.value = 0
+			answer.rating = answer.rating + 1
+			answer.user.profile.rating = answer.user.profile.rating + 1
+			aLike.is_disliked = False
+		answer.save()
+		answer.user.profile.save()
+		aLike.save()
+		return aLike
+
 
 
 class QuestionLike(models.Model):
@@ -172,12 +239,26 @@ class QuestionLike(models.Model):
 		return str(self.value)
 
 
+class AnswerLike(models.Model):
+
+	value = models.IntegerField(default=0)
+	answer = models.ForeignKey(Answer, default=0)
+	compose_key = models.CharField(max_length=70, unique=True, default='None0')
+	is_liked = models.BooleanField(default=False)
+	is_disliked = models.BooleanField(default=False)
+
+	objects = AnswerLikeManager()
+	def __unicode__(self):
+		return str(self.value)
+
+
 class Profile(models.Model):
 	user = models.OneToOneField(User)
 	avatar = models.ImageField(upload_to='uploads', default="uploads/user_avatar.jpeg")
 	information = models.TextField(default="My info")
 	rating = models.IntegerField( default=0)
 	questionlikes = models.ManyToManyField(QuestionLike)
+	answerlikes = models.ManyToManyField(AnswerLike)
 
 	objects = ProfileManager()
 
