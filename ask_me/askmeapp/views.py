@@ -213,7 +213,7 @@ def answer_check(request):
 		answer = get_object_or_404(Answer, pk=ansid)
 		answer.is_correct = not answer.is_correct
 		answer.save()
-		response = {'ansid' : str(ansid), 'qid' : str(qid)}
+		response = {'ansid' : str(ansid), 'qid' : str(qid), 'iscorrect' : answer.is_correct}
 
 		return HttpResponse(json.dumps(response), content_type='application/json')
 

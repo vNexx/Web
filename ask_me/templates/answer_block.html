@@ -23,16 +23,17 @@
     
       {% if answer.is_correct %}
       
-        <img src="{% static 'images/tick.png' %}" class="anscorrect" ansid="{{ answer.id }}" qid="{{ question.id }}" width="30">
+        <img src="{% static 'images/tick.png' %}" width="30">
       
-      {% else %} 
+      {% endif %} 
+      </div>
         {% if question.user == request.user %}
           <div class="checkbox">
-            <label><input class="anscheck" type="checkbox" ansid="{{ answer.id }}" qid="{{ question.id }}" value="">Correct!</label>
+            <label><input class="anscheck" type="checkbox" ansid="{{ answer.id }}" qid="{{ question.id }}" value="{{ answer.is_correct }}">Correct!
+            </label>
           </div> 
         {% endif %}
-      {% endif %}
-     </div>
+      
     </div>
     <div class="col-md-9">
       {% if  answer.rating >= 0 %}
