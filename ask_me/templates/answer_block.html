@@ -23,7 +23,7 @@
     
       {% if answer.is_correct %}
       
-        <img src="{% static 'images/tick.png' %}"  width="30">
+        <img src="{% static 'images/tick.png' %}" class="anscorrect" ansid="{{ answer.id }}" qid="{{ question.id }}" width="30">
       
       {% else %} 
         {% if question.user == request.user %}

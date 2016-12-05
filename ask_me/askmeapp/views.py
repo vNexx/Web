@@ -211,9 +211,9 @@ def answer_check(request):
 	question = get_object_or_404(Question, pk=qid)
 	if request.user == question.user:
 		answer = get_object_or_404(Answer, pk=ansid)
-		answer.is_correct = True
+		answer.is_correct = not answer.is_correct
 		answer.save()
-		response = {'ansid' : ansid}
+		response = {'ansid' : str(ansid), 'qid' : str(qid)}
 
 		return HttpResponse(json.dumps(response), content_type='application/json')
 

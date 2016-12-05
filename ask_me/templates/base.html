@@ -207,8 +207,22 @@
       type: "POST",
       data: {'ansid' : $(this).attr('ansid'), 'qid' : $(this).attr('qid'), 'csrfmiddlewaretoken': '{{ csrf_token }}'},
       success: function(response) {
-        $(".check" + response.ansid).html('<img src="{% static 'images/tick.png' %}" width="30">')
+        $(".check" + response.ansid).html('<img src="{% static 'images/tick.png' %}" class="anscorrect" ansid='
+         +  response.ansid + ' qid=' + response.qid +' width="30">')
         
+      }
+    });
+
+  });
+
+  $('.anscorrect').click(function() {
+    $.ajax({
+      url: "{% url 'answer_check' %}",
+      type: "POST",
+      data: {'ansid' : $(this).attr('ansid'), 'qid' : $(this).attr('qid'), 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+      success: function(response) {
+        $(".check" + response.ansid).html('<div class="checkbox"><label><input class="anscheck" type="checkbox" ansid=' +
+          response.ansid + ' qid=' + response.qid + ' value="">Correct!</label></div> ')
       }
     });
 
