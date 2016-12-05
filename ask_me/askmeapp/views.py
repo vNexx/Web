@@ -202,6 +202,22 @@ def date_search(request, month, day, year, page = '1'):
 	question_list.paginator.baseurl = "/questions/" + str(year) + "/" + str(month) + "/" + str(day) + "/"
 	return render(request, 'dates.html', {"data" : question_list, "popular_tags": popular_tags, 'date': search_date}, )
 
+
+@login_required_ajax
+@require_POST
+def answer_check(request):
+	ansid = int(request.POST.get('ansid'))
+	qid = int(request.POST.get('qid'))
+	question = get_object_or_404(Question, pk=qid)
+	if request.user == question.user:
+		answer = get_object_or_404(Answer, pk=ansid)
+		answer.is_correct = True
+		answer.save()
+		response = {'ansid' : ansid}
+
+		return HttpResponse(json.dumps(response), content_type='application/json')
+
+
 @login_required_ajax
 @require_POST
 def question_like(request):
@@ -250,13 +266,13 @@ def question_like(request):
 		elif qLike.is_disliked:
 			dislikebuttonstyle = dislikebuttonstyle + ' btn-disliked'
 
-		ctx = {'qrating': qrating, 'qstyleid': qstyleid, 'qstyle': qstyle,
+		response = {'qrating': qrating, 'qstyleid': qstyleid, 'qstyle': qstyle,
 			   'urating': urating, 'ustyleid': ustyleid, 'ustyle': ustyle,
 			   'likebuttonid': likebuttonid, 'likebuttonstyle': likebuttonstyle,
 			   'dislikebuttonid': dislikebuttonid, 'dislikebuttonstyle': dislikebuttonstyle}
 
 
-	return HttpResponse(json.dumps(ctx), content_type='application/json')
+	return HttpResponse(json.dumps(response), content_type='application/json')
 
 @csrf_exempt
 def get_post_params(request):

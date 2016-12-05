@@ -19,7 +19,7 @@
           <span class="glyphicon glyphicon-triangle-bottom"></span>
         </button>
       </div>
-      <div class="askmee__tickblock">
+      <div class="check{{ answer.id }} askmee__tickblock">
     
       {% if answer.is_correct %}
       
@@ -27,9 +27,9 @@
       
       {% else %} 
         {% if question.user == request.user %}
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Correct!</label>
-      </div> 
+          <div class="checkbox">
+            <label><input class="anscheck" type="checkbox" ansid="{{ answer.id }}" qid="{{ question.id }}" value="">Correct!</label>
+          </div> 
         {% endif %}
       {% endif %}
      </div>

@@ -200,6 +200,19 @@
             }
         });
   });
+
+  $('.anscheck').click(function() {
+    $.ajax({
+      url: "{% url 'answer_check' %}",
+      type: "POST",
+      data: {'ansid' : $(this).attr('ansid'), 'qid' : $(this).attr('qid'), 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+      success: function(response) {
+        $(".check" + response.ansid).html('<img src="{% static 'images/tick.png' %}" width="30">')
+        
+      }
+    });
+
+  });
   
   </script>
 </body>

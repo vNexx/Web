@@ -31,6 +31,7 @@ urlpatterns = [
 	url(r'^edit/profile/$', views.profile_edit, name='profile_edit'),
 
 	url(r'^like/question/$', views.question_like, name='question_like'),
+	url(r'^answer/check/$', views.answer_check, name='answer_check'),
 	url(r'get_post_params/', views.get_post_params, name='get_post_params'),
 ]
 
