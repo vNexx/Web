@@ -17,7 +17,9 @@
 	</div>
 	<div class="col-md-9">             
 		<p>{{ profile.information }}</p>  
-    <p>Date joined to ask.me: {{ profile.user.date_joined }}</p>         
+    <p>Date joined to ask.me: {{ profile.user.date_joined }}</p>
+    <p>Asked questions: {{ profile.questions_count }}</p> 
+    <p>Added answers: {{ answers_count }}</p>        
 	</div>
 </div>
 {% endif %}

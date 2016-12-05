@@ -24,8 +24,14 @@ class QuestionManager(models.Manager):
 		return self.filter(date = date)
 
 class ProfileManager(models.Manager):
-	def get_by_name(self, user_name):
-		return self.filter(user__username = user_name)
+	def get_by_name_with_question_count(self, user_name):
+		return self.with_question_count().filter(user__username = user_name)
+	def get_by_name_with_answer_count(self, user_name):
+		return self.with_answers_count().filter(user__username = user_name)
+	def with_question_count(self):
+		return self.annotate(questions_count=Count('user__question'))
+	def with_answers_count(self):
+		return self.annotate(answers_count=Count('user__answer'))
 
 class TagManager(models.Manager):
 	# adds number of questions to each tag

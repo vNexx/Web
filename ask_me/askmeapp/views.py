@@ -32,11 +32,15 @@ def hot_questions(request, page = '1'):
 
 def profile(request, user_name, page = '1'):
 	myquestions = Question.objects.user_questions(user_name)
-	profile = Profile.objects.get_by_name(user_name)
+	profile = Profile.objects.get_by_name_with_question_count(user_name)
+	p2 = Profile.objects.get_by_name_with_answer_count(user_name)
+
+
 	popular_tags = Tag.objects.get_popular_tags()
 	question_list = pagination_function.pagination(myquestions, 5, page)
 	question_list.paginator.baseurl = "/profile/" + profile[0].user.username + "/"
-	return render(request, 'profile.html', {"data": question_list, "profile": profile[0], "popular_tags" : popular_tags}, )
+	return render(request, 'profile.html', {"data": question_list, "profile": profile[0],
+											'answers_count' : p2[0].answers_count, "popular_tags" : popular_tags}, )
 
 def tag(request, tag, page = '1'):
 	myquestions = Question.objects.tag_search(tag)
@@ -328,8 +332,7 @@ def answer_like(request):
 			   		'likebuttonid': likebuttonid, 'likebuttonstyle': likebuttonstyle,
 			   		'dislikebuttonid': dislikebuttonid, 'dislikebuttonstyle': dislikebuttonstyle}
 
-	print response
-	return HttpResponse(json.dumps(response), content_type='application/json')
+		return HttpResponse(json.dumps(response), content_type='application/json')
 
 @csrf_exempt
 def get_post_params(request):
