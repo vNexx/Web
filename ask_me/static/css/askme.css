@@ -331,7 +331,9 @@ a:focus{
 	color: #eee;
 	background-color: #383838;
 }
-
+.tagbage:hover {
+	background-color: #159B96;
+}
 .btn-success{
 	background-color: #646464;
 	border-color: #545454;
