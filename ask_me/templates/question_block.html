@@ -1,7 +1,7 @@
 <div class="askme_question_block"> <!-- question block-->
   <div class="row">
     <div class="col-md-2 askme__question-block_user-data">
-      <img src="/{{ question.user.profile.avatar.url }}" class="img-circle askmee__user-avatar" width="110" height="110">
+      <img src="/{{ question.user.profile.avatar.url }}" class="img-circle askmee__user-avatar" width="90" height="90">
       <p><a href="{% url 'profile'  question.user  %}"><b>{{ question.user }}</b></a></p>  
 
       {% if question.user.profile.rating >= 0 %}

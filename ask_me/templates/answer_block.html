@@ -2,7 +2,7 @@
 <div id="answer_{{ answer.id }}" class="askme__question_answer-block"> <!-- answer block -->
   <div class="row">
     <div class="col-md-2 askme__question-block_user-data">
-      <img src="/{{ answer.user.profile.avatar.url }}" class="img-circle askmee__user-avatar" width="110" height="110">
+      <img src="/{{ answer.user.profile.avatar.url }}" class="img-circle askmee__user-avatar" width="90" height="90">
       <p><a href="{% url 'profile'  answer.user %}"><b>{{ answer.user }}</b></a></p>
 
       {% if answer.user.profile.rating >= 0 %}
@@ -42,7 +42,10 @@
       </div>
         {% if question.user == request.user %}
           <div class="checkbox">
-            <label><input class="anscheck" type="checkbox" ansid="{{ answer.id }}" qid="{{ question.id }}" value="">
+            <label><input class="anscheck" type="checkbox" ansid="{{ answer.id }}" qid="{{ question.id }}" value="" 
+              {% if answer.is_correct %}
+               checked
+              {%endif%}>
               Correct!
             </label>
           </div> 
@@ -62,7 +65,7 @@
       <p>{{ answer.text }}</p>
     </div>
     <div class="col-md-10 col-md-offset-1 askmee__bottomblock">
-      <a href="{% url 'developing' %}" class="pull-right">{{ answer.created }}</a>     
+      <span class="pull-right">{{ answer.created }}</span>     
     </div>
   </div>
 </div> <!-- /.answer block --> 
