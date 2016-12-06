@@ -18,42 +18,36 @@ from askmeapp.ajax_funcs import *
 
 def index(request, page = '1'):
 	myquestions = Question.objects.newest()
-	popular_tags = Tag.objects.get_popular_tags()
 	question_list = pagination_function.pagination(myquestions, 5, page)
 	question_list.paginator.baseurl = "/"
-	return render(request, 'index.html', {"data": question_list, "popular_tags" : popular_tags}, )
+	return render(request, 'index.html', {"data": question_list}, )
 
 def hot_questions(request, page = '1'):
 	myquestions = Question.objects.hot()
-	popular_tags = Tag.objects.get_popular_tags()
 	question_list = pagination_function.pagination(myquestions, 5, page)
 	question_list.paginator.baseurl = "/hot/"
-	return render(request, 'hot_questions.html', {"data": question_list, "popular_tags" : popular_tags}, )
+	return render(request, 'hot_questions.html', {"data": question_list}, )
 
 def profile(request, user_name, page = '1'):
 	myquestions = Question.objects.user_questions(user_name)
 	profile = Profile.objects.get_by_name_with_question_count(user_name)
 	p2 = Profile.objects.get_by_name_with_answer_count(user_name)
 
-
-	popular_tags = Tag.objects.get_popular_tags()
 	question_list = pagination_function.pagination(myquestions, 5, page)
 	question_list.paginator.baseurl = "/profile/" + profile[0].user.username + "/"
 	return render(request, 'profile.html', {"data": question_list, "profile": profile[0],
-											'answers_count' : p2[0].answers_count, "popular_tags" : popular_tags}, )
+											'answers_count' : p2[0].answers_count}, )
 
 def tag(request, tag, page = '1'):
 	myquestions = Question.objects.tag_search(tag)
-	popular_tags = Tag.objects.get_popular_tags()
 	question_list = pagination_function.pagination(myquestions, 5, page)
 	question_list.paginator.baseurl = "/tag/" + tag + "/"		
-	return render(request, 'tag.html', {"data": question_list, "tag" : tag,	"popular_tags" : popular_tags}, )
+	return render(request, 'tag.html', {"data": question_list, "tag" : tag}, )
 
 def single_question(request, id, page = '1'):
 
 	question = get_object_or_404(Question, pk=id)
 	answers = question.answer_set.all()
-	popular_tags = Tag.objects.get_popular_tags()
 	answer_list = pagination_function.pagination(answers, 4, page)
 	answer_list.paginator.baseurl = "/question/id" + id + "/"
 	last_page_num = (answers.count() + 1) / 4 + 1
@@ -68,16 +62,14 @@ def single_question(request, id, page = '1'):
 	else:
 		answer_form = AnswerForm()
 	return render(request, 'question.html', {"question": question, "data" : answer_list, "new_question" : True,
-											 "popular_tags" : popular_tags, "form" : answer_form},)
+											 "form" : answer_form},)
 
 def developing(request):
-	popular_tags = Tag.objects.get_popular_tags()
-	return render(request, 'developing.html', {"popular_tags" : popular_tags},)
+	return render(request, 'developing.html', {},)
 
 
 @login_required
 def ask_question(request):
-	popular_tags = Tag.objects.get_popular_tags()
 	if request.method == "POST":
 		form = QuestionForm(request.POST)
 		if form.is_valid():
@@ -85,13 +77,12 @@ def ask_question(request):
 			return HttpResponseRedirect(reverse('question', kwargs={'id': q.id}))
 	else:
 		form = QuestionForm()
-	return render(request, 'ask.html', {"popular_tags" : popular_tags, 'form': form},)
+	return render(request, 'ask.html', {'form': form},)
 @login_required
 def edit_question(request, id):
 	question = get_object_or_404(Question, pk=id)
 	if question.user != request.user:
 		return HttpResponseRedirect(reverse('question', kwargs={'id': id}))
-	popular_tags = Tag.objects.get_popular_tags()
 	if request.method == "POST":
 		form = QuestionForm(request.POST)
 		if form.is_valid():
@@ -111,11 +102,10 @@ def edit_question(request, id):
 
 		q['category'] = question.category.title
 		form = QuestionForm(q)
-	return render(request, 'ask.html', {"popular_tags": popular_tags, 'form': form}, )
+	return render(request, 'ask.html', {'form': form}, )
 
 
 def login(request):
-	popular_tags = Tag.objects.get_popular_tags()
 	redirect = request.GET.get('continue', '/')
 
 	if request.user.is_authenticated():
@@ -129,7 +119,7 @@ def login(request):
 			return HttpResponseRedirect(redirect)
 	else:
 		form = LoginForm()
-	return render(request, 'login.html', {"popular_tags" : popular_tags, 'form': form},)
+	return render(request, 'login.html', {'form': form},)
 
 @login_required
 def logout(request):
@@ -138,7 +128,6 @@ def logout(request):
 	return HttpResponseRedirect(redirect)
 
 def signup(request):
-	popular_tags = Tag.objects.get_popular_tags()
 	if request.user.is_authenticated():
 		return HttpResponseRedirect('/')
 
@@ -151,7 +140,7 @@ def signup(request):
 	else:
 		form = SignupForm()
 
-	return render(request, 'signup.html', {"popular_tags" : popular_tags, 'form': form},)
+	return render(request, 'signup.html', {'form': form},)
 
 @login_required
 def profile_edit(request):
@@ -170,8 +159,7 @@ def profile_edit(request):
 		u['information'] = up.information
 		form = ProfileEditForm(u)
 		form.status = False
-	popular_tags = Tag.objects.get_popular_tags()
-	return render(request, 'edit_profile.html', {"popular_tags" : popular_tags,'form': form},)
+	return render(request, 'edit_profile.html', {'form': form},)
 
 @login_required
 def change_password(request):
@@ -186,13 +174,11 @@ def change_password(request):
 	else:
 		form = ChangePasswordForm()
 		form.user = request.user
-	popular_tags=Tag.objects.get_popular_tags()
-	return render(request, 'change_password.html', {"popular_tags": popular_tags, 'form': form}, )
+	return render(request, 'change_password.html', {'form': form}, )
 
 def tag_list(request):
 	tags = Tag.objects.order_by_name_with_question_count()
-	popular_tags = Tag.objects.get_popular_tags()
-	return render(request, 'tag_list.html', {"popular_tags": popular_tags, 'tag_list' : tags},)
+	return render(request, 'tag_list.html', {'tag_list' : tags},)
 
 
 def date_search(request, month, day, year, page = '1'):
@@ -201,10 +187,9 @@ def date_search(request, month, day, year, page = '1'):
 	day = int(day)
 	search_date = datetime.date(year, month, day)
 	questions = Question.objects.date_search(search_date)
-	popular_tags = Tag.objects.get_popular_tags()
 	question_list = pagination_function.pagination(questions, 5, page)
 	question_list.paginator.baseurl = "/questions/" + str(year) + "/" + str(month) + "/" + str(day) + "/"
-	return render(request, 'dates.html', {"data" : question_list, "popular_tags": popular_tags, 'date': search_date}, )
+	return render(request, 'dates.html', {"data" : question_list, 'date': search_date}, )
 
 
 @login_required_ajax
